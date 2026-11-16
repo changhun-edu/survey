@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>옆학교는? · 학교 판단 아카이브</title>
+<title>옆학교는? · 초등학교 판단 아카이브</title>
 <meta name="description" content="업무 갈등과 공문 핑퐁, 다른 학교는 어떻게 판단했는지 학교별 1표로 모으고 누적하는 서비스">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
@@ -213,6 +212,45 @@ h1,h2,h3{letter-spacing:-.5px;margin:0}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 /* sample banner, footer, dev */
 .banner{margin-top:12px;font-size:12.5px;color:#7A5300;background:#FFF4D6;border-radius:12px;padding:9px 13px}
+.demobar{display:none;background:repeating-linear-gradient(-45deg,#FFE7A0 0 14px,#FFF0C4 14px 28px);color:#6B4700;font-size:12.5px;font-weight:700;text-align:center;padding:7px 12px;line-height:1.5}
+.demobar a{color:#6B4700;margin-left:8px;white-space:nowrap}
+body.demo .demobar{display:block}
+body.demo{--bg:#F7F5EE}
+.pill.ex{background:#FFE7A0;color:#6B4700}
+.pill.feat{background:#F0EBFF;color:#5B3CC4}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.how .st{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:14px}
+.how .no{width:24px;height:24px;border-radius:50%;background:var(--pri-soft);color:var(--pri-ink);display:grid;place-items:center;font-size:12.5px;font-weight:800;margin-bottom:8px}
+.how b{display:block;font-size:14px;line-height:1.4;margin-bottom:3px}
+.how span{font-size:12.5px;color:var(--sub);line-height:1.5;display:block}
+@media (max-width:560px){.how{grid-template-columns:1fr}.how .st{display:grid;grid-template-columns:24px 1fr;column-gap:10px;padding:12px 14px}.how .no{grid-row:span 2;margin:0}}
+.exq{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.exq button{border:1px dashed var(--line2);background:#fff;border-radius:12px;padding:8px 12px;font-size:13.5px;color:var(--ink);text-align:left;line-height:1.45}
+.exq button:hover{border-color:var(--pri);background:var(--pri-soft)}
+.exq small{display:block;font-size:11.5px;color:var(--mute);font-weight:600}
+.gate{text-align:center;padding:22px 8px 6px}
+.gate .segs{display:flex;gap:6px;justify-content:center;margin:14px 0 12px}
+.gate .segs i{width:34px;height:8px;border-radius:4px;background:#E3E7F0}
+.gate .segs i.on{background:var(--pri)}
+.shlink{display:flex;gap:6px;margin-top:14px}
+.shlink .inp{font-size:13px;padding:8px 11px;color:var(--sub)}
+.shlink .btn{white-space:nowrap;flex:none;height:auto}
+.shc{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:10px}
+.shc pre{margin:8px 0 0;white-space:pre-wrap;word-break:break-all;font-family:inherit;font-size:13px;color:var(--sub);background:#F6F7FA;border-radius:10px;padding:10px 12px;line-height:1.6;max-height:170px;overflow:auto}
+.admchip{border:0;background:#5B3CC4;color:#fff;font-weight:700;font-size:13px;border-radius:999px;padding:6px 12px}
+.admbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;background:#F0EBFF;border-radius:14px;padding:10px 12px;margin-top:10px}
+.admbar b{color:#5B3CC4;font-size:13px;margin-right:4px}
+.btn.danger{color:#C92A2A;border-color:#F3C4C4}
+.btn.danger:hover{background:#FFF5F5}
+.admrows{display:grid;gap:8px;margin-top:12px}
+.admrow{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff}
+.admrow .tt{font-weight:700;font-size:14.5px;line-height:1.45;word-break:break-all}
+.admrow .meta{font-size:12.5px;color:var(--mute);margin:6px 0 8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.wchips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.wchip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line2);background:#fff;border-radius:999px;padding:4px 6px 4px 11px;font-size:13px}
+.wchip button{border:0;background:#F1F3F8;border-radius:50%;width:20px;height:20px;line-height:20px;padding:0;color:var(--sub);font-size:13px}
+.disc{font-size:12px;color:var(--mute);background:#F4F6FB;border-radius:10px;padding:9px 12px;margin-top:14px;line-height:1.55}
+body.demo .disc{background:#EFEBDD}
 footer{margin-top:40px;padding:22px 0;text-align:center;font-size:12.5px;color:var(--mute);border-top:1px solid var(--line)}
 footer a{color:var(--sub)}
 .lic{position:fixed;right:14px;bottom:14px;z-index:20;border:1px solid var(--line2);background:#fff;border-radius:999px;padding:6px 11px;font-size:12px;color:var(--sub);box-shadow:var(--shadow)}
@@ -226,12 +264,12 @@ footer a{color:var(--sub)}
 </style>
 </head>
 <body>
-<header id="hdr"><div class="wrap hd">
+<header id="hdr"><div class="demobar" id="demobar"></div><div class="wrap hd">
   <button class="logo" data-act="home" aria-label="홈으로">
     <span class="mk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l5-4 5 4v11"/><path d="M13 21v-8l4-3 4 3v8"/><path d="M2 21h20"/></svg></span>
     옆학교는?
   </button>
-  <nav class="nav" id="nav"></nav>
+  <div style="display:flex;align-items:center;gap:6px"><button class="admchip" id="admchip" data-act="admin" hidden>관리</button><nav class="nav" id="nav"></nav></div>
 </div></header>
 
 <main class="wrap" id="app"></main>
@@ -249,14 +287,18 @@ footer a{color:var(--sub)}
    옆학교는?
    - CONFIG에 Supabase 주소와 공개 키(anon key)를 넣으면 실서비스 모드로 동작합니다.
    - 비워 두면 샘플 데이터로 이 브라우저 안에서만 동작하는 체험 모드입니다.
-   - 같은 폴더에 schools.json(나이스 전국 학교 목록)이 있으면 그 목록을 씁니다.
+   - 같은 폴더의 schools.js(전국 초등학교 목록)를 읽습니다. 서버의 학교 목록은 supabase/schools-*.sql로 넣습니다.
    ========================================================= */
 const CONFIG = {
-  SUPABASE_URL: '',        // 예: https://abcdefgh.supabase.co
-  SUPABASE_ANON_KEY: '',   // Project Settings > API > anon public 키 (공개되어도 되는 키)
+  SUPABASE_URL: 'https://kcgntohyhikhvowkslcf.supabase.co',
+  SUPABASE_ANON_KEY: 'sb_publishable_ixXy3ojgNNnY-fkiF-Y-rA_L92VEGly',   // Publishable key (공개되어도 되는 키)
   TURNSTILE_SITE_KEY: ''   // 선택: Cloudflare Turnstile 사이트 키 (Supabase 봇 차단을 켰을 때만)
 };
-const LIVE = !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY);
+const HAS_CONFIG = !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY);
+/* 주소에 ?demo가 있으면(또는 키가 없으면) 체험 모드: 예시 데이터만 쓰고 서버에는 아무것도 저장하지 않습니다 */
+const DEMO = !HAS_CONFIG || new URLSearchParams(location.search).has('demo');
+const LIVE = HAS_CONFIG && !DEMO;
+const MIN_SCHOOLS = 5;   // 이 수 이상 학교가 모여야 결과(비율·지도·의견)를 공개
 let sb = null;
 
 const NOW = new Date();
@@ -278,24 +320,43 @@ const STEMS = ['가람', '한빛', '새솔', '다온', '누리', '도담', '별�
 const SCHOOLS = [];
 REGIONS.forEach((r, ri) => {
   for (let k = 0; k < 4; k++) {
-    const level = k < 3 ? '초' : (ri % 2 ? '중' : '고');
-    const suf = level === '초' ? '초등학교' : level === '중' ? '중학교' : '고등학교';
+    const level = '초', suf = '초등학교';
     SCHOOLS.push({ code: r.c + String(7010000 + ri * 10 + k), name: r.n + STEMS[(ri * 3 + k) % STEMS.length] + suf, region: r.n, level });
   }
 });
 let REAL_SCHOOLS = false;
 const SMAP = Object.fromEntries(SCHOOLS.map(s => [s.code, s]));
+/* 학교 코드: '시도교육청코드 + (시도|시군구|학교명) 해시'. supabase/schools-*.sql과 같은 방식이라 서버와 일치합니다. */
+const OFFICE_ORDER = [['서울', 'B10'], ['부산', 'C10'], ['대구', 'D10'], ['인천', 'E10'], ['광주', 'F10'], ['대전', 'G10'], ['울산', 'H10'], ['세종', 'I10'], ['경기', 'J10'], ['강원', 'K10'], ['충북', 'M10'], ['충남', 'N10'], ['전북', 'P10'], ['전남', 'Q10'], ['경북', 'R10'], ['경남', 'S10'], ['제주', 'T10']];
+function fnv(s) { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h.toString(16).padStart(8, '0'); }
+function setSchools(list) {
+  SCHOOLS.length = 0;
+  Object.keys(SMAP).forEach(k => delete SMAP[k]);
+  list.forEach(o => { SCHOOLS.push(o); SMAP[o.code] = o; });
+  REAL_SCHOOLS = true;
+  SCHOOL_STEMS = null;
+}
 async function loadSchools() {
+  // schools.js (전국 초등학교 압축 목록) — 더블클릭으로 열어도 읽힙니다
   try {
-    const r = await fetch('schools.json', { cache: 'no-cache' });
-    if (!r.ok) throw 0;
-    const arr = await r.json();
-    if (!Array.isArray(arr) || !arr.length) throw 0;
-    SCHOOLS.length = 0;
-    Object.keys(SMAP).forEach(k => delete SMAP[k]);
-    arr.forEach(s => { const o = { code: s.c, name: s.n, region: s.r, level: s.l, addr: s.a || '' }; SCHOOLS.push(o); SMAP[o.code] = o; });
-    REAL_SCHOOLS = true;
-  } catch (e) { /* schools.json이 없으면 샘플 학교 목록 사용 */ }
+    if (!window.SCHOOLS) await loadScript('schools.js');
+    const P = window.SCHOOLS && window.SCHOOLS.p;
+    if (Array.isArray(P) && P.length === OFFICE_ORDER.length) {
+      const list = [];
+      P.forEach((part, i) => {
+        const [region, office] = OFFICE_ORDER[i];
+        part.split(';').forEach(d => {
+          const k = d.indexOf('>'); const addr = d.slice(0, k);
+          d.slice(k + 1).split('|').forEach(n => {
+            const name = n[0] === '*' ? n.slice(1) : n + '초등학교';
+            list.push({ code: office + fnv(`${region}|${addr}|${name}`), name, region, level: '초', addr });
+          });
+        });
+      });
+      setSchools(list); return;
+    }
+  } catch (e) { }
+  /* schools.js가 없으면 샘플 학교 목록 사용 */
 }
 
 /* ---------- 유틸 ---------- */
@@ -304,6 +365,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+function when(x) { return x && x.ex ? '예시' : ago(x.createdAt != null ? x.createdAt : x.at); }
 function ago(t) {
   const d = (Date.now() - t) / 1000;
   if (d < 60) return '방금';
@@ -333,14 +395,14 @@ function makeCode() {
 }
 
 /* ---------- 데이터 저장소 (실서비스: Supabase로 교체) ---------- */
-const KEY = 'yhg_proto_v1';
+const KEY = 'yhg_demo_v3';
 let S;
 function load() {
   const raw = LS.get(KEY);
   if (raw) {
     try {
       S = JSON.parse(raw);
-      // 학교 목록이 바뀌어(샘플 ↔ 나이스) 저장된 학교를 찾을 수 없으면 샘플 데이터를 새로 만듭니다
+      // 학교 목록이 바뀌어(샘플 ↔ 전국 목록) 저장된 학교를 찾을 수 없으면 샘플 데이터를 새로 만듭니다
       if (S.entries.every(e => SMAP[e.schoolCode])) return;
     } catch (e) { }
   }
@@ -357,65 +419,32 @@ function seed() {
   const R = rng(20261116);
   const day = 86400000;
   const pick = arr => arr[Math.floor(R() * arr.length)];
+  const EX = t => '(예시) ' + t;
   const SEEDS = [
-    { id: 'p1', year: CUR_YEAR - 1, cat: '늘봄', title: '늘봄 프로그램 강사 채용 공고는 누가 담당하나요?', desc: '늘봄학교 프로그램 강사 채용 공고문 작성·게시와 서류 접수까지의 담당을 두고 학교마다 판단이 다릅니다.', options: ['늘봄지원실장', '교무행정지원인력', '행정실', '늘봄 담당 교사'], w: [30, 36, 22, 12], n: 34, age: 330,
-      reasons: { 1: ['작년에는 전담 인력이 배치되기 전이라 교무행정지원인력이 공고까지 맡았습니다.'] } },
-    { id: 'a1', year: CUR_YEAR, cat: '늘봄', prev: 'p1', title: '늘봄 프로그램 강사 채용 공고는 누가 담당하나요?', desc: '늘봄학교 프로그램 강사 채용 공고문 작성·게시와 서류 접수까지의 담당을 두고 학교마다 판단이 다릅니다. 올해 전담 인력 배치 이후 달라진 점이 궁금합니다.', options: ['늘봄지원실장', '교무행정지원인력', '행정실', '늘봄 담당 교사'], w: [55, 24, 13, 8], n: 46, age: 12, held: true,
+    { id: 'p1', year: CUR_YEAR - 1, cat: '늘봄', title: EX('늘봄 프로그램 강사 채용 공고는 누가 담당하나요?'), desc: '체험용 예시 안건입니다. 작년에 같은 질문이 열렸을 때의 모습을 보여 줍니다.', options: ['늘봄 전담 인력', '교무행정지원인력', '행정실', '담당 교사'], w: [30, 36, 22, 12], n: 34, age: 330,
+      reasons: { 1: ['예시 의견입니다. 지난 학년도 결과는 이렇게 따로 남아 올해와 비교할 수 있어요.'] } },
+    { id: 'a1', year: CUR_YEAR, cat: '늘봄', prev: 'p1', title: EX('늘봄 프로그램 강사 채용 공고는 누가 담당하나요?'), desc: '체험용 예시 안건입니다. 같은 질문을 새 학년도에 다시 열면 작년 결과와 나란히 비교돼요.', options: ['늘봄 전담 인력', '교무행정지원인력', '행정실', '담당 교사'], w: [55, 24, 13, 8], n: 46, age: 12, held: true,
       reasons: {
-        0: ['늘봄 전담 인력이 배치된 취지를 생각하면 채용 공고까지 한 사람이 일괄 담당하는 게 자연스럽다고 봤습니다.', '강사 풀 관리와 프로그램 운영을 한 사람이 맡아야 해마다 연속성이 생깁니다.'],
-        1: ['공고문 게시와 서류 접수는 행정 지원 성격이 강하다고 판단했습니다.'],
-        2: ['강사 계약의 체결 주체가 학교장이고 예산 집행이 따르므로, 회계 담당 부서가 공고부터 맡는 게 맞다고 봤습니다.', '계약·보수 지급 담당과 공고 담당이 나뉘면 서류가 두 번 오가서 행정실로 일원화했습니다.'],
-        3: ['프로그램 내용을 가장 잘 아는 사람이 강사 자격 요건을 정해야 한다고 판단했습니다.']
+        0: ['예시 의견입니다. 다수 의견의 이유는 이런 식으로 쌓여요.', '예시 의견입니다. 직위는 적지 않아도 되고, 적으면 이렇게 함께 표시돼요.'],
+        1: ['예시 의견입니다. 판단 이유와 함께 관련 사이트 주소도 남길 수 있어요.'],
+        2: ['예시 의견입니다. 소수 선택이라도 공감(논리적이에요)을 많이 받으면 위쪽 「주목할 소수의견」으로 올라와요.'],
+        3: ['예시 의견입니다. 전화번호나 이메일을 적으면 저장할 때 자동으로 가려져요.']
       } },
-    { id: 'a2', year: CUR_YEAR, cat: '학교폭력', title: '학교폭력 사안 관련 학부모 면담에 관리자가 동석하나요?', desc: '사안 접수 후 학부모 면담을 담당교사 혼자 진행할지, 교감 등 관리자가 함께할지 기준이 궁금합니다.', options: ['항상 동석', '요청이 있을 때만 동석', '동석하지 않음(담당교사 단독)'], w: [32, 56, 12], n: 41, age: 20,
+    { id: 'a5', year: CUR_YEAR, cat: '업무분장', title: EX('학교 홈페이지 관리 업무는 어느 부서가 맡나요?'), desc: '체험용 예시 안건입니다. 숫자와 의견은 모두 꾸며 낸 것이에요.', options: ['정보 담당 부서', '교무기획부', '행정실', '교무행정지원인력'], w: [58, 16, 10, 16], n: 44, age: 33,
       reasons: {
-        0: ['말이 엇갈리는 일을 막으려고 관리자가 기록자로 늘 함께합니다.', '담당교사가 혼자 감정적인 항의를 받지 않도록 보호 차원에서 동석합니다.'],
-        1: ['모든 면담에 동석하면 학부모가 압박감을 느껴 오히려 대화가 어려워졌습니다.', '담당교사가 필요하다고 판단할 때 바로 합류하는 방식으로 운영합니다.'],
-        2: ['학교 면담은 절차 안내 중심이라 담당교사 단독으로 충분하고, 기록은 공유 문서로 남깁니다.']
+        0: ['예시 의견입니다. 실제 서비스에서는 선생님들이 남긴 판단 이유가 이 자리에 보여요.'],
+        2: ['예시 의견입니다. 소수 의견도 공감을 받으면 눈에 띄게 올라와요.']
       } },
-    { id: 'a3', year: CUR_YEAR, cat: '학적·출결', title: '교외체험학습 결과보고서를 기한 내 내지 않으면 어떻게 처리하나요?', desc: '결과보고서 미제출 시 미인정결석으로 바로 처리하는지, 보완 기회를 주는지 학교마다 다릅니다.', options: ['미인정결석으로 처리', '재제출 기회 부여 후 인정', '담임 재량'], w: [40, 52, 8], n: 38, age: 8, held: true,
-      reasons: {
-        0: ['학칙에 보고서 제출을 출석 인정 요건으로 명시해 두어서 예외 없이 처리합니다.', '기준이 흔들리면 다른 학부모와 형평성 문제가 생깁니다.'],
-        1: ['보고서는 확인 절차라서 한 번 더 기회를 주고, 그래도 내지 않으면 미인정으로 바꿉니다.', '학칙에 보완 기간을 두고, 안내 문자를 보낸 기록을 남겨 둡니다.'],
-        2: ['학생 사정을 가장 잘 아는 담임 판단을 존중하되, 결과는 학적 담당과 공유합니다.']
-      } },
-    { id: 'a4', year: CUR_YEAR, cat: '회계·계약', title: '방과후학교 수강료 환불 업무는 누가 맡나요?', desc: '중도 포기·결강에 따른 수강료 환불 계산과 학부모 안내를 어느 쪽이 맡는지 궁금합니다.', options: ['방과후 담당교사', '행정실', '교무행정지원인력'], w: [28, 47, 25], n: 33, age: 26,
-      reasons: {
-        0: ['수강 인원과 출결을 관리하는 사람이 환불 사유를 가장 정확히 판단할 수 있습니다.'],
-        1: ['환불은 세입 반납과 회계 처리라서 행정실 소관으로 정리했습니다.', '교원에게 회계 업무를 맡기지 않는다는 원칙을 세웠습니다.'],
-        2: ['신청 접수부터 환불 안내까지 한 창구로 일원화하니 학부모 문의가 줄었습니다.']
-      } },
-    { id: 'a5', year: CUR_YEAR, cat: '업무분장', title: '학교 홈페이지 관리 업무는 어느 부서가 맡나요?', desc: '게시물 등록, 메뉴 관리, 개인정보 노출 점검까지 포함한 홈페이지 관리 담당 부서를 정하려 합니다.', options: ['정보(디지털) 담당 부서', '교무기획부', '행정실', '교무행정지원인력'], w: [58, 16, 10, 16], n: 44, age: 33,
-      reasons: {
-        0: ['시스템 관리와 보안 점검까지 포함되니 정보 업무 담당 부서가 맡는 게 맞습니다.', '개인정보 노출 점검을 함께 해야 해서 정보 담당이 책임지고 있습니다.'],
-        1: ['게시물 대부분이 교육과정과 학사 안내라서 교무기획부가 관리합니다.'],
-        2: ['도메인·호스팅 계약이 행정실 소관이라 함께 맡고 있습니다.'],
-        3: ['게시물 등록은 단순 업무라 교무행정지원인력이 하고, 승인은 부서장이 합니다.']
-      } },
-    { id: 'a6', year: CUR_YEAR, cat: '회계·계약', title: '졸업앨범 업체 선정은 누가 주관하나요?', desc: '졸업앨범 업체 선정을 학년 협의로 할지, 행정실 계약 절차로 할지, 위원회를 둘지 고민입니다.', options: ['6학년 부장(학년 협의)', '행정실', '졸업앨범 선정위원회'], w: [24, 21, 55], n: 29, age: 41,
-      reasons: {
-        0: ['학생들이 직접 쓰는 물품이라 학년 협의로 정했을 때 만족도가 높았습니다.'],
-        1: ['일정 금액 이상 계약은 행정실 계약 절차를 따라야 해서 행정실이 주관합니다.'],
-        2: ['학부모가 비용을 부담하므로 학부모 위원이 포함된 선정위원회를 거치도록 했습니다.', '업체 선정 공정성 시비를 피하려면 위원회 심의 기록이 꼭 필요합니다.']
-      } },
-    { id: 'a7', year: CUR_YEAR, cat: '복무', title: '조퇴한 날 같은 날짜의 초과근무를 인정하나요?', desc: '오후에 조퇴했다가 저녁에 복귀해 업무를 처리한 경우 초과근무 인정 여부를 두고 의견이 갈립니다.', options: ['인정하지 않음', '사유가 분명하면 사전 결재 후 인정', '학교장 판단'], w: [60, 25, 15], n: 37, age: 4,
-      reasons: {
-        0: ['같은 날 조퇴와 초과근무를 함께 인정하면 근무시간 관리 원칙에 어긋난다고 봤습니다.', '예외를 두기 시작하면 기준이 흐려져서 원칙적으로 인정하지 않습니다.'],
-        1: ['진료 후 복귀해 긴급 업무를 처리한 경우처럼 사유가 분명하면 사전 결재를 거쳐 인정합니다.'],
-        2: ['사례마다 상황이 달라 학교장이 사전 명령 여부를 보고 판단합니다.']
-      } },
-    { id: 'a8', year: CUR_YEAR, cat: '시설·안전', title: '정수기 위생 점검 관리는 누가 담당하나요?', desc: '정수기 필터 교체 확인, 점검표 관리, 업체 연락 담당을 정하려 합니다.', options: ['행정실', '보건교사', '시설 담당 교사'], w: [58, 32, 10], n: 35, age: 47,
-      reasons: {
-        0: ['임대·관리 계약 주체가 행정실이라 점검 일정과 업체 연락도 행정실이 맡습니다.', '시설물 관리 대장에 함께 넣어 관리합니다.'],
-        1: ['수질 검사 결과 확인은 보건 업무와 맞닿아 있어 보건교사가 점검표를 확인합니다.'],
-        2: ['층별 정수기 위치를 잘 아는 시설 담당이 점검 확인만 합니다.']
-      } }
+    { id: 'a6', year: CUR_YEAR, cat: '회계·계약', title: EX('졸업앨범 업체 선정은 누가 주관하나요?'), desc: '체험용 예시 안건입니다. 숫자와 의견은 모두 꾸며 낸 것이에요.', options: ['학년 협의', '행정실', '선정위원회'], w: [24, 21, 55], n: 29, age: 41,
+      reasons: { 2: ['예시 의견입니다. 결과는 학교마다 1표로만 집계돼요.'], 0: ['예시 의견입니다. 지역 이름과 직위만 보이고 학교 이름은 보이지 않아요.'] } },
+    { id: 'a8', year: CUR_YEAR, cat: '시설·안전', title: EX('정수기 위생 점검 관리는 누가 담당하나요?'), desc: '체험용 예시 안건입니다. 숫자와 의견은 모두 꾸며 낸 것이에요.', options: ['행정실', '보건교사', '시설 담당 교사'], w: [58, 32, 10], n: 35, age: 47,
+      reasons: { 1: ['예시 의견입니다. 「확인된 표만 보기」를 켜면 이유를 적었거나 같은 학교가 확인한 표만 집계돼요.'] } }
   ];
-  const elem = SCHOOLS.filter(s => s.level === '초'), sec = SCHOOLS.filter(s => s.level !== '초');
+  const elem = SCHOOLS.filter(s => s.level === '초');
   SEEDS.forEach(sd => {
     const createdAt = Date.now() - sd.age * day;
-    D.agendas.push({ id: sd.id, year: sd.year, category: sd.cat, title: sd.title, desc: sd.desc, options: sd.options, createdAt, status: 'open', curious: [], prevId: sd.prev || null, authorDevice: 'seed' });
-    const pool = [...elem].sort(() => R() - .5).slice(0, sd.n - 4).concat([...sec].sort(() => R() - .5).slice(0, 4));
+    D.agendas.push({ id: sd.id, year: sd.year, category: sd.cat, title: sd.title, desc: sd.desc, options: sd.options, createdAt, status: 'open', curious: [], prevId: sd.prev || null, authorDevice: 'seed', ex: true, short: 'EXMP' + String(SEEDS.indexOf(sd) + 1).padStart(2, '0') });
+    const pool = [...elem].sort(() => R() - .5).slice(0, sd.n);
     const tot = sd.w.reduce((a, b) => a + b, 0);
     const used = {};
     const topIdx = sd.w.indexOf(Math.max(...sd.w));
@@ -424,26 +453,25 @@ function seed() {
       let r = R() * tot, choice = 0;
       for (let k = 0; k < sd.w.length; k++) { if ((r -= sd.w[k]) < 0) { choice = k; break; } }
       const t = createdAt + R() * (Date.now() - createdAt);
-      const e = { id: 'e' + uid(), agendaId: sd.id, schoolCode: sc.code, deviceId: 'seed-' + i, choice, role: 'origin', position: R() < .75 ? pick(POSITIONS) : '', reason: '', link: '', code: 'seed-' + uid(), createdAt: t };
+      const e = { id: 'e' + uid(), agendaId: sd.id, schoolCode: sc.code, deviceId: 'seed-' + i, choice, role: 'origin', position: R() < .75 ? pick(POSITIONS) : '', reason: '', link: '', code: 'seed-' + uid(), createdAt: t, ex: true };
       const rs = (sd.reasons || {})[choice] || [];
       used[choice] = used[choice] || 0;
-      if (used[choice] < rs.length && R() < .7) {
+      if (used[choice] < rs.length && R() < .8) {
         e.reason = rs[used[choice]++];
-        if (choice === 2 && sd.id === 'a1' && used[choice] === 1) e.link = 'https://www.law.go.kr/';
         const n = choice === topIdx ? Math.floor(R() * 9) : 4 + Math.floor(R() * 14);
         D.likes[e.id] = Array.from({ length: n }, (_, k) => 'seed-like-' + k);
       }
       D.entries.push(e);
       if (sd.held && !heldDone && i > 3 && !e.reason) {
         heldDone = true;
-        D.entries.push({ id: 'e' + uid(), agendaId: sd.id, schoolCode: sc.code, deviceId: 'seed-obj-' + i, choice: (choice + 1) % sd.options.length, role: 'object', position: '교사', reason: '저희 학교는 협의회에서 다르게 결정했는데 잘못 입력된 것 같습니다.', link: '', code: 'seed-' + uid(), createdAt: t + 3600000 });
+        D.entries.push({ id: 'e' + uid(), agendaId: sd.id, schoolCode: sc.code, deviceId: 'seed-obj-' + i, choice: (choice + 1) % sd.options.length, role: 'object', position: '교사', reason: '예시 의견입니다. 같은 학교에서 다른 판단이 들어오면 그 학교 표는 보류되고 통계에서 빠져요.', link: '', code: 'seed-' + uid(), createdAt: t + 3600000, ex: true });
       } else if (R() < .22) {
-        D.entries.push({ id: 'e' + uid(), agendaId: sd.id, schoolCode: sc.code, deviceId: 'seed-cf-' + i, choice, role: 'confirm', position: R() < .6 ? pick(POSITIONS) : '', reason: '', link: '', code: 'seed-' + uid(), createdAt: t + 7200000 });
+        D.entries.push({ id: 'e' + uid(), agendaId: sd.id, schoolCode: sc.code, deviceId: 'seed-cf-' + i, choice, role: 'confirm', position: R() < .6 ? pick(POSITIONS) : '', reason: '', link: '', code: 'seed-' + uid(), createdAt: t + 7200000, ex: true });
       }
     });
   });
-  D.comments.push({ id: 'c' + uid(), agendaId: 'a1', schoolCode: SCHOOLS[50].code, deviceId: 'seed-c1', text: '저희는 늘봄지원실장으로 정했지만, 계약서 작성 단계부터는 행정실과 함께 검토하는 방식으로 역할을 나눴어요.', position: '교감', createdAt: Date.now() - 2 * day });
-  D.agendas.push({ id: 'a9', year: CUR_YEAR, category: '업무분장', title: '학생 1인 1기기 분실 신고 처리는 누가 담당하나요?', desc: '학생 스마트기기를 잃어버렸을 때 분실 신고 접수와 물품 처리 담당이 학교마다 다릅니다.', options: ['담임교사', '정보 담당 교사', '행정실(물품관리)'], createdAt: Date.now() - day, status: 'pending', curious: [SCHOOLS[2].code], prevId: null, authorDevice: 'seed' });
+  D.comments.push({ id: 'c' + uid(), agendaId: 'a1', schoolCode: elem[50 % elem.length].code, deviceId: 'seed-c1', text: '예시 의견입니다. 선택 없이 의견만 덧붙이면 이렇게 「의견」으로 표시돼요.', position: '', createdAt: Date.now() - 2 * day, ex: true });
+  D.agendas.push({ id: 'a9', year: CUR_YEAR, category: '업무분장', title: EX('학생 1인 1기기 분실 신고 처리는 누가 담당하나요?'), desc: '체험용 예시 안건입니다. 다른 학교 3곳이 「우리도 궁금해요」를 누르면 투표가 열려요.', options: ['담임교사', '정보 담당 교사', '행정실'], createdAt: Date.now() - day, status: 'pending', curious: [elem[2].code], prevId: null, authorDevice: 'seed', ex: true, short: 'EXMP09' });
   return D;
 }
 
@@ -475,8 +503,8 @@ function summarize(ag, rows, f) {
 }
 function opinionsOf(ag) {
   const arr = [];
-  S.entries.filter(e => e.agendaId === ag.id && e.reason).forEach(e => arr.push({ id: e.id, choice: e.choice, text: e.reason, link: e.link, position: e.position, code: e.schoolCode, role: e.role, at: e.createdAt }));
-  S.comments.filter(c => c.agendaId === ag.id).forEach(c => arr.push({ id: c.id, choice: null, text: c.text, link: '', position: c.position, code: c.schoolCode, role: 'comment', at: c.createdAt }));
+  S.entries.filter(e => e.agendaId === ag.id && e.reason).forEach(e => arr.push({ id: e.id, choice: e.choice, text: e.reason, link: e.link, position: e.position, code: e.schoolCode, role: e.role, at: e.createdAt, ex: e.ex }));
+  S.comments.filter(c => c.agendaId === ag.id).forEach(c => arr.push({ id: c.id, choice: null, text: c.text, link: '', position: c.position, code: c.schoolCode, role: 'comment', at: c.createdAt, ex: c.ex }));
   return arr;
 }
 const likeN = id => (S.likes[id] || []).length;
@@ -485,6 +513,60 @@ const blinded = id => (S.reports[id] || []).length >= 3;
 /* 비슷한 안건 찾기: 글자 2개 묶음(bigram) 유사도 */
 function grams(s) { s = String(s).replace(/[^가-힣a-zA-Z0-9]/g, '').toLowerCase(); const g = new Set(); for (let i = 0; i < s.length - 1; i++) g.add(s.slice(i, i + 2)); return g; }
 function sim(a, b) { const A = grams(a), B = grams(b); if (!A.size || !B.size) return 0; let n = 0; A.forEach(x => B.has(x) && n++); return n / (A.size + B.size - n); }
+
+/* ---------- 비속어·욕설·학교 이름 차단 ----------
+   화면에서 입력 즉시 안내하고, 서버(supabase/update-2.sql)가 같은 규칙으로 저장 직전에 한 번 더 검사합니다.
+   관리자 화면에서 추가한 금지어는 서버에만 적용되므로, 아래 기본 목록에 없는 말은 저장할 때 걸러집니다. */
+const BAN_WORDS = ["시발", "씨발", "씨바", "시바", "씨빨", "시빨", "쉬발", "쓰발", "씨팔", "시팔", "씹새", "씹년", "씹할", "씹창", "씹놈", "개새끼", "개새기", "개색기", "개색끼", "개세끼", "개쉐", "개쌔", "새끼", "병신", "븅신", "빙신", "좆", "존나", "존내", "지랄", "엠창", "니애미", "니애비", "느금", "니미럴", "미친놈", "미친년", "미친새", "또라이", "돌아이", "똘아이", "닥쳐", "엿먹", "등신같", "호로새", "호로자식", "후레자식", "호래자식", "창녀", "창년", "쌍놈", "쌍년", "썅", "개놈", "섹스", "18놈", "c8", "tlqkf", "qudtls", "whssk", "fuck", "shit", "bitch", "asshole", "ㅅㅂ", "ㅆㅂ", "ㅂㅅ", "ㅄ", "ㅈㄹ", "ㅅㄲ", "ㅈㄴ", "ㅁㅊ", "ㄷㅊ", "ㅗㅗ"];
+const ALLOW_WORDS = ["시발점", "시발역", "시발표", "시발생", "시발송", "시발주", "시발령", "시발급", "시발견", "시발행", "시발전", "시바견", "시바로", "시바뀌", "시바꾸", "시바꿔", "새끼손가락", "새끼발가락", "병신고", "병신청", "병신년"];
+const BAN_SORTED = [...BAN_WORDS].sort((a, b) => b.length - a.length || (a < b ? -1 : 1));
+function normWords(t, keepDigits) {
+  let s = String(t || '').toLowerCase().replace(keepDigits ? /[^가-힣ㄱ-ㅎㅏ-ㅣa-z0-9]+/g : /[^가-힣ㄱ-ㅎㅏ-ㅣa-z]+/g, ' ').trim();
+  if (!s) return ' ';
+  const out = []; let run = '';
+  s.split(/ +/).forEach(tok => {   // 한 글자씩 띄어 쓴 것은 붙여서 검사 ("시 1 발" → "시발")
+    if (tok.length === 1) run += tok;
+    else { if (run) { out.push(run); run = ''; } out.push(tok); }
+  });
+  if (run) out.push(run);
+  return ' ' + out.join(' ') + ' ';
+}
+function findBad(t) {
+  let a = normWords(t, true), b = normWords(t, false);
+  ALLOW_WORDS.forEach(w => { a = a.split(w).join(' '); b = b.split(w).join(' '); });
+  return BAN_SORTED.find(w => a.includes(w) || b.includes(w)) || null;
+}
+let SCHOOL_STEMS = null;
+function buildStems() {   // 학교 이름 줄임말 (서버의 v_school_stems와 같은 규칙)
+  const ex = new Set();
+  SCHOOLS.forEach(s => {
+    ex.add(s.region);
+    if (s.addr) { ex.add(s.addr); const b = s.addr.replace(/(시|군|구)$/, ''); if (b.length >= 2) ex.add(b); }
+  });
+  const set = new Set();
+  SCHOOLS.forEach(s => {
+    if (!s.name.endsWith('초등학교')) return;
+    const st = s.name.slice(0, -3);
+    [st, st.startsWith(s.region) ? st.slice(s.region.length) : null].forEach(x => {
+      if (x && x.length >= 3 && !ex.has(x.slice(0, -1))) set.add(x);
+    });
+  });
+  SCHOOL_STEMS = [...set].sort((a, b) => b.length - a.length || (a < b ? -1 : 1));
+}
+function findSchool(t) {
+  if (!SCHOOL_STEMS) buildStems();
+  const n = normWords(t, false);
+  return SCHOOL_STEMS.find(st => n.includes(st)) || null;
+}
+const maskWord = w => w.length <= 1 ? '*' : w[0] + '*'.repeat(w.length - 1);
+function contentProblem(t) {
+  const b = findBad(t);
+  if (b) return `부적절한 표현(${maskWord(b)})이 있어요. 고쳐서 다시 적어 주세요.`;
+  const s = findSchool(t);
+  if (s) return `학교 이름(${s})은 적지 말아 주세요. 이 서비스는 학교 이름을 공개하지 않아요.`;
+  return '';
+}
+function showProblem(id, msg) { const e = document.getElementById(id); if (!e) return; e.textContent = msg; e.classList.toggle('on', !!msg); }
 
 /* ---------- 데이터 접근 계층: 체험 모드(이 브라우저) / 실서비스 모드(Supabase) ---------- */
 const ERR = {
@@ -506,10 +588,18 @@ const ERR = {
   ALREADY_CURIOUS: '우리 학교는 이미 눌렀어요',
   ALREADY_REPORTED: '이미 신고했어요',
   NOT_MINE: '내가 남긴 표만 고칠 수 있어요',
-  NO_AUTH: '연결이 끊겼어요. 새로고침해 주세요'
+  NO_AUTH: '연결이 끊겼어요. 새로고침해 주세요',
+  NOT_ADMIN: '관리자 권한이 없어요',
+  NOT_FOUND: '이미 지워졌거나 찾을 수 없어요',
+  BAD_WORD_INPUT: '단어를 1~30자로 적어 주세요'
 };
 const errKey = e => Object.keys(ERR).find(k => String((e && e.message) || e).includes(k));
-const errMsg = e => ERR[errKey(e)] || '처리하지 못했어요. 잠시 후 다시 시도해 주세요';
+const errMsg = e => {
+  const m = String((e && e.message) || e);
+  const bw = m.match(/BAD_WORDS:(\S+)/); if (bw) return `부적절한 표현(${maskWord(bw[1])})이 있어 저장하지 않았어요`;
+  const sn = m.match(/SCHOOL_NAME:(\S+)/); if (sn) return `학교 이름(${sn[1]})은 적을 수 없어요`;
+  return ERR[errKey(e)] || '처리하지 못했어요. 잠시 후 다시 시도해 주세요';
+};
 async function run(btn, fn) {
   if (run.busy) return;
   run.busy = true;
@@ -565,17 +655,18 @@ async function refreshAll() {
   const [ags, ens, cms, lks, rps, my] = await Promise.all([
     fetchAll('v_agendas'), fetchAll('v_entries'), fetchAll('v_comments'), fetchAll('v_likes'), fetchAll('v_reports'), rpc('my_state')
   ]);
+  IS_ADMIN = !!(my && my.is_admin);
   const codes = Object.fromEntries(((my && my.codes) || []).map(x => [x.entry_id, x.code]));
-  // 서버는 학교 코드 대신 '학교 키'만 줍니다. 키에 시도·학교급만 붙여 둡니다.
+  // 서버는 학교 코드 대신 '학교 키'만 줍니다. 키에 시도만 붙여 둡니다.
   [...ens, ...cms].forEach(x => { if (!SMAP[x.school_key]) SMAP[x.school_key] = { code: x.school_key, name: '', region: x.region, level: x.level }; });
   const D = { agendas: [], entries: [], comments: [], likes: {}, reports: {}, deviceSchool: {} };
   if (my && my.school_code) {
     const real = SMAP[my.school_code] || {};
-    SMAP[my.school_key] = { code: my.school_key, name: real.name || '우리 학교', region: real.region || '', level: real.level || '', real: my.school_code };
+    SMAP[my.school_key] = { code: my.school_key, name: real.name || '우리 학교', region: real.region || '', level: real.level || '', addr: real.addr || '', real: my.school_code };
     D.deviceSchool[DEV] = { code: my.school_key, year: my.year, changes: my.changes };
   }
   const myKey = my && my.school_key;
-  D.agendas = ags.map(a => ({ id: a.id, year: a.year, category: a.category, title: a.title, desc: a.descr, options: a.options, createdAt: Date.parse(a.created_at), status: a.status, prevId: a.prev_id, authorDevice: a.mine ? DEV : 'o', curious: fillN(a.curious_n, a.curious_mine, myKey) }));
+  D.agendas = ags.map(a => ({ id: a.id, year: a.year, category: a.category, title: a.title, desc: a.descr, options: a.options, createdAt: Date.parse(a.created_at), status: a.status, prevId: a.prev_id, featured: !!a.featured, short: a.short_code || '', authorDevice: a.mine ? DEV : 'o', curious: fillN(a.curious_n, a.curious_mine, myKey) }));
   D.entries = ens.map(e => ({ id: e.id, agendaId: e.agenda_id, schoolCode: e.school_key, deviceId: e.mine ? DEV : 'o', choice: e.choice, role: e.role, position: e.position, reason: e.reason, link: e.link, code: codes[e.id] || '', createdAt: Date.parse(e.created_at) }));
   D.comments = cms.map(c => ({ id: c.id, agendaId: c.agenda_id, schoolCode: c.school_key, deviceId: c.mine ? DEV : 'o', text: c.body, position: c.position, createdAt: Date.parse(c.created_at) }));
   lks.forEach(l => D.likes[l.target_id] = fillN(l.n, l.mine, DEV));
@@ -583,6 +674,11 @@ async function refreshAll() {
   S = D;
 }
 const fail = k => { throw new Error(k); };
+function localShort() {   // 체험 모드용 6자리 코드 (실서비스는 서버가 만듦)
+  const abc = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let c;
+  do { c = Array.from({ length: 6 }, () => abc[Math.floor(Math.random() * abc.length)]).join(''); } while (S.agendas.some(a => a.short === c));
+  return c;
+}
 
 /* 화면은 아래 API만 부릅니다. school: 실제 학교 코드, null이면 이 기기에 연결된 학교 */
 const API = {
@@ -653,7 +749,7 @@ const API = {
     const ms = mySchool(); const code = school || (ms && ms.code);
     if (!code) fail('NO_SCHOOL');
     bindSchool(code);
-    const ag = { id: 'a' + uid(), year: CUR_YEAR, category: f.cat, title: f.title, desc: maskPI(f.desc), options: f.options, createdAt: Date.now(), status: 'pending', curious: [code], prevId: f.prevId, authorDevice: DEV };
+    const ag = { id: 'a' + uid(), year: CUR_YEAR, category: f.cat, title: f.title, desc: maskPI(f.desc), options: f.options, createdAt: Date.now(), status: 'pending', curious: [code], prevId: f.prevId, authorDevice: DEV, short: localShort() };
     S.agendas.push(ag); save(); return ag.id;
   },
   async claim(code, agendaId) {
@@ -675,6 +771,8 @@ const API = {
 
 /* ---------- 화면 상태 ---------- */
 const ST = { view: 'home', id: null };
+let IS_ADMIN = false;
+const ADM = { tab: 'agendas', data: null, loading: false };
 const H = { q: '', cat: '전체', year: 'all', sort: 'new' };
 let F = { region: null, level: '', confirmed: false };
 let OPSORT = 'like';
@@ -686,10 +784,14 @@ resetNew();
 
 /* ---------- 라우터 (해시 없이, 뒤로가기 유지) ---------- */
 function urlFor(view, id) {
-  if (view === 'agenda') return '?a=' + encodeURIComponent(id);
-  if (view === 'new') return '?new';
-  if (view === 'my') return '?my';
-  return location.pathname;
+  const d = DEMO && HAS_CONFIG ? 'demo' : '';   // 체험 주소는 이동해도 체험 모드 유지
+  let q = '';
+  if (view === 'agenda') { const ag = getAg(id); q = ag && ag.short ? 'q=' + ag.short : 'a=' + encodeURIComponent(id); }
+  else if (view === 'new') q = 'new';
+  else if (view === 'my') q = 'my';
+  else if (view === 'admin') q = 'admin';
+  q = [q, d].filter(Boolean).join('&');
+  return q ? '?' + q : location.pathname;
 }
 function go(view, id = null, push = true) {
   if (view === 'agenda' && ST.id !== id) { F = { region: null, level: '', confirmed: false }; OPSORT = 'like'; }
@@ -702,9 +804,11 @@ function go(view, id = null, push = true) {
 }
 function parseLoc() {
   const p = new URLSearchParams(location.search);
+  if (p.get('q')) { const code = p.get('q').trim().toUpperCase(); const ag = S && S.agendas.find(a => a.short === code); return { view: 'agenda', id: ag ? ag.id : 'missing' }; }
   if (p.get('a')) return { view: 'agenda', id: p.get('a') };
   if (p.has('new')) return { view: 'new', id: null };
   if (p.has('my')) return { view: 'my', id: null };
+  if (p.has('admin')) return { view: 'admin', id: null };
   return { view: 'home', id: null };
 }
 window.addEventListener('popstate', e => {
@@ -743,29 +847,52 @@ function render() {
   if (v === 'agenda') app.innerHTML = viewAgenda();
   else if (v === 'new') app.innerHTML = viewNew();
   else if (v === 'my') app.innerHTML = viewMy();
+  else if (v === 'admin') app.innerHTML = viewAdmin();
   else app.innerHTML = viewHome();
+  $('#admchip').hidden = !IS_ADMIN || v === 'admin';
   if (v === 'home') renderHomeList();
   if (v === 'new') renderSim();
-  document.title = v === 'agenda' && getAg(ST.id) ? getAg(ST.id).title + ' · 옆학교는?' : '옆학교는? · 학교 판단 아카이브';
+  document.title = v === 'agenda' && getAg(ST.id) ? getAg(ST.id).title + ' · 옆학교는?' : '옆학교는? · 초등학교 판단 아카이브';
 }
 
 /* ----- 홈 ----- */
+const EXAMPLE_Q = [
+  ['업무분장', '학교 홈페이지 관리 업무는 어느 부서가 맡나요?'],
+  ['늘봄', '늘봄 프로그램 강사 채용 공고는 누가 담당하나요?'],
+  ['학적·출결', '전학 서류 발송은 담임과 학적 담당 중 누가 하나요?'],
+  ['회계·계약', '방과후학교 수강료 환불 안내는 누가 맡나요?'],
+  ['시설·안전', '정수기 위생 점검 관리는 누가 담당하나요?'],
+  ['복무', '연수 출장 복명서의 결재선은 어떻게 정하나요?'],
+  ['학교폭력', '사안 접수 뒤 학부모 첫 연락은 누가 하나요?'],
+  ['기타', '학교 대표 이메일 확인은 누가 맡나요?']
+];
+function exampleChips(n = 8) {
+  return `<div class="exq">${EXAMPLE_Q.slice(0, n).map(([c, t]) => `<button data-act="useExample" data-c="${esc(c)}" data-t="${esc(t)}"><small>${esc(c)}</small>${esc(t)}</button>`).join('')}</div>`;
+}
+function howBlock() {
+  return `<div class="how">
+    <div class="st"><span class="no">1</span><b>궁금한 안건 올리기</b><span>업무 갈등, 공문 핑퐁처럼 학교마다 판단이 갈리는 질문을 올려요.</span></div>
+    <div class="st"><span class="no">2</span><b>3개교가 궁금해하면 공개</b><span>다른 학교 3곳이 「우리도 궁금해요」를 누르면 투표가 열려요.</span></div>
+    <div class="st"><span class="no">3</span><b>학교별 1표로 쌓여요</b><span>${MIN_SCHOOLS}개교가 모이면 결과와 판단 이유가 공개되고, 해마다 비교돼요.</span></div>
+  </div>`;
+}
 function viewHome() {
   const open = S.agendas.filter(a => a.status === 'open');
   const schools = new Set(S.entries.map(e => e.schoolCode)).size;
   const ops = S.entries.filter(e => e.reason).length + S.comments.length;
+  const fresh = open.length < 10;   // 안건이 적은 초기에는 사용 안내와 질문 예시를 보여 줌
   return `
   <section class="hero">
-    <p class="eyebrow">${CUR_YEAR}학년도 · 학교 판단 아카이브</p>
+    <p class="eyebrow">${CUR_YEAR}학년도 · 전국 초등학교 판단 아카이브</p>
     <h1>다른 학교는<br>어떻게 판단했을까요?</h1>
     <p>업무 갈등과 공문 핑퐁, 학교마다의 결정을 학교별 1표로 모아 둡니다. 로그인 없이 학교만 고르면 참여할 수 있어요.</p>
-    <div class="stats">
-      <div class="stat"><b>${open.length}</b><span>누적 안건</span></div>
-      <div class="stat"><b>${schools}</b><span>참여 학교</span></div>
-      <div class="stat"><b>${ops}</b><span>남긴 의견</span></div>
-    </div>
+    ${open.length ? `<div class="stats">
+      <div class="stat"><b>${open.length}</b><span>${DEMO ? '예시 안건' : '누적 안건'}</span></div>
+      <div class="stat"><b>${schools}</b><span>${DEMO ? '예시 참여 학교' : '참여 학교'}</span></div>
+      <div class="stat"><b>${ops}</b><span>${DEMO ? '예시 의견' : '남긴 의견'}</span></div>
+    </div>` : ''}
   </section>
-  ${LIVE ? '' : `<div class="banner">체험 모드입니다. 투표 데이터는 샘플이며 이 브라우저에만 저장됩니다.${REAL_SCHOOLS ? ' 학교 목록은 나이스 전국 학교 목록이에요.' : ' 학교 목록도 샘플이에요.'}</div>`}
+  ${fresh ? howBlock() : ''}
   <div class="sec">
     <label class="search">${IC.search}<input id="q" type="search" placeholder="키워드로 찾기 (예: 홈페이지, 환불, 체험학습)" value="${esc(H.q)}" aria-label="안건 검색"></label>
     <div class="chips" role="tablist">${['전체', ...CATS].map(c => `<button class="chip ${H.cat === c ? 'on' : ''}" data-act="cat" data-v="${c}">${c}</button>`).join('')}</div>
@@ -781,7 +908,8 @@ function viewHome() {
     </div>
     <div class="alist" id="homeList"></div>
   </div>
-  ${pendingSection()}`;
+  ${pendingSection()}
+  ${fresh && open.length ? `<div class="sech"><h2>이런 질문을 올려 보세요</h2><span class="small muted">누르면 안건 올리기로 이어져요</span></div>${exampleChips(6)}` : ''}`;
 }
 function renderHomeList() {
   const box = $('#homeList'); if (!box) return;
@@ -792,7 +920,12 @@ function renderHomeList() {
     .filter(a => { const hay = (a.title + ' ' + a.desc + ' ' + a.options.join(' ') + ' ' + a.category).toLowerCase(); return toks.every(t => hay.includes(t)); });
   list = list.map(a => ({ a, n: computeRows(a).length }));
   list.sort((x, y) => H.sort === 'hot' ? y.n - x.n : (y.a.year - x.a.year) || (y.a.createdAt - x.a.createdAt));
-  box.innerHTML = list.length ? list.map(({ a }) => agendaCard(a)).join('') :
+  const none = !S.agendas.some(a => a.status === 'open');
+  box.innerHTML = list.length ? list.map(({ a }) => agendaCard(a)).join('') : none ?
+    `<div class="card empty" style="text-align:left"><b style="font-size:16px">첫 안건을 기다리고 있어요</b>
+      <p class="small sub" style="margin:6px 0 4px">학교마다 판단이 갈렸던 질문을 올려 주세요. 아래 예시를 누르면 바로 이어서 쓸 수 있어요.</p>
+      ${exampleChips()}
+      <button class="btn dark sm" style="margin-top:14px" data-act="new">직접 안건 올리기</button></div>` :
     `<div class="card empty"><b>찾는 안건이 없어요</b><p class="small" style="margin:6px 0 14px">처음 올리는 안건이 될 수 있어요.</p><button class="btn dark sm" data-act="new">안건 올리기</button></div>`;
 }
 function agendaCard(a) {
@@ -800,15 +933,16 @@ function agendaCard(a) {
   const ops = opinionsOf(a).length;
   const shown = myEntry(a) || REVEAL.has(a.id);
   const top = sm.counts.indexOf(Math.max(...sm.counts));
-  const vis = shown && sm.total ?
+  const vis = shown && sm.total >= MIN_SCHOOLS ?
     `<div class="stack">${sm.counts.map((c, i) => c ? `<i style="width:${c / sm.total * 100}%;background:${COLORS[i]}"></i>` : '').join('')}</div>
      <div class="small" style="margin-bottom:6px"><b style="color:${COLORS[top]}">${esc(a.options[top])}</b> <span class="muted">${pct(sm.counts[top], sm.total)}%로 가장 많아요</span></div>` :
+    shown ? `<div class="hidden-res">${IC.lock.replace('22', '15').replace('22', '15')} ${sm.total}/${MIN_SCHOOLS}개교 · ${MIN_SCHOOLS}개교가 모이면 결과가 공개돼요</div>` :
     `<div class="hidden-res">${IC.lock.replace('22', '15').replace('22', '15')} 우리 학교 판단을 남기면 결과가 보여요</div>`;
   return `<button class="acard" data-act="open" data-id="${a.id}">
-    <div class="row"><span class="pill pri">${a.year}학년도</span><span class="pill">${esc(a.category)}</span>${myEntry(a) ? '<span class="pill ok">참여함</span>' : ''}${a.prevId ? '<span class="pill">작년과 비교</span>' : ''}</div>
+    <div class="row">${a.ex ? '<span class="pill ex">예시</span>' : ''}${a.featured ? '<span class="pill feat">운영자 제안</span>' : ''}<span class="pill pri">${a.year}학년도</span><span class="pill">${esc(a.category)}</span>${myEntry(a) ? '<span class="pill ok">참여함</span>' : ''}${a.prevId ? '<span class="pill">작년과 비교</span>' : ''}</div>
     <h3>${esc(a.title)}</h3>
     ${vis}
-    <div class="meta"><span>${sm.all}개교 참여</span><span>의견 ${ops}</span>${sm.held ? `<span>보류 ${sm.held}</span>` : ''}<span>${ago(a.createdAt)}</span></div>
+    <div class="meta"><span>${sm.all}개교 참여</span><span>의견 ${ops}</span>${sm.held ? `<span>보류 ${sm.held}</span>` : ''}<span>${when(a)}</span></div>
   </button>`;
 }
 function pendingSection() {
@@ -816,7 +950,7 @@ function pendingSection() {
   if (!pend.length) return '';
   return `<div class="sech"><h2>공개 대기 중인 안건</h2><span class="small muted">3개교가 궁금해하면 열려요</span></div>
   <div class="alist">${pend.map(a => `<button class="acard" data-act="open" data-id="${a.id}">
-    <div class="row"><span class="pill warn">대기 ${a.curious.length}/3</span><span class="pill">${esc(a.category)}</span></div>
+    <div class="row">${a.ex ? '<span class="pill ex">예시</span>' : ''}${a.featured ? '<span class="pill feat">운영자 제안</span>' : ''}<span class="pill warn">대기 ${a.curious.length}/3</span><span class="pill">${esc(a.category)}</span></div>
     <h3>${esc(a.title)}</h3>
     <div class="prog">${[0, 1, 2].map(i => `<i class="${i < a.curious.length ? 'on' : ''}"></i>`).join('')}</div>
   </button>`).join('')}</div>`;
@@ -832,19 +966,23 @@ function viewAgenda() {
   let h = `<button class="back" data-act="back">${IC.back}목록으로</button>
   <section class="card ahead">
     <div class="row">
-      <span class="pill pri">${ag.year}학년도</span><span class="pill">${esc(ag.category)}</span>
+      ${ag.ex ? '<span class="pill ex">예시</span>' : ''}${ag.featured ? '<span class="pill feat">운영자 제안</span>' : ''}<span class="pill pri">${ag.year}학년도</span><span class="pill">${esc(ag.category)}</span>
       ${ag.status === 'pending' ? '<span class="pill warn">공개 대기</span>' : (ag.year === CUR_YEAR ? '<span class="pill ok">진행 중</span>' : '<span class="pill">지난 학년도</span>')}
     </div>
     <h1>${esc(ag.title)}</h1>
     ${ag.desc ? `<p class="desc">${esc(ag.desc)}</p>` : ''}
     <div class="between small muted">
-      <span>${rows.length}개교 참여 · ${ago(ag.createdAt)} 등록</span>
-      <button class="link" data-act="share">공유하기</button>
+      <span>${rows.length}개교 참여 · ${ag.ex ? '예시 안건' : ago(ag.createdAt) + ' 등록'}</span>
+      <span class="row" style="gap:12px"><button class="link" style="color:var(--mute)" data-act="reportAgenda">신고</button><button class="link" data-act="share">공유하기</button></span>
     </div>
     ${prev ? `<div class="small" style="margin-top:6px">작년에도 열린 안건이에요 · <button class="link" data-act="open" data-id="${prev.id}">${prev.year}학년도 결과 보기</button></div>` : ''}
     ${next ? `<div class="small" style="margin-top:6px">올해 다시 열렸어요 · <button class="link" data-act="open" data-id="${next.id}">${next.year}학년도 안건으로 가기</button></div>` : ''}
     ${ag.status === 'pending' ? pendingPanel(ag) : actionPanel(ag, rows)}
-  </section>`;
+  </section>
+  ${IS_ADMIN ? `<div class="admbar"><b>관리</b>
+    <button class="btn sm" data-act="adm" data-a="${ag.featured ? 'unfeature' : 'feature'}" data-id="${ag.id}">${ag.featured ? '운영자 제안 해제' : '운영자 제안으로 바로 공개'}</button>
+    <button class="btn sm" data-act="adm" data-a="hide" data-id="${ag.id}">숨기기</button>
+    <button class="btn sm danger" data-act="admDelAgenda" data-id="${ag.id}">영구 삭제</button></div>` : ''}`;
   if (ag.status !== 'pending') h += resultsSection(ag, rows);
   return h;
 }
@@ -920,6 +1058,16 @@ function resultsSection(ag, rows) {
       <p class="small sub" style="margin:0">다른 학교 결과에 끌려가지 않도록 먼저 숨겨 두었어요.<br>${rows.length}개교의 판단과 ${opsAll.length}개의 의견이 기다리고 있어요.</p>
       <button class="link" data-act="reveal" style="margin-top:6px">투표하지 않고 결과만 보기</button></div></section>`;
   }
+  const DISC = `<p class="disc">이 결과는 참여 학교의 응답을 모은 참고 자료이며, 법령·지침의 공식 해석이 아닙니다.${DEMO ? ' 지금 보이는 숫자와 의견은 체험용 예시예요.' : ''}</p>`;
+  const all = summarize(ag, rows, { region: null, level: '', confirmed: false });
+  if (all.total < MIN_SCHOOLS) {   // 공개 기준 전: 비율·지도·의견을 모두 숨김
+    return `<section class="card sec"><div class="gate">
+      <b style="font-size:16px">결과 공개까지 ${all.total}/${MIN_SCHOOLS}개교</b>
+      <div class="segs">${Array.from({ length: MIN_SCHOOLS }, (_, i) => `<i class="${i < all.total ? 'on' : ''}"></i>`).join('')}</div>
+      <p class="small sub" style="margin:0">${MIN_SCHOOLS}개교 이상 모이면 비율과 시도별 지도, 판단 이유가 함께 공개돼요.<br>한두 학교의 응답이 전체 경향처럼 보이지 않도록 기다리는 중이에요.${all.held ? `<br>학교 안에서 의견이 갈려 보류된 ${all.held}개교는 세지 않아요.` : ''}</p>
+      <button class="btn sm" style="margin-top:14px" data-act="share">${IC.share} 다른 학교에 알리기</button>
+    </div>${DISC}</section>`;
+  }
   const sm = summarize(ag, rows, F);
   const maxC = Math.max(...sm.counts);
   const bars = ag.options.map((o, i) => `
@@ -934,16 +1082,16 @@ function resultsSection(ag, rows) {
   let h = `<section class="card sec">
     <div class="between"><h2 style="font-size:18px;font-weight:800">학교별 판단</h2><span class="small muted">학교당 1표</span></div>
     <div class="filters" style="margin-top:12px">${regionChips}
-      <select class="sel" id="fLevel" aria-label="학교급"><option value="">전체 학교급</option>${['초', '중', '고'].map(l => `<option value="${l}" ${F.level === l ? 'selected' : ''}>${l}등학교</option>`).join('').replace('중등학교', '중학교')}</select>
     </div>
     <div style="margin-top:12px"><label class="toggle"><input type="checkbox" id="fConf" ${F.confirmed ? 'checked' : ''}><span class="sw"></span>확인된 표만 보기</label>
       <span class="small muted" style="display:block;margin-top:2px">이유를 적었거나 같은 학교 선생님이 확인한 표만 집계해요</span></div>
-    ${sm.total ? `<div class="bars">${bars}</div>` : `<div class="empty small">조건에 맞는 학교가 아직 없어요.</div>`}
+    ${sm.total >= MIN_SCHOOLS ? `<div class="bars">${bars}</div>` : `<div class="empty small">이 조건에 맞는 학교가 아직 ${sm.total}개교예요.<br>${MIN_SCHOOLS}개교 이상부터 비율을 보여 드려요.</div>`}
     <p class="note">${sm.total}개교 집계${sm.held ? ` · 학교 내 의견이 갈려 보류된 ${sm.held}개교는 통계에서 빠졌어요` : ''}</p>
+    ${DISC}
   </section>`;
   h += tileMap(ag, rows);
   if (ag.prevId && getAg(ag.prevId)) h += compareBlock(getAg(ag.prevId), ag);
-  h += opinionsBlock(ag, rows, sm);
+  h += opinionsBlock(ag, rows, all);
   return h;
 }
 function tileMap(ag, rows) {
@@ -952,7 +1100,7 @@ function tileMap(ag, rows) {
   const tiles = REGIONS.map(rg => {
     const rr = fr.filter(r => r.sc.region === rg.n);
     const pos = `grid-column:${rg.x + 1};grid-row:${rg.y + 1}`;
-    if (!rr.length) return `<button class="tile ${F.region === rg.n ? 'sel' : ''}" style="${pos}" data-act="fRegion" data-v="${rg.n}" aria-label="${rg.n} 참여 없음">${rg.n}<small>-</small></button>`;
+    if (rr.length < 3) return `<button class="tile ${F.region === rg.n ? 'sel' : ''}" style="${pos}" data-act="fRegion" data-v="${rg.n}" aria-label="${rg.n} ${rr.length}개교">${rg.n}<small>${rr.length ? rr.length + '개교' : '-'}</small></button>`;
     const c = ag.options.map((_, i) => rr.filter(r => r.choice === i).length);
     const top = c.indexOf(Math.max(...c));
     const op = .55 + .45 * (rr.length / maxN);
@@ -962,11 +1110,13 @@ function tileMap(ag, rows) {
     <div class="between"><h2 style="font-size:18px;font-weight:800">시도별 다수 의견</h2><span class="small muted">타일을 누르면 그 시도만 봐요</span></div>
     <div class="tiles">${tiles}</div>
     <div class="legend">${ag.options.map((o, i) => `<span><i style="background:${COLORS[i]}"></i>${esc(o)}</span>`).join('')}</div>
+    <p class="note">참여가 3개교 미만인 시도는 색을 칠하지 않아요.</p>
   </section>`;
 }
 function compareBlock(prev, ag) {
   const a = summarize(prev, computeRows(prev), { region: null, level: '', confirmed: false });
   const b = summarize(ag, computeRows(ag), { region: null, level: '', confirmed: false });
+  if (a.total < MIN_SCHOOLS || b.total < MIN_SCHOOLS) return '';
   const labels = [...new Set([...ag.options, ...prev.options])];
   return `<section class="card sec">
     <div class="between"><h2 style="font-size:18px;font-weight:800">작년과 비교</h2><span class="small muted">전국 기준</span></div>
@@ -999,17 +1149,18 @@ function opinionsBlock(ag, rows, sm) {
   h += `<div class="ops">${sorted.length ? sorted.map(o => opItem(ag, o)).join('') : '<div class="empty small">아직 남겨진 이유가 없어요. 첫 의견을 남겨 주세요.</div>'}</div></section>`;
   return h;
 }
-function who(o) { const sc = SMAP[o.code]; return `${sc ? sc.region + ' · ' + sc.level : ''}${o.position ? ' · ' + esc(o.position) : ' · 직위 미공개'}`; }
+function who(o) { const sc = SMAP[o.code]; return `${sc ? sc.region : ''}${o.position ? ' · ' + esc(o.position) : ' · 직위 미공개'}`; }
 function likeBtn(o) { const on = (S.likes[o.id] || []).includes(DEV); return `<button class="like ${on ? 'on' : ''}" data-act="like" data-id="${o.id}" aria-pressed="${on}">${IC.thumb} 논리적이에요 ${likeN(o.id)}</button>`; }
 function opItem(ag, o) {
-  if (blinded(o.id)) return `<div class="op"><p class="blind">신고가 누적되어 가려진 의견이에요.</p></div>`;
+  const admDel = IS_ADMIN ? `<button class="rep" style="color:#C92A2A" data-act="admDelItem" data-id="${o.id}">삭제</button>` : '';
+  if (blinded(o.id)) return `<div class="op"><p class="blind">신고가 누적되어 가려진 의견이에요.</p>${admDel ? `<div class="ft"><span></span>${admDel}</div>` : ''}</div>`;
   const badge = o.choice === null ? `<span class="pill">의견</span>` : `<span class="pill" style="background:${COLORS[o.choice]}1F;color:${COLORS[o.choice]}">${esc(ag.options[o.choice])}</span>`;
   const url = safeUrl(o.link);
   return `<div class="op">
     <div class="top">${badge}${ROLE_LABEL[o.role] && o.role !== 'comment' ? `<span class="pill ${o.role === 'object' ? 'warn' : 'ok'}">${ROLE_LABEL[o.role]}</span>` : ''}</div>
     <p class="txt">${esc(o.text)}</p>
     ${url ? `<a class="lk" href="${esc(url)}" target="_blank" rel="noopener nofollow">${IC.link}${esc(url)}</a>` : ''}
-    <div class="ft"><span>${who(o)} · ${ago(o.at)}</span><span class="row">${likeBtn(o)}<button class="rep" data-act="report" data-id="${o.id}">신고</button></span></div>
+    <div class="ft"><span>${who(o)} · ${when(o)}</span><span class="row">${likeBtn(o)}<button class="rep" data-act="report" data-id="${o.id}">신고</button>${admDel}</span></div>
   </div>`;
 }
 
@@ -1037,6 +1188,7 @@ function viewNew() {
       ${NEWF.options.map((o, i) => `<div class="optrow"><span class="num" style="color:${COLORS[i]}">${i + 1}</span><input class="inp" data-new-opt="${i}" maxlength="40" placeholder="${['행정실', '교무행정지원인력', '담당 교사', '학교장 판단', '기타'][i]}" value="${esc(o)}" aria-label="선택지 ${i + 1}">${NEWF.options.length > 2 ? `<button class="x" data-act="delOpt" data-i="${i}" aria-label="선택지 삭제">×</button>` : ''}</div>`).join('')}
       ${NEWF.options.length < 5 ? `<button class="btn sm" data-act="addOpt">${IC.plus} 선택지 추가</button>` : ''}
       <div class="err" id="eOpt">서로 다른 선택지를 2개 이상 적어 주세요</div></div>
+    <div class="err" id="eBadNew" style="margin:14px 0 0"></div>
     <div class="botck">${IC.check} 자동 봇 확인을 통과했어요 <span class="muted">(실서비스: Cloudflare Turnstile)</span></div>
     <button class="btn dark block" style="margin-top:14px;height:50px" data-act="submitNew">안건 등록하기</button>
   </section>`;
@@ -1065,7 +1217,7 @@ function viewMy() {
     <h1 style="font-size:22px;font-weight:800">내 참여</h1>
     <p class="sub small" style="margin:6px 0 0">로그인 없이 이 기기에 기록돼요. 다른 기기에서는 수정 코드로 불러올 수 있어요.</p>
     <div class="f"><span class="lbl">이 기기의 학교 <span class="opt">${CUR_YEAR}학년도</span></span>
-      ${ms ? `<div class="picked"><span><b>${esc(ms.sc.name)}</b> <span class="small muted">${ms.sc.region} · ${ms.sc.level}</span></span>
+      ${ms ? `<div class="picked"><span><b>${esc(ms.sc.name)}</b> <span class="small muted">${esc(ms.sc.region)}${ms.sc.addr ? ' ' + esc(ms.sc.addr) : ''}</span></span>
         ${ch < 1 ? `<button class="link" data-act="changeSchoolMy">학교 변경</button>` : '<span class="small muted">올해 변경 완료</span>'}</div>
         <p class="small muted" style="margin:6px 0 0">전근 등을 위해 학년도마다 한 번 바꿀 수 있어요. 3월 1일에 자동으로 초기화돼요.</p>`
       : `<p class="small sub" style="margin:0">아직 학교를 고르지 않았어요. 처음 투표할 때 정해져요.</p>`}
@@ -1080,17 +1232,95 @@ function viewMy() {
   ${myAgs.length ? `<section class="card sec"><h2 style="font-size:18px;font-weight:800">내가 올린 안건</h2><div class="mylist">${myAgs.map(a => `<button class="myit" data-act="open" data-id="${a.id}"><span class="tt">${esc(a.title)}</span>${a.status === 'pending' ? `<span class="pill warn">대기 ${a.curious.length}/3</span>` : '<span class="pill ok">공개</span>'}</button>`).join('')}</div></section>` : ''}`;
 }
 
-/* ---------- 학교 선택기 (실서비스: 나이스 전국 학교 목록 JSON) ---------- */
+/* ----- 관리자 ----- */
+const ADMIN_ACT = { open: '공개', hide: '숨기기', feature: '운영자 제안', unfeature: '제안 해제', delete_agenda: '안건 삭제', delete_item: '의견 삭제', clear_reports: '신고 지우기', word_add: '금지어 추가', word_del: '금지어 삭제' };
+async function loadAdmin() {
+  ADM.loading = true;
+  try {
+    const [ag, rp, wd, lg] = await Promise.all([rpc('admin_agendas'), rpc('admin_reports'), rpc('admin_words'), rpc('admin_log_list')]);
+    ADM.data = { ag: ag || [], rp: rp || [], wd: wd || [], lg: lg || [] };
+  } catch (e) { console.error(e); toast(errMsg(e)); ADM.data = { ag: [], rp: [], wd: [], lg: [] }; }
+  ADM.loading = false;
+  if (ST.view === 'admin') render();
+}
+function admStatus(a) {
+  if (a.status === 'hidden') return '<span class="pill">숨김</span>';
+  if (a.reports >= 3) return '<span class="pill bad">신고로 자동 숨김</span>';
+  if (a.status === 'pending') return `<span class="pill warn">공개 대기 ${a.curious_n}/3</span>`;
+  return '<span class="pill ok">공개</span>';
+}
+function viewAdmin() {
+  if (DEMO) return `<section class="card empty sec"><b>관리자 화면은 실서비스 주소에서만 열려요</b><p class="small sub" style="margin:6px 0 0">체험 모드에는 서버에 저장된 데이터가 없어요.</p></section>`;
+  if (!IS_ADMIN) return `<section class="card" style="margin:14px auto 0;max-width:440px">
+    <h1 style="font-size:22px;font-weight:800">관리자 로그인</h1>
+    <p class="small sub" style="margin:6px 0 0">사이트 관리자만 들어올 수 있어요.</p>
+    <div class="f"><label for="admEmail">이메일</label><input class="inp" id="admEmail" type="email" autocomplete="username" inputmode="email"></div>
+    <div class="f"><label for="admPw">비밀번호</label><input class="inp" id="admPw" type="password" autocomplete="current-password"></div>
+    <div class="err" id="eAdm"></div>
+    <button class="btn dark block" style="margin-top:16px;height:48px" data-act="adminLogin">로그인</button>
+  </section>`;
+  if (!ADM.data) { if (!ADM.loading) loadAdmin(); return '<div class="empty sec">관리 정보를 불러오는 중…</div>'; }
+  const d = ADM.data;
+  const tab = (k, label) => `<button class="chip ${ADM.tab === k ? 'on' : ''}" data-act="admTab" data-v="${k}">${label}</button>`;
+  let body = '';
+  if (ADM.tab === 'agendas') {
+    body = d.ag.length ? d.ag.map(a => {
+      const gone = a.status === 'hidden' || a.reports >= 3;
+      return `<div class="admrow"><div class="tt">${esc(a.title)}</div>
+        <div class="meta">${admStatus(a)}${a.featured ? '<span class="pill feat">운영자 제안</span>' : ''}${a.reports ? `<span class="pill bad">신고 ${a.reports}</span>` : ''}<span>${a.year}학년도 · ${esc(a.category)} · ${a.schools}개교 · ${ago(Date.parse(a.created_at))}</span></div>
+        <div class="row">
+          ${gone ? '' : `<button class="btn sm" data-act="open" data-id="${a.id}">보기</button>`}
+          <button class="btn sm" data-act="adm" data-a="${a.featured ? 'unfeature' : 'feature'}" data-id="${a.id}">${a.featured ? '제안 해제' : '운영자 제안'}</button>
+          ${gone ? `<button class="btn sm" data-act="adm" data-a="open" data-id="${a.id}">다시 공개</button>` : `<button class="btn sm" data-act="adm" data-a="hide" data-id="${a.id}">숨기기</button>`}
+          <button class="btn sm danger" data-act="admDelAgenda" data-id="${a.id}">영구 삭제</button>
+        </div></div>`;
+    }).join('') : '<div class="empty small">아직 올라온 안건이 없어요.</div>';
+  } else if (ADM.tab === 'reports') {
+    const TYPE = { agenda: '안건', entry: '판단 이유', comment: '의견' };
+    body = d.rp.length ? d.rp.map(r => `<div class="admrow">
+        <div class="meta" style="margin-top:0"><span class="pill bad">신고 ${r.n}회</span><span class="pill">${TYPE[r.type]}</span>${r.type !== 'agenda' ? `<span>안건: ${esc(r.agenda_title || '')}</span>` : ''}</div>
+        <div class="tt" style="font-weight:500">${esc(r.text || '(내용 없음)')}</div>
+        <div class="row" style="margin-top:8px">
+          ${r.type === 'agenda'
+            ? `<button class="btn sm" data-act="adm" data-a="open" data-id="${r.id}">문제없음 · 다시 공개</button><button class="btn sm" data-act="adm" data-a="hide" data-id="${r.id}">숨기기</button><button class="btn sm danger" data-act="admDelAgenda" data-id="${r.id}">영구 삭제</button>`
+            : `<button class="btn sm" data-act="admClear" data-id="${r.id}">문제없음 · 신고 지우기</button><button class="btn sm danger" data-act="admDelItem" data-id="${r.id}">삭제</button>`}
+        </div></div>`).join('') : '<div class="empty small">신고된 글이 없어요.</div>';
+  } else if (ADM.tab === 'words') {
+    const chips = k => d.wd.filter(w => w.kind === k).map(w => `<span class="wchip">${esc(w.word)}<button data-act="admWordDel" data-w="${esc(w.word)}" data-k="${k}" aria-label="${esc(w.word)} 지우기">×</button></span>`).join('') || '<span class="small muted">없음</span>';
+    body = `<div class="admrow">
+        <div class="tt">단어 추가</div>
+        <div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="inp" id="admWord" placeholder="막을 단어 또는 예외 단어" maxlength="30">
+          <select class="sel" id="admKind" style="height:46px"><option value="ban">금지어</option><option value="allow">예외</option></select>
+          <button class="btn dark" data-act="admWordAdd">추가</button></div>
+        <p class="small muted" style="margin:8px 0 0">금지어는 띄어쓰기·기호를 넣어도 걸러요. 예외는 금지어와 글자가 겹치는 정상 단어예요(예: 시발점, 감염병). 여기서 추가한 단어는 저장할 때 서버에서 걸러져요.</p>
+      </div>
+      <div class="admrow"><div class="tt">금지어 <span class="muted">${d.wd.filter(w => w.kind === 'ban').length}</span></div><div class="wchips">${chips('ban')}</div></div>
+      <div class="admrow"><div class="tt">예외 <span class="muted">${d.wd.filter(w => w.kind === 'allow').length}</span></div><div class="wchips">${chips('allow')}</div></div>`;
+  } else {
+    body = d.lg.length ? d.lg.map(l => `<div class="admrow" style="padding:10px 14px"><div class="meta" style="margin:0"><span class="pill">${ADMIN_ACT[l.action] || esc(l.action)}</span>${l.action.startsWith('word') ? `<span>${l.target === 'allow' ? '예외' : '금지어'}</span>` : ''}<span style="color:var(--ink)">${esc(l.detail || '')}</span><span>${ago(Date.parse(l.at))}</span></div></div>`).join('') : '<div class="empty small">아직 처리 기록이 없어요.</div>';
+  }
+  const pend = d.ag.filter(a => a.status === 'pending').length;
+  return `<section class="card" style="margin-top:14px">
+      <div class="between"><h1 style="font-size:22px;font-weight:800">관리</h1>
+        <span class="row"><button class="btn sm" data-act="admRefresh">새로 고침</button><button class="btn sm" data-act="adminLogout">로그아웃</button></span></div>
+      <p class="small sub" style="margin:6px 0 0">안건 ${d.ag.length}개 · 공개 대기 ${pend}개 · 신고된 글 ${d.rp.length}개</p>
+      <div class="chips">${tab('agendas', '안건')}${tab('reports', `신고${d.rp.length ? ' ' + d.rp.length : ''}`)}${tab('words', '금지어')}${tab('log', '처리 기록')}</div>
+      <div class="admrows">${body}</div>
+    </section>`;
+}
+async function afterAdmin(msg) { await refreshAll(); await loadAdmin(); render(); toast(msg); }
+
+/* ---------- 학교 선택기 (schools.js 전국 초등학교 목록) ---------- */
 function schoolPicker(key) {
   const code = PICK[key];
   if (code && SMAP[code]) {
     const s = SMAP[code];
-    return `<div class="picked" data-picker="${key}"><span><b>${esc(s.name)}</b> <span class="small muted">${s.region} · ${s.level}</span></span><button class="link" data-act="unpick" data-for="${key}">다시 고르기</button></div>`;
+    return `<div class="picked" data-picker="${key}"><span><b>${esc(s.name)}</b> <span class="small muted">${esc(s.region)}${s.addr ? ' ' + esc(s.addr) : ''}</span></span><button class="link" data-act="unpick" data-for="${key}">다시 고르기</button></div>`;
   }
   return `<div class="picker" data-picker="${key}">
     <input class="inp" data-school-search="${key}" placeholder="학교 이름 검색 (예: 가람, 한빛)" autocomplete="off" aria-label="학교 검색">
     <div class="plist" id="plist-${key}" style="display:none"></div>
-    <p class="small muted" style="margin:6px 0 0">${REAL_SCHOOLS ? '같은 이름의 학교가 많으면 지역을 함께 적어 보세요 (예: 광주 중앙초).' : '샘플 학교 목록이에요. schools.json을 넣으면 나이스 전국 학교 목록으로 바뀌어요.'}</p>
+    <p class="small muted" style="margin:6px 0 0">${REAL_SCHOOLS ? '같은 이름의 학교가 많으면 지역을 함께 적어 보세요 (예: 광주 중앙초).' : '샘플 학교 목록이에요. 같은 폴더에 schools.js를 두면 전국 초등학교 목록으로 바뀌어요.'}</p>
   </div>`;
 }
 function refreshPicker(key) { const el = document.querySelector(`[data-picker="${key}"]`); if (el) el.outerHTML = schoolPicker(key); }
@@ -1114,7 +1344,8 @@ function reasonFields(e = {}) {
     <p class="small muted" style="margin:4px 0 0">전화번호·이메일은 자동으로 가려져요. 비공개 공문 원문은 올리지 말아 주세요.</p></div>
   <div class="f"><label for="vLink">관련 사이트 <span class="opt">선택 · 법령, 공개 지침 등</span></label>
     <input class="inp" id="vLink" type="url" inputmode="url" placeholder="https://www.law.go.kr/..." value="${esc(e.link || '')}">
-    <div class="err" id="eLink">http:// 또는 https://로 시작하는 주소를 적어 주세요</div></div>`;
+    <div class="err" id="eLink">http:// 또는 https://로 시작하는 주소를 적어 주세요</div></div>
+  <div class="err" id="eBad"></div>`;
 }
 function readReason() {
   const reason = maskPI(($('#vReason') || {}).value?.trim() || '');
@@ -1130,7 +1361,7 @@ function voteSheet(ag, edit) {
   if (edit) schoolHtml = `<div class="picked"><span><b>${esc((SMAP[edit.schoolCode] || {}).name || '우리 학교')}</b></span></div>`;
   else if (ms && !changing) {
     const ch = (S.deviceSchool[DEV] || {}).changes || 0;
-    schoolHtml = `<div class="picked"><span><b>${esc(ms.sc.name)}</b> <span class="small muted">${ms.sc.region} · ${ms.sc.level}</span></span>${ch < 1 ? `<button class="link" data-act="changeSchool">학교 변경</button>` : ''}</div>`;
+    schoolHtml = `<div class="picked"><span><b>${esc(ms.sc.name)}</b> <span class="small muted">${esc(ms.sc.region)}${ms.sc.addr ? ' ' + esc(ms.sc.addr) : ''}</span></span>${ch < 1 ? `<button class="link" data-act="changeSchool">학교 변경</button>` : ''}</div>`;
   } else schoolHtml = schoolPicker('vote');
   openSheet(`
     <h2>${edit ? '선택·의견 바꾸기' : '우리 학교 판단 남기기'}</h2>
@@ -1150,6 +1381,7 @@ function submitVote(btn) {
   const ms = mySchool();
   const chEl = document.querySelector('input[name="vChoice"]:checked');
   const { reason, link, pos, linkBad } = readReason();
+  const prob = contentProblem(reason); showProblem('eBad', prob); if (prob) return;
   const useBound = !!(ms && !PICK._changing);
   const hasSchool = edit || useBound || PICK.vote;
   showErr('eSchool', !hasSchool); showErr('eChoice', !chEl); showErr('eLink', linkBad);
@@ -1199,6 +1431,7 @@ function submitSide(role, btn) {
   const ag = sideSheet._ag;
   const chEl = document.querySelector('input[name="vChoice"]:checked');
   const { reason, link, pos, linkBad } = readReason();
+  const prob = contentProblem(reason); showProblem('eBad', prob); if (prob) return;
   showErr('eChoice', !chEl); showErr('eLink', linkBad);
   if (!chEl || linkBad) return;
   run(btn, async () => {
@@ -1213,10 +1446,56 @@ function commentSheet(ag) {
   openSheet(`
     <h2>의견만 덧붙이기</h2>
     <p class="small sub" style="margin:0">우리 학교 표는 그대로 두고 개인 의견만 남겨요.</p>
-    <div class="f"><label for="cText">의견</label><textarea class="ta" id="cText" maxlength="600" placeholder="저희는 결정은 같지만, 역할을 이렇게 나눴어요."></textarea><div class="err" id="eText">의견을 적어 주세요</div></div>
+    <div class="f"><label for="cText">의견</label><textarea class="ta" id="cText" maxlength="600" placeholder="저희는 결정은 같지만, 역할을 이렇게 나눴어요."></textarea><div class="err" id="eText">의견을 적어 주세요</div><div class="err" id="eBad"></div></div>
     <div class="f"><span class="lbl">직위 <span class="opt">선택</span></span>${posRadios()}</div>
     <div class="foot"><button class="btn" data-act="closeSheet">닫기</button><button class="btn pri" data-act="submitComment">남기기</button></div>`);
   commentSheet._ag = ag;
+}
+/* ---------- 공유: 짧은 링크와 붙여 넣기 문구 ---------- */
+function shareUrl(ag) {
+  const base = location.href.split(/[?#]/)[0];
+  const q = ag.short ? 'q=' + ag.short : 'a=' + encodeURIComponent(ag.id);
+  return base + '?' + q + (DEMO && HAS_CONFIG ? '&demo' : '');
+}
+function shareTexts(ag) {
+  const link = shareUrl(ag);
+  const n = summarize(ag, computeRows(ag), { region: null, level: '', confirmed: false }).total;
+  let k, m;
+  if (ag.status === 'pending') {
+    k = `다른 학교 3곳이 '우리도 궁금해요'를 누르면 투표가 열려요. 궁금하시면 눌러 주세요!`;
+    m = `다른 학교 3곳이 '우리도 궁금해요'를 누르면 투표가 열립니다. 같은 고민이 있으시면 눌러 주시기 바랍니다.`;
+  } else if (ag.year !== CUR_YEAR) {
+    k = `${ag.year}학년도에 ${n}개교가 남긴 판단을 볼 수 있어요.`;
+    m = `${ag.year}학년도에 ${n}개교가 남긴 판단 결과를 확인하실 수 있습니다.`;
+  } else if (n >= MIN_SCHOOLS) {
+    k = `벌써 ${n}개교가 판단을 남겼어요. 우리 학교 판단도 남겨 주세요!`;
+    m = `현재 ${n}개교가 참여했습니다. 귀교의 판단도 남겨 주시면 큰 도움이 됩니다.`;
+  } else {
+    k = `학교별 판단을 모으고 있어요. ${MIN_SCHOOLS}개교가 모이면 결과가 공개돼요.`;
+    m = `학교별 판단을 모으고 있으며, ${MIN_SCHOOLS}개교 이상 참여하면 결과가 공개됩니다.`;
+  }
+  const kakaoText = `[옆학교는?] ${ag.title}\n${k}`;
+  return {
+    link,
+    kakaoText,
+    kakao: `${kakaoText}\n▶ ${link}`,
+    msg: `[안내] 다른 학교들은 어떻게 판단했을까요?\n\n○ 안건: ${ag.title}\n○ ${m}\n○ 학교명만 선택하면 로그인 없이 1분 안에 참여할 수 있으며, 학교 이름은 공개되지 않습니다.\n\n참여하기: ${link}`
+  };
+}
+function shareSheet(ag, fresh) {
+  if (!ag) return;
+  const p = shareTexts(ag);
+  const card = (k, label, sub) => `<div class="shc"><div class="between"><span><b>${label}</b> <span class="small muted">${sub}</span></span><button class="btn sm dark" data-act="copyShare" data-k="${k}" data-id="${ag.id}">복사</button></div><pre>${esc(p[k])}</pre></div>`;
+  openSheet(`
+    <h2>${fresh ? '안건을 올렸어요. 이제 알려 주세요' : '안건 알리기'}</h2>
+    <p class="small sub" style="margin:0">${fresh ? '다른 학교 2곳이 더 「우리도 궁금해요」를 누르면 투표가 열려요. ' : ''}아래 문구를 복사해 카톡이나 교내 메신저에 붙여 넣으세요.</p>
+    <div class="shlink"><input class="inp" readonly value="${esc(p.link)}" aria-label="안건 링크" onclick="this.select()"><button class="btn sm" data-act="copyShare" data-k="link" data-id="${ag.id}">링크 복사</button></div>
+    ${card('kakao', '카톡용', '짧게')}
+    ${card('msg', '교내 메신저용', '안내문 말투')}
+    <div class="foot" style="grid-template-columns:${navigator.share ? '1fr 1fr' : '1fr'}">
+      ${navigator.share ? `<button class="btn" data-act="nativeShare" data-id="${ag.id}">${IC.share} 휴대폰으로 공유</button>` : ''}
+      <button class="btn pri" data-act="closeSheet">닫기</button>
+    </div>`);
 }
 function codeSheet(any) {
   openSheet(`
@@ -1234,6 +1513,52 @@ function schoolOnlySheet(title, next) {
 
 /* ---------- 이벤트 ---------- */
 const ACT = {
+  admin: () => go('admin'),
+  adminLogin: t => {
+    const email = $('#admEmail').value.trim(), password = $('#admPw').value;
+    if (!email || !password) { showProblem('eAdm', '이메일과 비밀번호를 적어 주세요'); return; }
+    run(t, async () => {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) { showProblem('eAdm', '이메일 또는 비밀번호를 확인해 주세요'); return; }
+      DEV = data.user.id;
+      await refreshAll();
+      if (!IS_ADMIN) {
+        await sb.auth.signOut(); await initLive(); render();
+        showProblem('eAdm', '관리자 권한이 없는 계정이에요'); return;
+      }
+      ADM.data = null; render(); toast('관리자로 로그인했어요');
+    });
+  },
+  adminLogout: t => run(t, async () => { await sb.auth.signOut(); IS_ADMIN = false; ADM.data = null; await initLive(); go('home'); toast('로그아웃했어요'); }),
+  admTab: t => { ADM.tab = t.dataset.v; render(); },
+  admRefresh: t => run(t, async () => { await refreshAll(); await loadAdmin(); }),
+  adm: t => run(t, async () => { await rpc('admin_set', { p_agenda: t.dataset.id, p_action: t.dataset.a }); await afterAdmin(ADMIN_ACT[t.dataset.a] + ' 처리했어요'); }),
+  admDelAgenda: t => {
+    const id = t.dataset.id;
+    const a = getAg(id) || (ADM.data && ADM.data.ag.find(x => x.id === id)) || {};
+    openSheet(`<h2>안건을 영구 삭제할까요?</h2><p class="small sub">「${esc(a.title || '')}」<br>이 안건의 투표와 의견이 모두 지워지고 되돌릴 수 없어요. 잠시 가리기만 하려면 「숨기기」를 쓰세요.</p>
+      <div class="foot"><button class="btn" data-act="closeSheet">취소</button><button class="btn danger" data-act="admDelAgendaGo" data-id="${id}">영구 삭제</button></div>`);
+  },
+  admDelAgendaGo: t => run(t, async () => { await rpc('admin_delete_agenda', { p_agenda: t.dataset.id }); closeSheet(); if (ST.view === 'agenda') go(IS_ADMIN ? 'admin' : 'home'); await afterAdmin('안건을 삭제했어요'); }),
+  admDelItem: t => openSheet(`<h2>이 글을 삭제할까요?</h2><p class="small sub">판단 이유나 의견이 지워지고 되돌릴 수 없어요. 판단 이유를 지우면 그 학교의 표도 함께 빠져요.</p>
+      <div class="foot"><button class="btn" data-act="closeSheet">취소</button><button class="btn danger" data-act="admDelItemGo" data-id="${t.dataset.id}">삭제</button></div>`),
+  admDelItemGo: t => run(t, async () => { await rpc('admin_delete_item', { p_id: t.dataset.id }); closeSheet(); await afterAdmin('삭제했어요'); }),
+  admClear: t => run(t, async () => { await rpc('admin_clear_reports', { p_id: t.dataset.id }); await afterAdmin('신고를 지웠어요'); }),
+  admWordAdd: t => {
+    const w = $('#admWord').value.trim(), k = $('#admKind').value;
+    if (!w) { toast('단어를 적어 주세요'); return; }
+    run(t, async () => { await rpc('admin_word', { p_word: w, p_kind: k, p_add: true }); await afterAdmin(`${k === 'ban' ? '금지어' : '예외'}에 추가했어요`); });
+  },
+  admWordDel: t => run(null, async () => { await rpc('admin_word', { p_word: t.dataset.w, p_kind: t.dataset.k, p_add: false }); await afterAdmin('지웠어요'); }),
+  reportAgenda: () => openSheet(`<h2>이 안건을 신고할까요?</h2><p class="small sub">욕설·비방, 특정 학교나 사람을 겨냥한 안건이면 신고해 주세요. 신고가 3회 쌓이면 자동으로 숨겨지고 관리자가 확인해요.</p>
+      <div class="foot"><button class="btn" data-act="closeSheet">취소</button><button class="btn dark" data-act="reportAgendaGo">신고하기</button></div>`),
+  reportAgendaGo: t => run(t, async () => {
+    const ag = getAg(ST.id);
+    const n = await API.report(ag.id);
+    closeSheet();
+    if (n >= 3) { if (!LIVE) ag.status = 'hidden', save(); go('home'); toast('신고가 쌓여 안건이 숨겨졌어요'); }
+    else toast('신고했어요. 3회 쌓이면 자동으로 숨겨져요');
+  }),
   home: () => go('home'),
   my: () => go('my'),
   new: () => { if (ST.view !== 'new') resetNew(); go('new'); },
@@ -1258,6 +1583,7 @@ const ACT = {
   commentSheet: () => commentSheet(getAg(ST.id)),
   submitComment: t => {
     const text = $('#cText').value.trim(); showErr('eText', !text); if (!text) return;
+    const prob = contentProblem(text); showProblem('eBad', prob); if (prob) return;
     const pos = (document.querySelector('input[name="pos"]:checked') || {}).value || '';
     const id = commentSheet._ag.id;
     run(t, async () => { await API.addComment(commentSheet._ag, text, pos); REVEAL.add(id); closeSheet(); render(); toast('의견을 남겼어요'); });
@@ -1278,11 +1604,9 @@ const ACT = {
     });
   },
   copyCode: t => copyText(t.dataset.v, '코드를 복사했어요'),
-  share: () => {
-    const ag = getAg(ST.id); const url = location.href;
-    if (navigator.share) navigator.share({ title: ag.title, text: '다른 학교는 어떻게 판단했을까요?', url }).catch(() => { });
-    else copyText(`[옆학교는?] ${ag.title}\n${url}`, '링크를 복사했어요. 카톡에 붙여 넣어 보세요');
-  },
+  share: () => shareSheet(getAg(ST.id)),
+  copyShare: t => { const p = shareTexts(getAg(t.dataset.id)); copyText(p[t.dataset.k], t.dataset.k === 'link' ? '링크를 복사했어요' : '문구를 복사했어요. 카톡이나 메신저에 붙여 넣으세요'); },
+  nativeShare: t => { const ag = getAg(t.dataset.id), p = shareTexts(ag); navigator.share({ title: ag.title, text: p.kakaoText, url: p.link }).catch(() => { }); },
   fRegion: t => { F.region = t.dataset.v || null; render(); },
   opsort: t => { OPSORT = t.dataset.v; render(); },
   like: t => run(null, async () => { await API.toggleLike(t.dataset.id); render(); }),
@@ -1309,6 +1633,7 @@ const ACT = {
   reopen: () => { const ag = getAg(ST.id); resetNew(); Object.assign(NEWF, { title: ag.title, desc: ag.desc, cat: ag.category, options: [...ag.options], prevId: ag.id }); go('new'); },
   usePrev: t => { const ag = getAg(t.dataset.id); Object.assign(NEWF, { title: ag.title, desc: NEWF.desc || ag.desc, cat: ag.category, options: [...ag.options], prevId: ag.id }); render(); },
   unPrev: () => { NEWF.prevId = null; render(); },
+  useExample: t => { resetNew(); NEWF.title = t.dataset.t; NEWF.cat = t.dataset.c; go('new'); },
   addOpt: () => { if (NEWF.options.length < 5) { NEWF.options.push(''); render(); } },
   delOpt: t => { NEWF.options.splice(+t.dataset.i, 1); render(); },
   submitNew: (t, force) => {
@@ -1316,7 +1641,8 @@ const ACT = {
     const title = NEWF.title.trim(); const opts = NEWF.options.map(o => o.trim()).filter(Boolean);
     const uniq = new Set(opts).size === opts.length;
     showErr('eSchool', !ms && !school); showErr('eCat', !NEWF.cat); showErr('eTitle', title.length < 8); showErr('eOpt', opts.length < 2 || !uniq);
-    if ((!ms && !school) || !NEWF.cat || title.length < 8 || opts.length < 2 || !uniq) { const f = document.querySelector('.err.on'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    const prob = contentProblem([title, NEWF.desc, ...opts].join(' ')); showProblem('eBadNew', prob);
+    if ((!ms && !school) || !NEWF.cat || title.length < 8 || opts.length < 2 || !uniq || prob) { const f = document.querySelector('.err.on'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
     const dup = S.agendas.filter(a => a.year === CUR_YEAR).map(a => ({ a, s: sim(title, a.title) })).sort((x, y) => y.s - x.s)[0];
     if (dup && dup.s >= .55 && force !== true) {
       openSheet(`<h2>거의 같은 안건이 올해 이미 있어요</h2><p class="small sub">같은 학년도에 같은 안건이 반복되면 표가 나뉘어요. 기존 안건에 참여해 주시겠어요?</p>
@@ -1327,7 +1653,7 @@ const ACT = {
     run(t && t.isConnected ? t : document.querySelector('[data-act="submitNew"]'), async () => {
       const id = await API.createAgenda({ title, desc: NEWF.desc.trim(), cat: NEWF.cat, options: opts, prevId: NEWF.prevId }, school);
       delete PICK.new; resetNew();
-      go('agenda', id); toast('등록했어요. 2개교가 더 궁금해하면 공개돼요');
+      go('agenda', id); shareSheet(getAg(id), true);
     });
   },
   forceNew: () => { closeSheet(); ACT.submitNew(null, true); },
@@ -1381,19 +1707,24 @@ document.addEventListener('input', e => {
       if (toks.every(w => hay.includes(w))) { hits.push(s); if (hits.length >= 40) break; }
     }
     box.style.display = 'block';
-    box.innerHTML = hits.length ? hits.map(s => `<button data-act="pickSchool" data-for="${key}" data-code="${s.code}"><span>${esc(s.name)}</span><small>${esc(s.region)}${s.addr ? ' ' + esc(s.addr) : ''} · ${esc(s.level)}</small></button>`).join('') : `<div class="small muted" style="padding:10px 13px">검색 결과가 없어요</div>`;
+    box.innerHTML = hits.length ? hits.map(s => `<button data-act="pickSchool" data-for="${key}" data-code="${s.code}"><span>${esc(s.name)}</span><small>${esc(s.region)}${s.addr ? ' ' + esc(s.addr) : ''}</small></button>`).join('') : `<div class="small muted" style="padding:10px 13px">검색 결과가 없어요</div>`;
     return;
   }
   if (t.dataset.new === 'title') { NEWF.title = t.value; renderSim(); showErr('eTitle', false); }
   else if (t.dataset.new === 'desc') NEWF.desc = t.value;
   else if (t.dataset.newOpt !== undefined) { NEWF.options[+t.dataset.newOpt] = t.value; showErr('eOpt', false); }
   if (t.name === 'vChoice') showErr('eChoice', false);
+  liveCheck();
 });
+function liveCheck() {   // 입력하는 동안 욕설·학교 이름을 바로 안내
+  if ($('#nTitle')) showProblem('eBadNew', contentProblem([NEWF.title, NEWF.desc, ...NEWF.options].join(' ')));
+  if ($('#vReason')) showProblem('eBad', contentProblem($('#vReason').value));
+  if ($('#cText')) showProblem('eBad', contentProblem($('#cText').value));
+}
 document.addEventListener('change', e => {
   const t = e.target;
   if (t.id === 'yearSel') { H.year = t.value; renderHomeList(); }
   else if (t.id === 'sortSel') { H.sort = t.value; renderHomeList(); }
-  else if (t.id === 'fLevel') { F.level = t.value; render(); }
   else if (t.id === 'fConf') { F.confirmed = t.checked; render(); }
   else if (t.dataset.new === 'cat') { NEWF.cat = t.value; showErr('eCat', false); }
   else if (t.name === 'vChoice') showErr('eChoice', false);
@@ -1408,6 +1739,10 @@ function copyText(t, msg) {
 
 /* ---------- 시작 ---------- */
 (async () => {
+  if (DEMO) {
+    document.body.classList.add('demo');
+    $('#demobar').innerHTML = `체험 모드 · 여기 보이는 안건과 숫자는 모두 예시예요${HAS_CONFIG ? `<a href="${location.pathname}">실제 서비스로 가기 →</a>` : ''}`;
+  }
   const DEVMODE = !LIVE || new URLSearchParams(location.search).has('dev');
   if (!DEVMODE) document.querySelector('.devbtn').style.display = 'none';
   $('#app').innerHTML = '<div class="empty sec">불러오는 중…</div>';
