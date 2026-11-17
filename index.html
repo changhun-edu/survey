@@ -256,6 +256,41 @@ body.demo{--bg:#F7F5EE}
 .pill.mine{background:#E7F5FF;color:#1864AB}
 .note{background:#F6F7FA;border-radius:12px;padding:10px 12px;margin:0 0 10px;font-size:14px;white-space:pre-wrap;line-height:1.6}
 .note b{display:block;font-size:12px;color:var(--pri-ink);margin-bottom:2px}
+.jcard{display:flex;align-items:center;gap:12px;width:100%;text-align:left;margin-top:12px;background:#fff;border:1.5px solid #C5D0FF;border-radius:18px;padding:14px 16px;box-shadow:var(--shadow)}
+.jcard:hover{background:var(--pri-soft)}
+.jcard .ic{width:40px;height:40px;border-radius:12px;background:var(--pri-soft);color:var(--pri-ink);display:grid;place-items:center;flex:none}
+.jcard .tx{flex:1;min-width:0}
+.jcard b{display:block;font-size:15.5px;font-weight:800}
+.jcard .tx span{display:block;font-size:12.5px;color:var(--sub);line-height:1.5;margin-top:2px}
+.jcard .ar{font-size:24px;color:var(--pri-ink);flex:none}
+.jlink{display:block;width:100%;text-align:left;background:var(--pri-soft);border:0;border-radius:12px;padding:10px 14px;margin:6px 0 10px;font-size:13px;color:var(--sub)}
+.jlink b{color:var(--pri-ink)}
+.jres{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.jres>div{border-radius:14px;padding:12px 14px}
+.jres .lead{background:#E6F1FB;color:#0C447C}
+.jres .help{background:#E1F5EE;color:#085041}
+.jres .help.none{background:#F1F3F8;color:var(--sub)}
+.jres small{display:block;font-size:12px;font-weight:700;opacity:.8}
+.jres b{display:block;font-size:17px;font-weight:800;margin:2px 0;line-height:1.35}
+.jres span{display:block;font-size:12px;opacity:.85;line-height:1.45}
+.jwarn{background:var(--warn-soft);color:#B35C00;border-radius:10px;padding:8px 12px;margin-top:10px;font-size:13px;font-weight:600}
+.jbars{display:grid;gap:7px;margin-top:14px}
+.jbar{display:grid;grid-template-columns:132px 1fr 28px;gap:8px;align-items:center;font-size:12.5px}
+.jbar span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--sub)}
+.jbar i{height:10px;border-radius:5px;background:#EEF0F5;overflow:hidden}
+.jbar i b{display:block;height:100%;border-radius:5px}
+.jbar em{font-style:normal;font-weight:700;text-align:right}
+.jrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:10px;align-items:center;border-top:1px solid var(--line);padding:11px 0}
+.jrow:first-of-type{border-top:0}
+.jrow .jl b{display:block;font-size:14px}
+.jrow .jl span{display:block;line-height:1.45;word-break:break-all}
+.jrow .jr{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.jrow.book{background:#F6F7FA;border-radius:12px;padding:12px;border-top:0;margin:12px 0 4px}
+.jw{font-size:11.5px;color:var(--mute);font-weight:600}
+.jchip{display:inline-flex;align-items:center;gap:4px;background:var(--pri-soft);color:var(--pri-ink);border-radius:999px;padding:4px 6px 4px 11px;font-size:13px;font-weight:600}
+.jchip button{border:0;background:#fff;border-radius:50%;width:19px;height:19px;line-height:19px;padding:0;color:var(--pri-ink);font-size:12px}
+.jadd{height:30px;font-size:12.5px;padding:0 6px}
+@media (max-width:560px){.jrow{grid-template-columns:1fr}.jbar{grid-template-columns:104px 1fr 24px}}
 .codebox{background:var(--pri-soft);border-radius:14px;padding:12px 14px;margin-top:12px}
 .disc{font-size:12px;color:var(--mute);background:#F4F6FB;border-radius:10px;padding:9px 12px;margin-top:14px;line-height:1.55}
 body.demo .disc{background:#EFEBDD}
@@ -853,6 +888,7 @@ function urlFor(view, id) {
   else if (view === 'new') q = 'new';
   else if (view === 'my') q = 'my';
   else if (view === 'admin') q = 'admin';
+  else if (view === 'judge') q = 'judge';
   q = [q, d].filter(Boolean).join('&');
   return q ? '?' + q : location.pathname;
 }
@@ -872,6 +908,7 @@ function parseLoc() {
   if (p.has('new')) return { view: 'new', id: null };
   if (p.has('my')) return { view: 'my', id: null };
   if (p.has('admin')) return { view: 'admin', id: null };
+  if (p.has('judge')) return { view: 'judge', id: null };
   return { view: 'home', id: null };
 }
 window.addEventListener('popstate', e => {
@@ -882,6 +919,7 @@ window.addEventListener('popstate', e => {
 
 /* ---------- 아이콘 ---------- */
 const IC = {
+  doc: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>',
   search: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
   home: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>',
   plus: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
@@ -900,10 +938,12 @@ function render() {
   const v = ST.view;
   $('#nav').innerHTML = `
     <button class="${v === 'home' ? 'on' : ''}" data-act="home">안건 둘러보기</button>
+    <button class="${v === 'judge' ? 'on' : ''}" data-act="judge">공문 판별</button>
     <button class="${v === 'my' ? 'on' : ''}" data-act="my">내 참여</button>
     <button class="cta" data-act="new">안건 올리기</button>`;
   $('#bnav').innerHTML = `
     <button class="${v === 'home' || v === 'agenda' ? 'on' : ''}" data-act="home">${IC.home}둘러보기</button>
+    <button class="${v === 'judge' ? 'on' : ''}" data-act="judge">${IC.doc}공문 판별</button>
     <button data-act="new"><span class="plus">${IC.plus}</span>안건 올리기</button>
     <button class="${v === 'my' ? 'on' : ''}" data-act="my">${IC.user}내 참여</button>`;
   const app = $('#app');
@@ -911,6 +951,7 @@ function render() {
   else if (v === 'new') app.innerHTML = viewNew();
   else if (v === 'my') app.innerHTML = viewMy();
   else if (v === 'admin') app.innerHTML = viewAdmin();
+  else if (v === 'judge') app.innerHTML = viewJudge();
   else app.innerHTML = viewHome();
   $('#admchip').hidden = !IS_ADMIN || v === 'admin';
   if (v === 'home') renderHomeList();
@@ -955,6 +996,7 @@ function viewHome() {
       <div class="stat"><b>${ops}</b><span>${DEMO ? '예시 의견' : '남긴 의견'}</span></div>
     </div>` : ''}
   </section>
+  <button class="jcard" data-act="judge"><span class="ic">${IC.doc}</span><span class="tx"><b>공문, 누구에게 배정할까?</b><span>공문을 붙여 넣으면 발신 부서·대상·자료 보유자를 따져 주관·협조 담당을 제안해요</span></span><span class="ar">›</span></button>
   ${fresh ? howBlock() : ''}
   <div class="sec">
     <label class="search">${IC.search}<input id="q" type="search" placeholder="키워드로 찾기 (예: 홈페이지, 환불, 체험학습)" value="${esc(H.q)}" aria-label="안건 검색"></label>
@@ -1236,6 +1278,7 @@ function viewNew() {
   const ms = mySchool();
   const prev = NEWF.prevId ? getAg(NEWF.prevId) : null;
   return `<button class="back" data-act="back">${IC.back}뒤로</button>
+  <button class="jlink" data-act="judge">공문 때문에 올리시나요? <b>공문 판별기로 먼저 확인해 보세요 ›</b></button>
   <section class="card">
     <h1 style="font-size:22px;font-weight:800">안건 올리기</h1>
     <p class="sub small" style="margin:6px 0 0">${CUR_YEAR}학년도 안건으로 등록돼요. 다른 학교 2곳이 더 '우리도 궁금해요'를 누르면 투표가 열려요.</p>
@@ -1319,6 +1362,171 @@ function viewMy() {
       <div class="row">${c.edited ? '<span class="small muted">수정됨</span>' : ''}${c.code ? `<span class="code" style="background:#F1F3F8">${esc(c.code)}</span>` : ''}<button class="btn sm" data-act="editComment" data-id="${c.id}">수정</button><button class="btn sm danger" data-act="delComment" data-id="${c.id}">삭제</button></div>
     </div>`; }).join('') : '<div class="empty small">아직 남긴 의견이 없어요.</div>'}</div>
   </section>`;
+}
+
+/* =========================================================
+   공문 판별기 (1차) — 공문 본문을 붙여 넣으면 성격을 따져 주관·협조 담당을 제안합니다.
+   붙여 넣은 원문은 저장하지도, 서버로 보내지도 않습니다(이 화면 안에서만 계산).
+   ========================================================= */
+const AREAS = [   // 업무 영역 사전: 이름, 단서 낱말(띄어쓰기 없이 비교), 협조할 때 넘겨줄 것
+  { id: 'special', name: '특수교육 담당', give: '특수교육대상자 명단·지원 현황', kw: ['특수교육', '특수학급', '통합학급', '특수교육대상', '장애학생', '장애인식', '개별화교육', '치료지원', '특수교육지원센터', '특수교육실무'] },
+  { id: 'neulbom', name: '늘봄 담당', give: '늘봄·돌봄 참여 학생 명단', kw: ['늘봄', '초등돌봄', '돌봄교실', '돌봄', '에듀케어', '저녁돌봄', '아침돌봄'] },
+  { id: 'after', name: '방과후학교 담당', give: '방과후학교 수강 현황', kw: ['방과후학교', '방과후프로그램', '자유수강권', '방과후강사'] },
+  { id: 'records', name: '학적 담당', give: '학적·재학생 현황', kw: ['학적', '전입', '전출', '취학', '입학', '졸업', '학생수', '학급수', '재학생', '출결', '결석', '정원외'] },
+  { id: 'curri', name: '교무(교육과정) 담당', give: '교육과정·학사 자료', kw: ['교육과정', '학사일정', '수업일수', '시수', '학업성적', '평가계획', '교과서', '초등교육과', '창의적체험활동'] },
+  { id: 'basic', name: '기초학력 담당', give: '기초학력 진단·지원 현황', kw: ['기초학력', '학습지원', '학습부진', '진단평가', '학습종합클리닉'] },
+  { id: 'multi', name: '다문화 담당', give: '다문화·이주배경 학생 현황', kw: ['다문화', '이주배경', '중도입국', '외국인학생', '한국어학급', '귀국학생'] },
+  { id: 'health', name: '보건 담당', give: '건강·보건 관련 자료', kw: ['보건', '건강검사', '감염병', '예방접종', '응급처치', '구강', '비만', '흡연', '음주예방', '약물'] },
+  { id: 'meal', name: '급식(영양교사)', give: '급식 운영 자료', kw: ['급식', '영양', '식단', '식중독', '알레르기', '식품'] },
+  { id: 'safety', name: '안전 담당', give: '안전교육·점검 실적', kw: ['안전교육', '안전점검', '재난', '소방', '대피훈련', '교통안전', '생활안전', '안전사고', '학교안전', '민방위'] },
+  { id: 'violence', name: '학교폭력 책임교사', give: '학교폭력 사안·예방교육 실적', kw: ['학교폭력', '학폭', '사이버폭력', '폭력예방', '어울림', '학생생활교육'] },
+  { id: 'counsel', name: '상담(위클래스) 담당', give: '상담 실적', kw: ['상담', '위클래스', 'wee클래스', '정서행동', '자살예방', '생명존중', '심리지원', '마음건강'] },
+  { id: 'digital', name: '정보·디지털 담당', give: '기기·정보화 현황', kw: ['정보화', '디지털', '스마트기기', '태블릿', '인공지능', '소프트웨어', '정보보안', '개인정보', '홈페이지', '네트워크', '에듀테크', '정보통신'] },
+  { id: 'career', name: '진로 담당', give: '진로교육 실적', kw: ['진로교육', '진로체험', '직업체험', '진로'] },
+  { id: 'library', name: '도서관·독서 담당', give: '도서관·독서교육 자료', kw: ['도서관', '독서', '사서', '도서구입'] },
+  { id: 'pe', name: '체육 담당', give: '체육·스포츠 활동 자료', kw: ['체육', '스포츠클럽', '건강체력', '학생선수', '운동부', '체육대회', '수영'] },
+  { id: 'science', name: '과학·발명·영재 담당', give: '과학·영재교육 자료', kw: ['과학', '발명', '영재', '과학실', '탐구'] },
+  { id: 'arts', name: '예술·문화 담당', give: '예술교육 자료', kw: ['예술', '음악', '미술', '문화예술', '합창', '오케스트라'] },
+  { id: 'parents', name: '학부모·운영위원회 담당', give: '학부모·운영위원회 자료', kw: ['학부모', '학교운영위원회', '운영위원회', '학부모회'] },
+  { id: 'personnel', name: '교감(인사·복무)', give: '교원 인사·복무 자료', kw: ['복무', '교원인사', '인사관리', '인사발령', '근무성적', '다면평가', '성과상여', '초과근무', '교원능력개발', '기간제교원'] },
+  { id: 'admin', name: '행정실', give: '예산·회계·시설 자료', kw: ['예산', '회계', '계약', '집행', '정산', '교부', '지출', '세입', '물품', '시설', '공사', '에듀파인', '수익자부담', '재정', '행정과'] }
+];
+const AMAP = Object.fromEntries(AREAS.map(a => [a.id, a]));
+const CRIT = [   // 판별 기준: 이름, 가중치, 설명
+  { k: 'sender', label: '발신 부서', w: 3, hint: '정책을 주관하는 과' },
+  { k: 'target', label: '조사·사업 대상', w: 3, hint: '누구에 관한 일인가' },
+  { k: 'content', label: '다루는 사업·내용', w: 3, hint: '무슨 사업에 관한 일인가' },
+  { k: 'basis', label: '근거 공문', w: 2, hint: '관련 공문의 발신 부서·제목' },
+  { k: 'holder', label: '자료를 가진 사람', w: 2, hint: '답을 쓰려면 누구의 명단·장부가 필요한가' },
+  { k: 'purpose', label: '정책 목적', w: 1, hint: '결과를 어디에 쓰나' },
+  { k: 'route', label: '제출 경로·권한', w: 1, hint: '어느 시스템으로 내나' },
+  { k: 'budget', label: '예산 수반', w: 1, hint: '집행·정산이 따르나' },
+  { k: 'span', label: '일회성·지속', w: 1, hint: '지속 사업이면 그 사업 담당에 무게' }
+];
+const JDG = { text: '', parsed: null, book: '', crit: null };
+const JUDGE_EXAMPLE = `수신 수신자 참조
+(경유)
+제목 [제출] 2026학년도 1학기 일반학교 특수교육대상자 교내 초등돌봄·교육 현황 조사
+
+1. 관련: 교육부 특수교육정책과-2350(2026. 5. 26.) 2026학년도 1학기 특수교육대상자 초등돌봄·교육 및 유·중등 방과후학교·돌봄 현황조사
+
+2. 교육부 '2026학년도 1학기 특수교육대상자 초등돌봄·교육 현황 조사'를 위해, 붙임과 같이 자료를 요청하오니, 해당 초등학교에서는 기한 내에서 제출하여 주시기 바랍니다.
+  가. 대 상: 특수교육대상자 배치 초등 일반학교(통합학급 배치 학생 포함)
+  나. 내 용: 2026학년도 1학기 초등돌봄·교육(늘봄학교) 참여 현황
+  다. 제출방법: 2026. 6. 22.(월) 교육행정데이터통합관리로 제출
+  라. 문 의: 중등특수교육과 ○○○ 주무관(☎062-○○○-○○○○)
+
+붙임 2026학년도 1학기 일반학교 교내 초등돌봄교육(늘봄학교) 특수교육대상학생 참여 현황(서식) 1부. 끝.`;
+
+const squash = t => String(t || '').toLowerCase().replace(/[\s·ㆍ・.,'"‘’“”()\[\]]/g, '');
+function areaHits(text) {   // 영역별 단서 낱말이 몇 번 나오는지
+  const t = squash(text), out = {};
+  AREAS.forEach(a => { let n = 0; a.kw.forEach(k => { const kk = squash(k); let i = t.indexOf(kk); while (i >= 0) { n++; i = t.indexOf(kk, i + kk.length); } }); if (n) out[a.id] = n; });
+  return out;
+}
+function topAreas(text, cap = 2) {   // 가장 많이 나온 영역(최댓값의 60% 이상, 최대 2개)
+  const h = areaHits(text); const arr = Object.entries(h).sort((a, b) => b[1] - a[1]);
+  if (!arr.length) return [];
+  return arr.filter(([, n]) => n >= arr[0][1] * 0.6).slice(0, cap).map(([id]) => id);
+}
+const firstMatch = (t, re) => { const m = t.match(re); return m ? m[1].trim() : ''; };
+function parseDoc(raw) {   // 공문 본문에서 항목 뽑기
+  const t = String(raw || '').replace(/\r/g, '');
+  const title = firstMatch(t, /제\s*목\s*[:：]?\s*([^\n]+)/);
+  const basis = firstMatch(t, /관\s*련\s*[:：]\s*([\s\S]*?)(?=\n\s*\n|\n\s*\d+\s*\.|$)/).replace(/\s+/g, ' ');
+  const target = firstMatch(t, /대\s*상\s*[:：]\s*([^\n]+)/);
+  const content = [firstMatch(t, /내\s*용\s*[:：]\s*([^\n]+)/), firstMatch(t, /(?:^|\n)\s*붙\s*임\s*[:：]?\s*([^\n]+)/)].filter(Boolean).join(' / ');
+  const route = firstMatch(t, /제\s*출\s*(?:방\s*법|기\s*한)?\s*[:：]\s*([^\n]+)/);
+  const inquiry = firstMatch(t, /문\s*의\s*(?:처)?\s*[:：]\s*([^\n]+)/);
+  const deptRe = /([가-힣]{2,14}(?:과|담당관|센터|지원단|교육지원청))(?=[\s\-·,)(]|$)/;
+  let sender = firstMatch(inquiry, deptRe);
+  if (!sender) sender = firstMatch(t.replace(/관\s*련\s*[:：][^\n]*/g, ''), deptRe);
+  const pm = t.replace(/\s+/g, ' ').match(/([^.。]*?)(?:를|을)?\s*위(?:해|하여)/);
+  const purpose = pm ? pm[1].trim().slice(-80) : '';
+  const span = /운영|추진|계획\s*수립|사업|지원\s*사업|공모/.test(title + content) && !/조사|현황|제출|실적/.test(title) ? '지속 사업' : (/조사|현황|제출|실적|명단/.test(title + content) ? '일회성 조사·제출' : '');
+  const budget = /예산|교부|집행|정산|지출|에듀파인|수익자\s*부담|비용\s*지원/.test(t);
+  return { title, basis, target, content, route, sender, purpose, span, budget, empty: !t.trim() };
+}
+function buildCriteria(p) {   // 기준별로 가리키는 영역 (사용자가 칩으로 고칠 수 있음)
+  const c = {};
+  c.sender = { snip: p.sender, areas: topAreas(p.sender, 1) };
+  c.target = { snip: p.target || p.title, areas: topAreas(p.target || p.title) };
+  c.content = { snip: p.content || p.title, areas: topAreas(p.content || p.title) };
+  c.basis = { snip: p.basis, areas: topAreas(p.basis) };
+  c.holder = { snip: '대상과 내용에서 추정 — 고쳐 주세요', areas: [...new Set([...c.target.areas, ...c.content.areas])].slice(0, 3) };
+  c.purpose = { snip: p.purpose, areas: topAreas(p.purpose) };
+  c.route = { snip: p.route, areas: /에듀파인/.test(p.route) ? ['admin'] : /나이스|neis/i.test(p.route) ? ['records'] : [] };
+  c.budget = { snip: p.budget ? '예산·정산 관련 표현이 있어요' : '예산 관련 표현이 없어요', areas: p.budget ? ['admin'] : [] };
+  c.span = { snip: p.span || '판단할 단서가 없어요', areas: p.span === '지속 사업' ? c.content.areas.slice(0, 1) : [] };
+  return c;
+}
+function scoreJudge() {
+  const sc = {}, why = {};
+  CRIT.forEach(cr => (JDG.crit[cr.k].areas || []).forEach(id => {
+    sc[id] = (sc[id] || 0) + cr.w; (why[id] = why[id] || []).push(cr.label);
+  }));
+  const rank = Object.entries(sc).sort((a, b) => b[1] - a[1]);
+  let lead = rank[0] ? rank[0][0] : null, help = rank[1] ? rank[1][0] : null, byBook = false;
+  if (JDG.book && AMAP[JDG.book]) { byBook = true; if (lead !== JDG.book) help = lead; lead = JDG.book; if (help === lead) help = rank[1] ? rank[1][0] : null; }
+  const s1 = lead ? (sc[lead] || 0) : 0, s2 = help ? (sc[help] || 0) : 0;
+  const close = !byBook && help && s2 > 0 && (s1 - s2 <= 3 || s2 >= s1 * 0.7);
+  return { sc, why, rank, lead, help: help && s2 > 0 ? help : null, s1, s2, close, byBook };
+}
+function judgeCopyText(r) {
+  const p = JDG.parsed, L = AMAP[r.lead], H = r.help ? AMAP[r.help] : null;
+  return `[공문 배정 참고] ${p.title || '(제목 없음)'}\n` +
+    `○ 주관: ${L.name} — ${r.byBook ? '우리 학교 업무분장표 기준' : '근거: ' + (r.why[r.lead] || []).join(', ')}\n` +
+    (H ? `○ 협조: ${H.name} — ${H.give} 제공\n` : '') +
+    (r.close ? '○ 두 영역의 판단 근거가 비슷해 담당자 간 협의를 권합니다.\n' : '') +
+    `※ 발신 부서·조사 대상·다루는 사업·자료 보유자 등을 따진 참고 의견이며, 최종 배정은 학교 업무분장과 협의에 따릅니다.`;
+}
+function chipHtml(k, id) { const a = AMAP[id]; return `<span class="jchip">${esc(a.name)}<button data-act="jDel" data-k="${k}" data-a="${id}" aria-label="${esc(a.name)} 빼기">×</button></span>`; }
+function viewJudge() {
+  let h = `<section class="card" style="margin-top:14px">
+    <h1 style="font-size:22px;font-weight:800">공문 판별기</h1>
+    <p class="small sub" style="margin:6px 0 0">공문 본문을 붙여 넣으면 발신 부서·조사 대상·다루는 사업·자료 보유자를 따져 <b>주관</b>과 <b>협조</b> 담당을 제안해요.</p>
+    <div class="f"><label for="jText">공문 본문</label>
+      <textarea class="ta" id="jText" style="min-height:190px" placeholder="업무관리시스템에서 공문 본문(제목부터 붙임까지)을 복사해 붙여 넣으세요.">${esc(JDG.text)}</textarea>
+      <p class="small muted" style="margin:6px 0 0">붙여 넣은 내용은 저장하거나 서버로 보내지 않아요. 이 화면 안에서만 계산해요.</p>
+      <div class="err" id="eJ">공문 본문을 붙여 넣어 주세요</div></div>
+    <div class="row" style="margin-top:12px"><button class="btn sm" data-act="jExample">예시 공문 넣기</button><button class="btn sm" data-act="jClear">지우기</button><span style="flex:1"></span><button class="btn dark" data-act="jRun">판별하기</button></div>
+  </section>`;
+  if (!JDG.crit) return h + `<section class="card sec"><div class="how" style="margin-top:0">
+      <div class="st"><span class="no">1</span><b>공문 붙여 넣기</b><span>제목·관련·대상·내용·문의처를 자동으로 찾아요.</span></div>
+      <div class="st"><span class="no">2</span><b>기준별로 확인</b><span>기준마다 가리키는 담당을 칩으로 고칠 수 있어요.</span></div>
+      <div class="st"><span class="no">3</span><b>주관·협조 제안</b><span>근거와 함께 결재·메신저용 배정 사유 문구를 복사해요.</span></div></div></section>`;
+  const r = scoreJudge();
+  const max = Math.max(1, ...r.rank.map(x => x[1]));
+  if (!r.lead) h += `<section class="card sec"><b>판단할 단서를 찾지 못했어요</b><p class="small sub" style="margin:6px 0 0">아래 기준에서 「+ 담당 추가」로 직접 골라 주세요.</p></section>`;
+  else h += `<section class="card sec">
+    <p class="small muted" style="margin:0 0 4px">판별 결과</p>
+    <p style="font-weight:700;margin:0 0 12px;line-height:1.5">${esc(JDG.parsed.title || '(제목을 찾지 못했어요)')}</p>
+    <div class="jres">
+      <div class="lead"><small>주관</small><b>${esc(AMAP[r.lead].name)}</b><span>${r.byBook ? '업무분장표 기준' : '점수 ' + r.s1}</span></div>
+      ${r.help ? `<div class="help"><small>협조</small><b>${esc(AMAP[r.help].name)}</b><span>${esc(AMAP[r.help].give)} 제공</span></div>` : '<div class="help none"><small>협조</small><b>없음</b><span>한 영역의 일로 보여요</span></div>'}
+    </div>
+    ${r.close ? '<div class="jwarn">두 영역의 근거가 비슷해요 · 두 담당자의 협의를 권해요</div>' : ''}
+    <div class="jbars">${r.rank.slice(0, 4).map(([id, n]) => `<div class="jbar"><span>${esc(AMAP[id].name)}</span><i><b style="width:${Math.round(n / max * 100)}%;background:${id === r.lead ? '#378ADD' : id === r.help ? '#12B886' : '#B4B2A9'}"></b></i><em>${n}</em></div>`).join('')}</div>
+    <div class="row" style="margin-top:12px"><button class="btn sm dark" data-act="jCopy">배정 사유 문구 복사</button></div>
+    <p class="disc">발신 부서·대상·사업·자료 보유자 등을 따진 참고 의견이에요. 최종 배정은 학교 업무분장과 협의에 따라 정해 주세요.</p>
+  </section>`;
+  h += `<section class="card sec"><h2 style="font-size:17px;font-weight:800">기준별 판단 <span class="small muted" style="font-weight:500">칩을 빼거나 더하면 바로 다시 계산해요</span></h2>
+    <div class="jrow book"><div class="jl"><b>우리 학교 업무분장표</b><span class="small muted">분장표에 이 업무가 적혀 있으면 그대로 따라요 (최우선)</span></div>
+      <select class="sel" id="jBook" style="height:40px;max-width:100%"><option value="">분장표 확인 안 함</option>${AREAS.map(a => `<option value="${a.id}" ${JDG.book === a.id ? 'selected' : ''}>${esc(a.name)}</option>`).join('')}</select></div>
+    ${CRIT.map(cr => { const c = JDG.crit[cr.k]; return `<div class="jrow">
+      <div class="jl"><b>${cr.label} <span class="jw">×${cr.w}</span></b><span class="small muted">${esc(c.snip ? c.snip.slice(0, 90) : cr.hint)}</span></div>
+      <div class="jr">${(c.areas || []).map(id => chipHtml(cr.k, id)).join('') || '<span class="small muted">해당 없음</span>'}
+        <select class="sel jadd" data-k="${cr.k}" aria-label="${cr.label}에 담당 추가"><option value="">+ 담당 추가</option>${AREAS.filter(a => !(c.areas || []).includes(a.id)).map(a => `<option value="${a.id}">${esc(a.name)}</option>`).join('')}</select></div>
+    </div>`; }).join('')}
+  </section>`;
+  return h;
+}
+function runJudge() {
+  JDG.parsed = parseDoc(JDG.text);
+  JDG.crit = buildCriteria(JDG.parsed);
+  render();
+  const res = document.querySelector('.jres') || document.querySelector('#app .card.sec');
+  if (res) res.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* ----- 내 글 관리 (안건) ----- */
@@ -1669,6 +1877,12 @@ function schoolOnlySheet(title, next) {
 
 /* ---------- 이벤트 ---------- */
 const ACT = {
+  judge: () => go('judge'),
+  jExample: () => { JDG.text = JUDGE_EXAMPLE; JDG.book = ''; runJudge(); },
+  jClear: () => { JDG.text = ''; JDG.parsed = null; JDG.crit = null; JDG.book = ''; render(); const t = $('#jText'); if (t) t.focus(); },
+  jRun: () => { JDG.text = $('#jText').value; if (!JDG.text.trim()) { showErr('eJ', true); return; } JDG.book = ''; runJudge(); },
+  jDel: t => { const c = JDG.crit[t.dataset.k]; c.areas = c.areas.filter(x => x !== t.dataset.a); render(); },
+  jCopy: () => copyText(judgeCopyText(scoreJudge()), '배정 사유 문구를 복사했어요. 결재 의견이나 메신저에 붙여 넣으세요'),
   myAgenda: t => myAgendaSheet(getAg(t.dataset.id)),
   editAgendaSheet: t => editAgendaSheet(getAg(t.dataset.id)),
   saveAgenda: t => {
@@ -1901,6 +2115,7 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('input', e => {
   const t = e.target;
+  if (t.id === 'jText') { JDG.text = t.value; showErr('eJ', false); return; }
   if (t.id === 'q') { H.q = t.value; renderHomeList(); return; }
   if (t.dataset.schoolSearch) {
     const key = t.dataset.schoolSearch;
@@ -1932,6 +2147,8 @@ function liveCheck() {   // 입력하는 동안 욕설·학교 이름을 바로 
 }
 document.addEventListener('change', e => {
   const t = e.target;
+  if (t.classList && t.classList.contains('jadd') && t.value) { const c = JDG.crit[t.dataset.k]; c.areas = [...(c.areas || []), t.value]; render(); return; }
+  if (t.id === 'jBook') { JDG.book = t.value; render(); return; }
   if (t.id === 'yearSel') { H.year = t.value; renderHomeList(); }
   else if (t.id === 'sortSel') { H.sort = t.value; renderHomeList(); }
   else if (t.id === 'fConf') { F.confirmed = t.checked; render(); }
