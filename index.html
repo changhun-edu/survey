@@ -370,6 +370,162 @@ body.demo{--bg:#F7F5EE}
 .logt td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 .logt td:first-child{font-weight:800;white-space:nowrap;color:var(--pri-ink)}
 .logt td:nth-child(2){white-space:nowrap;color:var(--mute)}
+.evid{padding:22px 22px 18px}
+.evh{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:var(--ink);letter-spacing:.2px;margin:18px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+.evh:first-child{margin-top:0}
+.evh span{width:20px;height:20px;border-radius:6px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:11.5px}
+.evh small{font-weight:500;color:var(--mute);margin-left:auto;font-size:12px}
+.evgist{margin:0;font-size:15px;line-height:1.8}
+.evgist b{color:var(--ink)}
+.evhead{display:grid;grid-template-columns:150px minmax(0,1fr) 170px;gap:12px;font-size:11.5px;font-weight:700;color:var(--mute);padding:0 10px 6px}
+.evtable{border-top:1px solid var(--line)}
+.evrow{display:grid;grid-template-columns:150px minmax(0,1fr) 170px;gap:12px;align-items:start;padding:10px 10px;border-bottom:1px solid var(--line);border-left:3px solid transparent}
+.evrow.lead{border-left-color:var(--pri)}
+.evrow.help{border-left-color:#12B886}
+.evrow.none{color:var(--mute)}
+.evrow.none .evk b{color:var(--mute)}
+.evk{display:flex;gap:6px;align-items:baseline;font-size:14px}
+.evq{font-size:13.5px;line-height:1.6;color:var(--sub);word-break:keep-all;overflow-wrap:anywhere}
+.evq q{quotes:"「" "」"}
+.evq mark{background:#FFF0B3;color:var(--ink);font-weight:700;border-radius:3px;padding:0 2px}
+.eva{display:flex;flex-wrap:wrap;gap:4px}
+.evtag{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;border-radius:8px;padding:3px 8px;background:#F1F3F8;color:var(--sub)}
+.evtag em{font-style:normal;font-weight:800;opacity:.75}
+.evtag.l{background:var(--pri-soft);color:var(--pri-ink)}
+.evtag.h{background:var(--ok-soft);color:#087F5B}
+.evsum{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#F6F7FA;border-radius:12px;padding:12px 16px}
+.evscore{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;white-space:nowrap}
+.evscore b{font-size:24px;font-weight:800;margin-left:4px}
+.evscore .l{color:var(--pri-ink)}
+.evscore .h{color:#087F5B}
+.evscore .vs{color:var(--mute);font-size:18px}
+.evsum p{margin:0;font-size:14px;line-height:1.65;flex:1;min-width:220px}
+.evfoot{font-size:12px;color:var(--mute);margin:12px 0 0;line-height:1.6}
+@media (max-width:640px){
+  .evid{padding:18px 16px 16px}
+  .evhead{display:none}
+  .evrow{grid-template-columns:1fr;gap:5px;padding:10px 10px}
+}
+.only-narrow{display:none}
+@media (max-width:640px){.only-narrow{display:flex}.only-wide{display:none!important}}
+.hseg{gap:4px;background:rgba(255,255,255,.12);border-radius:12px;padding:4px;margin:-4px 0 16px}
+.hseg button{flex:1;border:0;background:none;color:#C9D3FA;font-weight:700;font-size:13.5px;padding:8px 6px;border-radius:9px}
+.hseg button.on{background:#fff;color:var(--navy)}
+.critop .hseg{background:var(--navy);margin:14px 0 0}
+.critop .back{padding-top:12px}
+.cbadge{display:inline-flex;align-items:center;gap:5px;border:1px solid #C5D0FF;background:var(--pri-soft);color:var(--pri-ink);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.sech .sn{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--navy);color:#fff;font-size:12.5px;margin-right:8px;vertical-align:2px}
+/* ① 세 가지 질문 */
+.q3{display:flex;align-items:stretch;gap:8px}
+.q3c{flex:1;background:#F4F6FB;border-radius:14px;padding:14px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.q3i{width:46px;height:46px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;margin-bottom:4px}
+.q3c b{font-size:14.5px;line-height:1.4}
+.q3c small{font-size:12px;color:var(--pri-ink);font-weight:700}
+.q3a{align-self:center;color:var(--mute);font-size:22px;font-weight:800}
+.q3r{margin-top:12px;text-align:center;background:var(--pri-soft);color:var(--pri-ink);border-radius:12px;padding:10px;font-size:14px}
+@media (max-width:560px){.q3{flex-direction:column}.q3c{flex-direction:row;text-align:left;gap:12px;padding:10px 12px}.q3i{margin:0;width:40px;height:40px;flex:none}.q3a{transform:rotate(90deg);margin:-6px auto}.q3c small{margin-left:auto}}
+/* ② 무게 막대와 단별 카드 */
+.wbar{display:flex;gap:3px;height:44px;border-radius:12px;overflow:hidden}
+.wbar>div{display:flex;flex-direction:column;justify-content:center;padding:0 10px;color:#fff;min-width:0}
+.wbar b{font-size:12.5px;white-space:nowrap}
+.wbar span{font-size:11.5px;opacity:.85}
+.wbar .t3,.tier.t3 .ti{background:var(--navy)}
+.wbar .t2,.tier.t2 .ti{background:var(--pri)}
+.wbar .t1{background:#A9B6F5}
+.tier.t1 .ti{background:#A9B6F5}
+.tier{margin-top:14px}
+.tierh{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.tierh b{font-size:14px}
+.tierh span{font-size:12.5px;color:var(--mute)}
+.tcards{display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.tier.t2 .tcards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tier.t1 .tcards{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tcard{background:#F6F7FA;border-radius:14px;border:1px solid transparent;transition:background .6s,border-color .2s}
+.tcard[open]{background:#fff;border-color:var(--line2);grid-column:1/-1}
+.tcard.flash{background:#FFF8E1}
+.tcard summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px}
+.tcard summary::-webkit-details-marker{display:none}
+.ti{width:38px;height:38px;flex:none;border-radius:11px;color:#fff;display:grid;place-items:center}
+.tier.t1 .tcard summary{flex-direction:column;align-items:flex-start;gap:6px}
+.tier.t1 .ti{width:32px;height:32px;border-radius:9px}
+.tt{display:flex;flex-direction:column;min-width:0;flex:1}
+.tt b{font-size:14.5px;line-height:1.35}
+.tt small{font-size:12px;color:var(--mute);line-height:1.45}
+.tw{flex:none;width:8px;height:8px;border-right:2px solid var(--mute);border-bottom:2px solid var(--mute);transform:rotate(45deg);margin:0 4px 4px 0;transition:transform .15s}
+.tcard[open] .tw{transform:rotate(-135deg);margin:4px 4px 0 0}
+.tier.t1 .tw{position:absolute;right:14px;top:16px}
+.tier.t1 .tcard summary{position:relative}
+.tbody{padding:0 14px 14px}
+.tbody p{margin:6px 0 0;font-size:14px;color:var(--sub);line-height:1.65}
+.tbody p b{display:inline-block;color:var(--ink);font-size:12px;background:#F1F3F8;border-radius:6px;padding:1px 7px;margin-right:6px}
+.tbody .ex{display:inline-block;margin-top:8px;font-size:13px;background:#FFF8E1;border-radius:8px;padding:5px 10px}
+@media (max-width:640px){.tcards,.tier.t2 .tcards{grid-template-columns:1fr}.tier.t1 .tcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* ③ 흐름 */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;counter-reset:f}
+.fs{position:relative;background:#F4F6FB;border-radius:14px;padding:14px 12px}
+.fs:not(:last-child):after{content:"";position:absolute;right:-8px;top:50%;width:8px;height:2px;background:var(--line2)}
+.fs i{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;margin-bottom:6px}
+.fs:last-child{background:var(--navy);color:#fff}
+.fs:last-child i{background:#fff;color:var(--navy)}
+.fs:last-child span{color:#C9D3FA}
+.fs b{display:block;font-size:14.5px}
+.fs span{display:block;font-size:12.5px;color:var(--sub);line-height:1.5;margin-top:2px}
+@media (max-width:640px){.flow{grid-template-columns:1fr 1fr}.fs:nth-child(2):after{display:none}}
+.fshort{margin-top:10px;border:1.5px dashed #C5D0FF;border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.6}
+.fshort>b:first-child{display:inline-block;background:var(--pri);color:#fff;border-radius:6px;padding:0 7px;font-size:12px;margin-right:6px}
+.rulebox{margin-top:10px;background:var(--warn-soft);border-radius:12px;padding:12px 14px;font-size:14px}
+.rulebox .rr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.rc{background:#fff;border-radius:10px;padding:6px 12px;font-weight:800;color:#B35C00}
+.ro{font-size:12.5px;color:#B35C00;font-weight:700}
+/* ④ 쌓인 막대·눈금 */
+.sbars{display:grid;gap:10px}
+.sbar{display:grid;grid-template-columns:120px minmax(0,1fr) 30px;gap:10px;align-items:center}
+.sbl{display:flex;flex-direction:column;gap:2px;font-size:13px}
+.sbl span{font-size:11px;font-weight:800;border-radius:6px;padding:0 6px;width:max-content}
+.sbl .l{background:var(--pri-soft);color:var(--pri-ink)}
+.sbl .h{background:var(--ok-soft);color:#087F5B}
+.sbt{background:#F1F3F8;border-radius:8px;height:34px;overflow:hidden}
+.sbf{display:flex;gap:2px;height:100%}
+.sbf i{font-style:normal;color:#fff;font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:2px;min-width:0;overflow:hidden;white-space:nowrap}
+.sbf i small{font-size:10px;opacity:.85}
+.sbar em{font-style:normal;font-size:18px;font-weight:800;text-align:right}
+@media (max-width:560px){.sbar{grid-template-columns:76px minmax(0,1fr) 24px;gap:8px}.sbf i small{display:none}}
+.gauge{margin-top:14px;background:#F6F7FA;border-radius:12px;padding:12px 14px}
+.gt{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--sub);margin-bottom:22px}
+.gt b{color:var(--ink)}
+.gbar{position:relative;height:10px;border-radius:5px;background:#E3E7F0}
+.gz{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(45deg,#FFD8A8,#FFD8A8 5px,#FFE8CC 5px,#FFE8CC 10px);border-radius:0 5px 5px 0}
+.gz em{position:absolute;bottom:14px;left:0;font-style:normal;font-size:11.5px;font-weight:700;color:#B35C00;white-space:nowrap;transform:translateX(-50%)}
+.gbar i{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--navy);border:3px solid #fff;box-shadow:0 1px 4px rgba(20,30,60,.3);transform:translate(-50%,-50%)}
+.gscale{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin-top:6px}
+.gnote{margin:8px 0 0;font-size:13.5px}
+.gnote .warn{color:#B35C00}
+/* ⑤ 영역 타일 */
+.atiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.atile{border:1px solid var(--line);background:#F6F7FA;border-radius:12px;padding:10px 8px;text-align:left;display:flex;flex-direction:column;gap:1px;min-width:0}
+.atile b{font-size:13px;line-height:1.35}
+.atile small{font-size:11.5px;color:var(--mute)}
+.atile.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.atile.on small{color:#C9D3FA}
+@media (max-width:640px){.atiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:400px){.atiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.apanel{margin-top:10px;border:1.5px solid var(--navy);border-radius:12px;padding:12px 14px}
+.apanel .kw{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.apanel .kw span{font-size:12.5px;background:#FFF0B3;border-radius:999px;padding:2px 9px;font-weight:600}
+/* ⑥ 타임라인 · ⑦ 하지 않는 것 */
+.tline{list-style:none;margin:16px 0 0;padding:0 0 0 18px;border-left:2px solid var(--line2)}
+.tline li{position:relative;padding:0 0 10px 6px}
+.tline li:before{content:"";position:absolute;left:-25px;top:4px;width:12px;height:12px;border-radius:50%;background:#C9CEDA;border:2px solid #fff}
+.tline li.now:before{background:var(--pri);box-shadow:0 0 0 3px var(--pri-soft)}
+.tline b{color:var(--pri-ink);margin-right:8px}
+.tline span{font-size:12.5px;color:var(--mute)}
+.tline p{margin:2px 0 0;font-size:13.5px;color:var(--sub)}
+.nots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.nots>div{background:#F6F7FA;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:2px}
+.nots span{width:24px;height:24px;border-radius:50%;background:var(--bad-soft);color:var(--bad);display:grid;place-items:center;font-size:12px;font-weight:800;margin-bottom:4px}
+.nots b{font-size:14px}
+.nots small{font-size:12px;color:var(--mute);line-height:1.45}
+@media (max-width:640px){.nots{grid-template-columns:1fr 1fr}}
 .jother{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .jother>div:first-child{flex:1 1 260px}
 .jtabs{display:flex;gap:4px;background:#F1F3F8;border-radius:12px;padding:4px;margin-top:14px}
@@ -1100,7 +1256,8 @@ const IC = {
 function render() {
   const v = ST.view;
   $('#nav').innerHTML = `
-    <button class="${v === 'judge' || v === 'criteria' ? 'on' : ''}" data-act="judge">공문 판별</button>
+    <button class="${v === 'judge' ? 'on' : ''}" data-act="judge">공문 판별</button>
+    <button class="${v === 'criteria' ? 'on' : ''}" data-act="criteria">판별 기준</button>
     <button class="${v === 'home' || v === 'agenda' ? 'on' : ''}" data-act="home">옆 학교 기록</button>
     <button class="${v === 'my' ? 'on' : ''}" data-act="my">내 참여</button>
     <button class="cta ${v === 'new' ? 'on' : ''}" data-act="new">옆 학교에 묻기</button>`;
@@ -1884,23 +2041,78 @@ function scoreWith(crit, book) {
   const close = !byBook && help && s2 > 0 && (s1 - s2 <= CLOSE_GAP || s2 >= s1 * CLOSE_RATIO);
   return { sc, why, rank, lead, help: help && s2 > 0 ? help : null, s1, s2, close, byBook };
 }
+/* ----- 판별 근거 (보고서 형식, 늘 펼쳐 보임) ----- */
+const reEsc = t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function markKw(snip, areas) {   // 단서 문장에서 담당을 가리킨 낱말 강조
+  let t = esc(snip);
+  const kws = [...new Set((areas || []).flatMap(id => AMAP[id] ? AMAP[id].kw : []))].filter(Boolean).sort((a, b) => b.length - a.length);
+  if (!kws.length) return t;
+  return t.replace(new RegExp(kws.map(k => reEsc(esc(k))).join('|'), 'gi'), m => `<mark>${m}</mark>`);
+}
+const josa = (w, a, b) => { const c = (w || '').charCodeAt(w.length - 1); return (c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28) ? a : b; };
+function evidenceSection(r) {
+  if (!r.lead) return '';
+  const p = JDG.parsed, L = AMAP[r.lead].name, Hn = r.help ? AMAP[r.help].name : '';
+  const leadC = CRIT.filter(cr => (JDG.crit[cr.k].areas || []).includes(r.lead));
+  const helpC = r.help ? CRIT.filter(cr => (JDG.crit[cr.k].areas || []).includes(r.help)) : [];
+  const heavy = leadC.filter(c => c.w === 3).map(c => c.label);
+  const gap = r.s1 - r.s2;
+  // 판단 요지
+  const gist = r.byBook
+    ? `이 공문은 <b>우리 학교 업무분장표</b>에 따라 <b>${esc(L)}</b>${josa(L, '이', '가')} 주관합니다.${Hn ? ` 판별 기준상 점수가 가장 높은 <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} 자료 제공 등으로 협조합니다.` : ''}`
+    : `이 공문은 ${leadC.length}개 기준(가중 합계 <b>${r.s1}점</b>)이 <b>${esc(L)}</b>${josa(L, '을', '를')} 가리켜 이를 주관으로 판단합니다.${heavy.length === CRIT.filter(c => c.w === 3).length ? ` 특히 무게가 가장 큰(×3) 세 기준이 모두 ${esc(L)}${josa(L, '을', '를')} 가리킵니다.` : heavy.length ? ` 특히 무게가 가장 큰(×3) 기준 중 「${heavy.join('」·「')}」${josa(heavy[heavy.length - 1], '이', '가')} ${esc(L)}${josa(L, '을', '를')} 가리킵니다.` : ''}` +
+      (Hn ? ` <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} ${helpC.length}개 기준(<b>${r.s2}점</b>)에서 관련성이 확인되어 「${esc(AMAP[r.help].give)}」 제공 등 협조가 필요합니다.` : ' 다른 담당을 가리키는 기준이 없어 한 담당의 업무로 봅니다.');
+  const verdict = r.byBook ? `업무분장표 우선 원칙에 따라 <b>${esc(L)} 주관</b>${Hn ? ` · <b>${esc(Hn)} 협조</b>` : ''}`
+    : !Hn ? `<b>${esc(L)} 단독 주관</b> (협조 담당 없음)`
+    : r.close ? `<b>${esc(L)} 주관 · ${esc(Hn)} 협조</b> — 점수 차이 ${gap}점이 ${gap <= CLOSE_GAP ? `기준(${CLOSE_GAP}점 이하)` : `기준(2위가 1위의 ${Math.round(CLOSE_RATIO * 100)}% 이상)`}에 해당하여 <b>담당자 간 협의 권장</b>`
+    : `<b>${esc(L)} 주관 · ${esc(Hn)} 협조</b> — 점수 차이 ${gap}점으로 주관이 분명함`;
+  const rows = CRIT.map(cr => {
+    const c = JDG.crit[cr.k], a = c.areas || [];
+    const auto = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? (p.budget ? '예산·정산 관련 표현 있음' : '') : (c.snip || '');
+    const role = a.includes(r.lead) ? 'lead' : a.includes(r.help) ? 'help' : a.length ? 'etc' : 'none';
+    return `<div class="evrow ${role}">
+      <div class="evk"><b>${cr.label}</b><span class="jw">×${cr.w}</span></div>
+      <div class="evq">${auto ? `<q>${markKw(auto.length > 110 ? auto.slice(0, 108) + '…' : auto, a)}</q>` : '<span class="muted">공문에서 단서를 찾지 못함</span>'}</div>
+      <div class="eva">${a.length ? a.map(id => `<span class="evtag ${id === r.lead ? 'l' : id === r.help ? 'h' : ''}">${esc(AMAP[id].name)} <em>+${cr.w}</em></span>`).join('') : '<span class="muted small">—</span>'}</div>
+    </div>`;
+  }).join('');
+  return `<div class="sech"><h2>판별 근거</h2><span class="small muted">판별 기준 ${JUDGE_VER} · 공문에서 찾은 단서를 그대로 인용했어요</span></div>
+  <section class="card evid">
+    <div class="evh"><span>1</span>판단 요지</div>
+    <p class="evgist">${gist}</p>
+    <div class="evh"><span>2</span>근거 대조 <small>강조한 낱말이 담당을 가리킨 단서예요</small></div>
+    <div class="evhead"><span>기준(가중치)</span><span>공문의 단서</span><span>가리키는 담당</span></div>
+    <div class="evtable">${rows}</div>
+    <div class="evh"><span>3</span>판정</div>
+    <div class="evsum">
+      <div class="evscore"><span class="l">${esc(L)} <b>${r.s1}</b></span>${Hn ? `<span class="vs">:</span><span class="h">${esc(Hn)} <b>${r.s2}</b></span>` : ''}</div>
+      <p>${verdict}</p>
+    </div>
+    <p class="evfoot">이 판정은 공문 겉에 드러난 단서를 공개된 기준에 따라 계산한 참고 의견이며, 법령 해석이 아닙니다. <button class="link" style="font-size:12px" data-act="criteria" data-mine="1">판별 기준 ${JUDGE_VER} 전문 보기</button></p>
+  </section>`;
+}
 function judgeCopyText(r) {
   const p = JDG.parsed, L = AMAP[r.lead], H = r.help ? AMAP[r.help] : null;
   return `[공문 배정 참고] ${p.title || '(제목 없음)'}\n` +
     `○ 주관: ${L.name} — ${r.byBook ? '우리 학교 업무분장표 기준' : '근거: ' + (r.why[r.lead] || []).join(', ')}\n` +
     (H ? `○ 협조: ${H.name} — ${H.give} 제공\n` : '') +
     (r.close ? '○ 두 영역의 판단 근거가 비슷해 담당자 간 협의를 권합니다.\n' : '') +
+    `○ 근거 대조\n` + CRIT.filter(cr => (JDG.crit[cr.k].areas || []).length).map(cr => {
+      const c = JDG.crit[cr.k], snip = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? '예산·정산 관련 표현' : ((c.snip || '').length > 44 ? c.snip.slice(0, 43) + '…' : (c.snip || ''));
+      return `  - ${cr.label}(×${cr.w}): ${snip ? '「' + snip + '」 → ' : ''}${c.areas.map(id => AMAP[id].name).join(', ')}`;
+    }).join('\n') + '\n' +
     `※ 발신 부서·조사 대상·다루는 사업·자료 보유자 등을 따진 참고 의견(판별 기준 ${JUDGE_VER})이며, 최종 배정은 학교 업무분장과 협의에 따릅니다.`;
 }
 function chipHtml(k, id) { const a = AMAP[id]; return `<span class="jchip">${esc(a.name)}<button data-act="jDel" data-k="${k}" data-a="${id}" aria-label="${esc(a.name)} 빼기">×</button></span>`; }
 function viewJudge() {
   const simple = JDG.mode === 'simple', sv = JDG.simple, src = JDG.src;
   let h = `<section class="hero jhero">
+    ${critSeg('judge')}
     <p class="eyebrow">공문 판별기 · 참고 의견</p>
     <h1>이 공문, 누가 맡을까요?</h1>
     <p>공문 PDF·캡처를 올리면 발신 부서·조사 대상·다루는 사업·자료 보유자를 따져 주관과 협조 담당을 제안해요.</p>
     <ol class="hsteps"><li><i>1</i>공문 판별</li><li><i>2</i>옆 학교 기록 확인</li><li><i>3</i>애매하면 옆 학교에 묻기</li></ol>
-    <button class="hlink" data-act="criteria">어떤 기준으로 판별하나요? · 판별 기준 ${JUDGE_VER} ›</button>
+    <button class="hlink only-wide" data-act="criteria">어떤 기준으로 판별하나요? · 판별 기준 ${JUDGE_VER} ›</button>
   </section>
   <section class="card jcardtop">
     <div class="jtabs" role="tablist" style="margin-top:0">
@@ -1939,7 +2151,7 @@ function viewJudge() {
   if (!r.lead) h += `<section class="card sec"><b>판단할 단서를 찾지 못했어요</b><p class="small sub" style="margin:6px 0 0">아래 기준에서 「+ 담당 추가」로 직접 골라 주거나, 옆 학교에 물어보세요.</p>
     <button class="jask" data-act="jAsk" style="margin-top:12px"><b>옆 학교에 묻기 ›</b><span>공문 제목으로 질문을 미리 채워 드려요.</span></button></section>`;
   else h += `<section class="card sec">
-    <p class="small muted" style="margin:0 0 4px">판별 결과</p>
+    <div class="between" style="margin:0 0 4px"><p class="small muted" style="margin:0">판별 결과</p><button class="cbadge" data-act="criteria" data-mine="1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></svg>판별 기준 ${JUDGE_VER} · 계산 내역</button></div>
     <p style="font-weight:700;margin:0 0 12px;line-height:1.5">${esc(JDG.parsed.title || '(제목을 찾지 못했어요)')}</p>
     <div class="jres">
       <div class="lead"><small>주관</small><b>${esc(AMAP[r.lead].name)}</b><span>${r.byBook ? '업무분장표 기준' : '점수 ' + r.s1}</span></div>
@@ -1951,8 +2163,9 @@ function viewJudge() {
     <div class="row" style="margin-top:12px"><button class="btn sm" data-act="jCopy">배정 사유 문구 복사</button>${r.close ? '' : '<button class="btn sm" data-act="jAsk">결과가 다르다면 옆 학교에 묻기</button>'}</div>
     <p class="disc">규칙에 따라 계산한 <b>참고 의견</b>(판별 기준 ${JUDGE_VER})이에요. 정답이 아니며, 최종 배정은 학교 업무분장과 협의에 따라 정해 주세요. <button class="link" style="font-size:12px" data-act="criteria" data-mine="1">이 점수는 어떻게 나왔나요?</button></p>
   </section>`;
+  h += evidenceSection(r);
   h += similarSection(r);
-  h += `<details class="card sec jdetail" ${JDG.open ? 'open' : ''}><summary><b>판단 근거 ${CRIT.length}가지 보기 · 고치기</b><span class="small muted">기준마다 담당 칩을 빼거나 더하면 바로 다시 계산해요</span></summary>
+  h += `<details class="card sec jdetail" ${JDG.open ? 'open' : ''}><summary><b>판단 근거 고치기</b><span class="small muted">우리 학교 업무분장표를 반영하거나, 기준마다 담당을 빼거나 더하면 위 근거와 결과가 함께 다시 계산돼요</span></summary>
     <div class="jrow book"><div class="jl"><b>우리 학교 업무분장표</b><span class="small muted">분장표에 이 업무가 적혀 있으면 그대로 따라요 (최우선)</span></div>
       <select class="sel" id="jBook" style="height:40px;max-width:100%"><option value="">분장표 확인 안 함</option>${AREAS.map(a => `<option value="${a.id}" ${JDG.book === a.id ? 'selected' : ''}>${esc(a.name)}</option>`).join('')}</select></div>
     ${CRIT.map(cr => { const c = JDG.crit[cr.k]; return `<div class="jrow">
@@ -2012,69 +2225,130 @@ function judgeAskDraft() {   // 판별 결과로 「옆 학교에 묻기」 질�
       '다른 학교에서는 이 공문을 어느 담당이 맡는지 궁금합니다.'].filter(Boolean).join(' ').slice(0, 500)
   };
 }
-/* ----- 판별 기준 페이지 (?criteria) : 코드의 CRIT·AREAS 값을 그대로 읽어 보여 줌 ----- */
-const CRIT_VIEW = { mine: false };
-function calcBlock(crit, book) {   // 한 공문의 계산 내역
+/* ----- 판별 기준 페이지 (?criteria) : 코드의 CRIT·AREAS 값을 그대로 읽어 그림으로 보여 줌 ----- */
+const CRIT_VIEW = { mine: false, area: '' };
+const CRIT_SHORT = { sender: '발신', target: '대상', content: '사업', basis: '근거', holder: '자료', purpose: '목적', route: '경로', budget: '예산', span: '지속' };
+const TIER = { 3: { name: '핵심', cls: 't3', desc: '공문의 주인을 직접 가리켜요' }, 2: { name: '보조', cls: 't2', desc: '주인을 확인하고 협조 담당을 찾아요' }, 1: { name: '참고', cls: 't1', desc: '동점을 가르는 작은 단서예요' } };
+const CIC = {   // 기준 아이콘 (선 아이콘)
+  sender: '<path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/>',
+  target: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c3 .2 5.5 2.6 5.5 5.8"/>',
+  content: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+  basis: '<path d="M7 4h7l4 4v12H7z"/><path d="M14 4v4h4"/><path d="M4 8v13h10"/>',
+  holder: '<path d="M3 7h6l2 2h10v10H3z"/><path d="M3 11h18"/>',
+  purpose: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>',
+  route: '<path d="M4 12h12"/><path d="M12 7l5 5-5 5"/><path d="M20 5v14"/>',
+  budget: '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/>',
+  span: '<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>'
+};
+const cicon = (k, sz = 22) => `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CIC[k] || ''}</svg>`;
+function stackBlock(crit, book) {   // 담당별 쌓인 막대: 점수가 어느 기준에서 왔는지
   const r = scoreWith(crit, book);
-  const max = Math.max(1, ...r.rank.map(x => x[1]));
+  if (!r.rank.length) return '<p class="small muted">어느 기준에서도 담당을 찾지 못했어요.</p>';
+  const ids = r.rank.slice(0, 3).map(x => x[0]), max = Math.max(1, ...r.rank.map(x => x[1]));
+  return `<div class="sbars">${ids.map(id => {
+    const parts = CRIT.filter(cr => (crit[cr.k].areas || []).includes(id)), tot = parts.reduce((a, c) => a + c.w, 0);
+    const col = id === r.lead ? COLORS[0] : id === r.help ? COLORS[1] : '#9AA2B2';
+    return `<div class="sbar"><div class="sbl"><b>${esc(AMAP[id].name)}</b>${id === r.lead ? '<span class="l">주관</span>' : id === r.help ? '<span class="h">협조</span>' : ''}</div>
+      <div class="sbt"><div class="sbf" style="width:${tot / max * 100}%">${parts.map(cr => `<i style="flex:${cr.w};background:${col};opacity:${cr.w === 3 ? 1 : cr.w === 2 ? .78 : .56}" title="${cr.label} +${cr.w}">${CRIT_SHORT[cr.k]}<small>+${cr.w}</small></i>`).join('')}</div></div>
+      <em>${tot}</em></div>`;
+  }).join('')}</div>`;
+}
+function gaugeBlock(r) {   // 협의 권장 눈금: 2위 점수가 1위의 몇 %인가
+  if (!r.lead || !r.help || r.byBook) return '';
+  const ratio = Math.round(r.s2 / r.s1 * 100), gap = r.s1 - r.s2, z = Math.round(CLOSE_RATIO * 100);
+  return `<div class="gauge"><div class="gt"><span>2위 점수 ÷ 1위 점수</span><b>${r.s2} ÷ ${r.s1} = ${ratio}%</b></div>
+    <div class="gbar"><span class="gz" style="left:${z}%"><em>협의 권장 ${z}%~</em></span><i style="left:${Math.min(100, ratio)}%"></i></div>
+    <div class="gscale"><span>0%</span><span>50%</span><span>100%</span></div>
+    <p class="gnote">점수 차이 <b>${gap}점</b> ${gap <= CLOSE_GAP ? `≤ ${CLOSE_GAP}점` : `> ${CLOSE_GAP}점`} · 비율 <b>${ratio}%</b> ${ratio >= z ? `≥ ${z}%` : `< ${z}%`} → ${r.close ? '<b class="warn">협의 권장</b>' : '<b>주관이 분명함</b>'}</p></div>`;
+}
+function calcBlock(crit, book) {   // 한 공문의 계산 내역 (쌓인 막대 + 눈금 + 대조표 + 결론)
+  const r = scoreWith(crit, book);
   const L = r.lead ? AMAP[r.lead].name : '', Hn = r.help ? AMAP[r.help].name : '';
   let verdict;
   if (!r.lead) verdict = '어느 기준에서도 담당을 찾지 못해 판단할 수 없어요.';
-  else if (r.byBook) verdict = `우리 학교 업무분장표에서 <b>${esc(L)}</b>을(를) 골라 그대로 주관으로 정했어요${Hn ? `. 점수 1위였던 <b>${esc(Hn)}</b>은(는) 협조로 내려가요` : ''}.`;
-  else verdict = `1위 <b>${esc(L)} ${r.s1}점</b>이 주관${Hn ? `, 2위 <b>${esc(Hn)} ${r.s2}점</b>이 협조예요. 점수 차이 ${r.s1 - r.s2}점${r.close ? ` → ${r.s1 - r.s2 <= CLOSE_GAP ? `${CLOSE_GAP}점 이하라` : `2위가 1위의 ${Math.round(CLOSE_RATIO * 100)}% 이상이라`} <b>「협의 권장」</b>이에요.` : `이라 한 담당이 맡는 것으로 봤어요.`}` : '이에요. 다른 담당을 가리킨 기준이 없어 협조는 없어요.'}`;
-  return `<table class="ctable"><tbody>${CRIT.map(cr => { const a = (crit[cr.k].areas || []); return `<tr><th>${cr.label} <span class="jw">×${cr.w}</span></th><td>${a.length ? a.map(id => `<span class="jchip">${esc(AMAP[id].name)}</span>`).join('') : '<span class="small muted">해당 없음</span>'}</td><td class="n">${a.length ? `각 +${cr.w}` : ''}</td></tr>`; }).join('')}</tbody></table>
-    ${r.rank.length ? `<div class="jbars">${r.rank.slice(0, 5).map(([id, n]) => `<div class="jbar"><span>${esc(AMAP[id].name)}</span><i><b style="width:${Math.round(n / max * 100)}%;background:${id === r.lead ? COLORS[0] : id === r.help ? COLORS[1] : '#C9CEDA'}"></b></i><em>${n}</em></div>`).join('')}</div>` : ''}
+  else if (r.byBook) verdict = `우리 학교 업무분장표에서 <b>${esc(L)}</b>${josa(L, '을', '를')} 골라 그대로 주관으로 정했어요${Hn ? `. 점수 1위였던 <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} 협조로 내려가요` : ''}.`;
+  else verdict = `1위 <b>${esc(L)} ${r.s1}점</b>이 주관${Hn ? `, 2위 <b>${esc(Hn)} ${r.s2}점</b>이 협조예요.${r.close ? ' 두 점수가 가까워 <b>「협의 권장」</b>이에요.' : ' 차이가 커서 주관이 분명해요.'}` : '이에요. 다른 담당을 가리킨 기준이 없어 협조는 없어요.'}`;
+  return `${stackBlock(crit, book)}${gaugeBlock(r)}
+    <details class="ddict" style="margin-top:14px"><summary>기준별 점수표 보기</summary>
+    <table class="ctable"><tbody>${CRIT.map(cr => { const a = (crit[cr.k].areas || []); return `<tr><th>${cr.label} <span class="jw">×${cr.w}</span></th><td>${a.length ? a.map(id => `<span class="jchip">${esc(AMAP[id].name)}</span>`).join('') : '<span class="small muted">해당 없음</span>'}</td><td class="n">${a.length ? `각 +${cr.w}` : ''}</td></tr>`; }).join('')}</tbody></table></details>
     <div class="verdict">${verdict}</div>`;
+}
+function critSeg(on) {   // 휴대폰: 판별하기 ↔ 판별 기준 전환
+  return `<div class="hseg only-narrow"><button class="${on === 'judge' ? 'on' : ''}" data-act="judge">판별하기</button><button class="${on === 'criteria' ? 'on' : ''}" data-act="criteria">판별 기준</button></div>`;
 }
 function viewCriteria() {
   const mine = CRIT_VIEW.mine && JDG.crit && JDG.parsed;
-  const ex = mine ? null : buildCriteria(parseDoc(JUDGE_EXAMPLE));
-  const dots = w => `<span class="wb">×${w} ${[1, 2, 3].map(i => `<i class="${i <= w ? '' : 'off'}"></i>`).join('')}</span>`;
-  const top = CRIT.filter(c => c.w === 3).map(c => c.label).join('·');
-  return `<button class="back" data-act="back">${IC.back}${mine ? '판별 결과로' : '뒤로'}</button>
-  ${pageHead(`공문 판별기 · 판별 기준 ${JUDGE_VER} (${JUDGE_VER_AT})`, '공문 판별 기준', '판별기가 어떤 기준으로 주관·협조 담당을 제안하는지 모두 공개해요. 결과가 이상하다면 이 기준에 비춰 확인하고, 기준이 맞지 않으면 의견을 보내 주세요.')}
-  ${mine ? `<div class="sech"><h2>이 공문의 계산 내역</h2><span class="small muted">${esc((JDG.parsed.title || '').slice(0, 30))}</span></div>
+  const total = CRIT.reduce((a, c) => a + c.w, 0);
+  const tiers = [3, 2, 1].map(w => ({ w, list: CRIT.filter(c => c.w === w) })).filter(t => t.list.length);
+  const exCrit = mine ? null : buildCriteria(parseDoc(JUDGE_EXAMPLE));
+  const selA = CRIT_VIEW.area && AMAP[CRIT_VIEW.area];
+  const z = Math.round(CLOSE_RATIO * 100);
+  return `<div class="critop">${critSeg('criteria')}<button class="back only-wide" data-act="back">${IC.back}${mine ? '판별 결과로' : '뒤로'}</button></div>
+  ${pageHead(`판별 기준 ${JUDGE_VER} · ${JUDGE_VER_AT}`, '공문은 이렇게 판별해요', '판별기가 무엇을 보고, 어떻게 계산해, 어떻게 판정하는지 모두 공개해요. 기준과 숫자는 판별기가 실제로 쓰는 값 그대로예요.')}
+  ${mine ? `<div class="sech"><h2>이 공문의 계산 내역</h2><span class="small muted">${esc((JDG.parsed.title || '').slice(0, 34))}</span></div>
   <section class="card">${calcBlock(JDG.crit, JDG.book)}</section>` : ''}
-  <section class="card sec"><p class="principle">공문을 <b>누가 시작했고</b>(발신 부서), <b>누구에 관한 일이며</b>(대상), 답을 쓰려면 <b>누구의 자료가 필요한가</b>(자료 보유자)를 따져, 가장 많이 가리키는 담당을 <b>주관</b>으로 제안합니다.</p></section>
-  <div class="sech"><h2>이 판별기가 하지 않는 것</h2></div>
-  <section class="card"><ul class="nolist">
-    <li><b>법령 해석이나 공식 유권해석이 아니에요.</b> 공문의 겉에 드러난 단서로 계산한 참고 의견이에요.</li>
-    <li><b>우리 학교 업무분장표보다 앞서지 않아요.</b> 분장표에 적힌 업무라면 분장표가 최우선이에요.</li>
-    <li><b>업무량이나 형평은 따지지 않아요.</b> 누가 더 바쁜지는 협의로 정할 일이에요.</li>
-    <li><b>공문 원문을 저장하지 않아요.</b> 올린 파일과 본문은 이 기기 안에서만 읽고 계산해요.</li>
-  </ul></section>
-  <div class="sech"><h2>판단 기준 ${CRIT.length}가지</h2><span class="small muted">숫자가 클수록 무게가 커요</span></div>
+
+  <div class="sech"><h2><span class="sn">1</span>세 가지 질문</h2><span class="small muted">판별의 핵심 원칙</span></div>
   <section class="card">
-    ${CRIT.map(cr => `<div class="critem" id="c-${cr.k}"><h3>${cr.label} ${dots(cr.w)}</h3>
-      <p><b>왜:</b> ${cr.why}</p><p><b>어떻게 찾나:</b> ${cr.how}</p><span class="ex">예) ${cr.ex}</span></div>`).join('')}
-    <p class="small muted" style="margin:12px 0 0">${top}에 가장 큰 무게(×3)를 둔 까닭: 이 세 가지는 공문의 「주인」을 직접 가리키기 때문이에요. 나머지는 주인을 가리키기보다 협조 담당을 찾거나 동점을 가르는 보조 단서로 써요.</p>
+    <div class="q3">
+      ${[['sender', '누가 시작했나?', '발신 부서'], ['target', '누구에 관한 일인가?', '조사·사업 대상'], ['holder', '누구의 자료가 필요한가?', '자료를 가진 사람']].map(([k, q, l], i) => `${i ? '<span class="q3a" aria-hidden="true">›</span>' : ''}<div class="q3c"><span class="q3i">${cicon(k, 26)}</span><b>${q}</b><small>${l}</small></div>`).join('')}
+    </div>
+    <div class="q3r">세 질문이 <b>가장 많이 가리키는 담당 = 주관</b> · 그다음 = 협조</div>
   </section>
-  <div class="sech"><h2>계산 방식과 판정 규칙</h2></div>
-  <section class="card"><ol class="rules">
-    <li>기준마다 가리키는 담당에 그 기준의 가중치만큼 점수를 더해요. 한 기준이 두 담당을 가리키면 둘 다 더해요.</li>
-    <li>점수 <b>1위가 주관</b>, <b>2위가 협조</b>예요. 2위가 없으면 협조는 「없음」이에요.</li>
-    <li>1·2위의 점수 차이가 <b>${CLOSE_GAP}점 이하</b>이거나, 2위가 1위의 <b>${Math.round(CLOSE_RATIO * 100)}% 이상</b>이면 「협의 권장」을 표시해요.</li>
-    <li>「우리 학교 업무분장표」에서 담당을 고르면 그 담당이 무조건 주관이고, 원래 1위는 협조로 내려가요.</li>
-    <li>판별 화면의 「판단 근거」에서 담당 칩을 빼거나 더하면 같은 규칙으로 바로 다시 계산해요.</li>
-  </ol></section>
-  ${mine ? '' : `<div class="sech"><h2>예시 풀이</h2><span class="small muted">특수교육대상자 초등돌봄 현황 조사 공문</span></div>
-  <section class="card">${calcBlock(ex, '')}</section>`}
-  <div class="sech"><h2>업무 영역 사전</h2><span class="small muted">${AREAS.length}개 영역</span></div>
-  <section class="card"><details class="ddict"><summary>어떤 낱말을 보고 담당을 찾는지 보기</summary>
-    <p class="small sub" style="margin:0 0 8px">띄어쓰기를 무시하고 아래 낱말이 몇 번 나오는지 세어, 가장 많이 나온 영역(1위의 60% 이상, 최대 2개)을 그 기준의 담당으로 봐요.</p>
-    <div class="adict">${AREAS.map(a => `<div><b>${esc(a.name)}</b><small>협조할 때: ${esc(a.give)}</small><div class="kw">${a.kw.map(k => `<span>${esc(k)}</span>`).join('')}</div></div>`).join('')}</div>
-  </details></section>
-  <div class="sech"><h2>기준 판번과 바뀐 기록</h2></div>
-  <section class="card"><table class="logt"><tbody>${JUDGE_LOG.map(l => `<tr><td>${l.v}</td><td>${l.at}</td><td>${esc(l.what)}</td></tr>`).join('')}</tbody></table>
-    <p class="small muted" style="margin:10px 0 0">배정 사유 문구에는 「판별 기준 ${JUDGE_VER}」이 함께 적혀, 나중에 기준이 바뀌어도 그때 어떤 기준으로 판단했는지 알 수 있어요.</p></section>
-  <div class="sech"><h2>기준에 의견 내기</h2></div>
-  <section class="card jother">
-    <div><b>이 기준이 맞지 않는 공문이 있었나요?</b><p class="small sub" style="margin:4px 0 0">「발신 부서 무게 ×3이 너무 크다」처럼 기준 자체를 옆 학교에 물어보세요. 학교별 판단이 모이면 다음 판번에 반영해요.</p></div>
-    <div class="row"><button class="btn sm pri" data-act="critAsk">옆 학교에 묻기</button></div>
+
+  <div class="sech"><h2><span class="sn">2</span>기준 ${CRIT.length}가지와 무게</h2><span class="small muted">카드를 누르면 자세한 설명</span></div>
+  <section class="card">
+    <div class="wbar" role="img" aria-label="기준 무게 비율">${tiers.map(t => { const sum = t.list.reduce((a, c) => a + c.w, 0); return `<div class="${TIER[t.w].cls}" style="flex:${sum}"><b>${TIER[t.w].name} ${sum}점</b><span>${Math.round(sum / total * 100)}%</span></div>`; }).join('')}</div>
+    <p class="small muted" style="margin:6px 0 14px">전체 ${total}점 중 ${TIER[3].name} 기준 ${tiers[0].list.length}가지가 ${Math.round(tiers[0].list.reduce((a, c) => a + c.w, 0) / total * 100)}%를 차지해요.</p>
+    ${tiers.map(t => `<div class="tier ${TIER[t.w].cls}"><div class="tierh"><b>${TIER[t.w].name} ×${t.w}</b><span>${TIER[t.w].desc}</span></div>
+      <div class="tcards">${t.list.map(cr => `<details class="tcard" id="c-${cr.k}"><summary><span class="ti">${cicon(cr.k)}</span><span class="tt"><b>${cr.label}</b><small>${cr.hint}</small></span><span class="tw" aria-hidden="true"></span></summary>
+        <div class="tbody"><p><b>왜</b> ${cr.why}</p><p><b>어떻게 찾나</b> ${cr.how}</p><span class="ex">예) ${cr.ex}</span></div></details>`).join('')}</div></div>`).join('')}
   </section>
-  <div class="sech"><h2>함께 보면 좋은 곳</h2></div>
-  <section class="card jother">
-    <div><b>업무분장 한눈에</b><p class="small sub" style="margin:4px 0 0">공문 한 건이 아니라 학교 전체 업무분장 틀을 잡을 때. 표준안·행정실 경계 업무·갈등 조정 절차를 담았어요.</p></div>
+
+  <div class="sech"><h2><span class="sn">3</span>계산과 판정</h2><span class="small muted">4단계</span></div>
+  <section class="card">
+    <div class="flow">
+      <div class="fs"><i>1</i><b>공문 읽기</b><span>제목·대상·내용·문의처를 찾아요</span></div>
+      <div class="fs"><i>2</i><b>단서 찾기</b><span>기준마다 가리키는 담당을 정해요</span></div>
+      <div class="fs"><i>3</i><b>점수 더하기</b><span>가리킨 담당에 무게만큼 더해요</span></div>
+      <div class="fs"><i>4</i><b>판정</b><span>1위 주관 · 2위 협조</span></div>
+    </div>
+    <div class="fshort"><b>지름길</b> 「우리 학교 업무분장표」에 적힌 업무라면 계산보다 <b>분장표가 먼저</b>예요. 고른 담당이 주관, 원래 1위는 협조가 돼요.</div>
+    <div class="rulebox">
+      <div><b>협의 권장</b>이 붙는 경우 (둘 중 하나)</div>
+      <div class="rr"><span class="rc">점수 차이 ≤ ${CLOSE_GAP}점</span><span class="ro">또는</span><span class="rc">2위 ÷ 1위 ≥ ${z}%</span></div>
+    </div>
+  </section>
+
+  ${mine ? '' : `<div class="sech"><h2><span class="sn">4</span>예시 풀이</h2><span class="small muted">특수교육대상자 초등돌봄 현황 조사 공문</span></div>
+  <section class="card">${calcBlock(exCrit, '')}</section>`}
+
+  <div class="sech"><h2><span class="sn">${mine ? 4 : 5}</span>업무 영역 사전</h2><span class="small muted">${AREAS.length}개 영역 · 누르면 단서 낱말</span></div>
+  <section class="card">
+    <div class="atiles">${AREAS.map(a => `<button class="atile ${CRIT_VIEW.area === a.id ? 'on' : ''}" data-act="critArea" data-id="${a.id}"><b>${esc(a.name)}</b><small>낱말 ${a.kw.length}개</small></button>`).join('')}</div>
+    ${selA ? `<div class="apanel"><div class="between"><b>${esc(selA.name)}</b><small class="muted">협조할 때 넘겨줄 것: ${esc(selA.give)}</small></div><div class="kw">${selA.kw.map(k => `<span>${esc(k)}</span>`).join('')}</div></div>`
+      : `<p class="small muted" style="margin:12px 0 0">띄어쓰기를 무시하고 단서 낱말이 몇 번 나오는지 세어, 가장 많이 나온 영역(1위의 60% 이상, 최대 2개)을 그 기준의 담당으로 봐요.</p>`}
+  </section>
+
+  <div class="sech"><h2><span class="sn">${mine ? 5 : 6}</span>기준에 의견 내기 · 판번 기록</h2></div>
+  <section class="card">
+    <div class="jother" style="padding:0"><div><b>이 기준이 맞지 않는 공문이 있었나요?</b><p class="small sub" style="margin:4px 0 0">「발신 부서 무게 ×3이 너무 크다」처럼 기준 자체를 옆 학교에 물어보세요. 학교별 판단이 모이면 다음 판번에 반영해요.</p></div>
+      <div class="row"><button class="btn sm pri" data-act="critAsk">옆 학교에 묻기</button></div></div>
+    <ol class="tline">${JUDGE_LOG.map((l, i) => `<li class="${i === 0 ? 'now' : ''}"><b>${l.v}</b><span>${l.at}${i === 0 ? ' · 현재' : ''}</span><p>${esc(l.what)}</p></li>`).join('')}</ol>
+    <p class="small muted" style="margin:6px 0 0">배정 사유 문구에도 「판별 기준 ${JUDGE_VER}」이 적혀, 나중에 기준이 바뀌어도 그때의 기준을 알 수 있어요.</p>
+  </section>
+
+  <div class="sech"><h2>이 판별기가 하지 않는 것</h2></div>
+  <section class="card">
+    <div class="nots">
+      <div><span>✕</span><b>법령 해석</b><small>공식 유권해석이 아닌 참고 의견</small></div>
+      <div><span>✕</span><b>분장표보다 우선</b><small>분장표에 적힌 업무는 분장표대로</small></div>
+      <div><span>✕</span><b>업무량 판단</b><small>형평은 협의로 정할 일</small></div>
+      <div><span>✕</span><b>원문 저장</b><small>이 기기 안에서만 계산</small></div>
+    </div>
+  </section>
+  <section class="card sec jother">
+    <div><b>함께 보면 좋은 곳 · 업무분장 한눈에</b><p class="small sub" style="margin:4px 0 0">공문 한 건이 아니라 학교 전체 업무분장 틀을 잡을 때. 표준안·행정실 경계 업무·갈등 조정 절차를 담았어요.</p></div>
     <div class="row"><a class="btn sm" href="https://division-of-work.vercel.app/" target="_blank" rel="noopener">열기 ↗</a></div>
   </section>`;
 }
@@ -2453,8 +2727,9 @@ const ACT = {
     CRIT_VIEW.mine = t.dataset.mine === '1' && !!JDG.crit;
     const k = t.dataset.k || '';
     go('criteria');
-    if (k) setTimeout(() => { const el = document.getElementById('c-' + k); if (el) { el.scrollIntoView({ block: 'center' }); el.classList.add('flash'); } }, 60);
+    if (k) setTimeout(() => { const el = document.getElementById('c-' + k); if (el) { el.open = true; el.scrollIntoView({ block: 'center' }); el.classList.add('flash'); } }, 60);
   },
+  critArea: t => { CRIT_VIEW.area = CRIT_VIEW.area === t.dataset.id ? '' : t.dataset.id; const y = scrollY; render(); window.scrollTo(0, y); },
   critAsk: () => { resetNew(); NEWF.cat = '기타'; NEWF.desc = `공문 판별 기준 ${JUDGE_VER}에 대한 의견입니다. `; go('new'); },
   jExample: () => {
     JDG.book = ''; JDG.src = null;
