@@ -526,6 +526,37 @@ body.demo{--bg:#F7F5EE}
 .nots b{font-size:14px}
 .nots small{font-size:12px;color:var(--mute);line-height:1.45}
 @media (max-width:640px){.nots{grid-template-columns:1fr 1fr}}
+.nbadge{display:inline-grid;place-items:center;min-width:17px;height:17px;border-radius:999px;background:var(--bad);color:#fff;font-size:10.5px;font-weight:800;padding:0 4px;margin-left:5px;vertical-align:1px}
+.nwrap{position:relative;display:inline-block}
+.bnav .nwrap .nbadge{position:absolute;top:-4px;right:-10px;margin:0}
+.hnews{display:flex;align-items:center;gap:8px;margin-top:14px;border:0;background:#fff;color:var(--navy);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700}
+.hnews .dot,.newsc .dot{width:8px;height:8px;border-radius:50%;background:var(--bad);display:inline-block;flex:none}
+.newsc .dot{margin-right:6px;vertical-align:1px}
+.newsit{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--line);background:none;padding:12px 0 2px;margin-top:10px}
+.newsit .tt{display:block;font-weight:700;margin:4px 0 2px;line-height:1.45}
+.pill.newp{background:var(--bad-soft);color:#B42424;margin-right:6px}
+.crowd{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:10px;border:1.5px solid #C5D0FF;background:#F7F9FF;border-radius:14px;padding:12px 14px}
+.crowd>div:first-child{flex:1 1 220px}
+.crowd b{display:block;font-size:14.5px}
+.crowd span{display:block;font-size:12.5px;color:var(--sub);margin-top:2px}
+.crowd.on{display:block}
+.crowd.on .between b{display:inline}
+.crowdl{display:flex;flex-wrap:wrap;gap:6px 14px}
+.crowdl span{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--ink);margin:0}
+.crowdl i{width:9px;height:9px;border-radius:3px;display:inline-block}
+.crowdl b{display:inline;font-size:13px}
+.cmp{margin:10px 0 0;font-size:13.5px;line-height:1.6;border-radius:10px;padding:8px 12px}
+.crowd .cmp b{display:inline;font-size:inherit}
+.cmp.same{background:var(--ok-soft);color:#087F5B}
+.cmp.joint{background:var(--pri-soft);color:var(--pri-ink)}
+.cmp.diff{background:var(--warn-soft);color:#B35C00}
+.samel{display:grid;gap:8px;margin-top:14px}
+.sameit{display:flex;gap:10px;align-items:center;justify-content:space-between;background:#F6F7FA;border-radius:12px;padding:12px}
+.sameit b{display:block;font-size:14.5px;line-height:1.45}
+.sameit span{display:block;font-size:12.5px;color:var(--mute);margin-top:2px}
+.sameit .btn{flex:none}
+.intent{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border-radius:12px;padding:10px 12px;margin:0 0 10px;font-size:13.5px}
+.intent .btn{margin-left:auto}
 .jother{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .jother>div:first-child{flex:1 1 260px}
 .jtabs{display:flex;gap:4px;background:#F1F3F8;border-radius:12px;padding:4px;margin-top:14px}
@@ -1255,17 +1286,19 @@ const IC = {
 /* ---------- 렌더 ---------- */
 function render() {
   const v = ST.view;
+  if (v === 'agenda') markSeen(getAg(ST.id));
+  const nn = myNews().length;
   $('#nav').innerHTML = `
     <button class="${v === 'judge' ? 'on' : ''}" data-act="judge">공문 판별</button>
     <button class="${v === 'criteria' ? 'on' : ''}" data-act="criteria">판별 기준</button>
     <button class="${v === 'home' || v === 'agenda' ? 'on' : ''}" data-act="home">옆 학교 기록</button>
-    <button class="${v === 'my' ? 'on' : ''}" data-act="my">내 참여</button>
+    <button class="${v === 'my' ? 'on' : ''}" data-act="my">내 참여${nn ? `<span class="nbadge">${nn}</span>` : ''}</button>
     <button class="cta ${v === 'new' ? 'on' : ''}" data-act="new">옆 학교에 묻기</button>`;
   $('#bnav').innerHTML = `
     <button class="${v === 'judge' || v === 'criteria' ? 'on' : ''}" data-act="judge">${IC.doc}공문 판별</button>
     <button class="${v === 'home' || v === 'agenda' ? 'on' : ''}" data-act="home">${IC.home}옆 학교 기록</button>
     <button data-act="new"><span class="plus">${IC.plus}</span>묻기</button>
-    <button class="${v === 'my' ? 'on' : ''}" data-act="my">${IC.user}내 참여</button>`;
+    <button class="${v === 'my' ? 'on' : ''}" data-act="my"><span class="nwrap">${IC.user}${nn ? `<span class="nbadge">${nn}</span>` : ''}</span>내 참여</button>`;
   const app = $('#app');
   if (v === 'agenda') app.innerHTML = viewAgenda();
   else if (v === 'new') app.innerHTML = viewNew();
@@ -1459,6 +1492,7 @@ function actionPanel(ag, rows) {
   return `<div class="panel" id="votePanel">
     <p class="t">우리 학교는 어떻게 판단했나요?</p>
     <p>로그인 없이 학교만 고르면 돼요. 학교마다 1표로 집계되고, 학교 이름은 공개되지 않아요.</p>
+    ${(() => { const i = lsObj(INTENT_KEY)[ag.id]; return i != null && ag.options[i] ? `<div class="intent">질문을 올릴 때 고른 판단 <b>「${esc(ag.options[i])}」</b><button class="btn sm pri" data-act="voteIntent">이대로 남기기</button></div>` : ''; })()}
     <div class="acts"><button class="btn pri block" data-act="vote">우리 학교 판단 남기기</button></div>
     <div class="between" style="margin-top:10px">
       ${REVEAL.has(ag.id) ? '<span></span>' : `<button class="link" data-act="reveal">투표하지 않고 결과만 보기</button>`}
@@ -1631,6 +1665,9 @@ function viewNew() {
       ${NEWF.options.map((o, i) => `<div class="optrow"><span class="num" style="color:${COLORS[i]}">${i + 1}</span><input class="inp" data-new-opt="${i}" maxlength="40" placeholder="${['행정실', '교무행정지원인력', '담당 교사', '학교장 판단', '기타'][i]}" value="${esc(o)}" aria-label="선택지 ${i + 1}">${NEWF.options.length > 2 ? `<button class="x" data-act="delOpt" data-i="${i}" aria-label="선택지 삭제">×</button>` : ''}</div>`).join('')}
       ${NEWF.options.length < 5 ? `<button class="btn sm" data-act="addOpt">${IC.plus} 선택지 추가</button>` : ''}
       <div class="err" id="eOpt">서로 다른 선택지를 2개 이상 적어 주세요</div></div>
+    ${NEWF.fromJudge ? `<div class="f"><span class="lbl">우리 학교는 지금 어떻게 하고 있나요? <span class="opt">선택</span></span>
+      <div class="radios">${[...NEWF.options.map((o, i) => [i, o]).filter(([, o]) => o.trim()), [-1, '아직 정하지 못했어요']].map(([i, o]) => `<label><input type="radio" name="nIntent" value="${i}" ${(NEWF.intent ?? -1) === i ? 'checked' : ''}><span>${esc(o)}</span></label>`).join('')}</div>
+      <p class="small muted" style="margin:6px 0 0">질문은 다른 학교 2곳이 「우리도 궁금해요」를 눌러야 열려요. 열리면 고른 판단을 한 번에 남길 수 있게 기억해 둘게요.</p></div>` : ''}
     <div class="f"><label for="nPw">수정·삭제 비밀번호 <span class="opt">선택 · 권장</span></label>
       <div class="pwrow"><input class="inp" id="nPw" data-new="pw" type="password" maxlength="30" autocomplete="new-password" placeholder="4자 이상" value="${esc(NEWF.pw || '')}"><button class="btn sm" type="button" data-act="pwEye" data-for="nPw">보기</button></div>
       <p class="small muted" style="margin:6px 0 0">다른 기기에서 이 질문을 고치거나 지울 때 써요. <b>다른 사이트에서 쓰는 비밀번호는 쓰지 마세요.</b> 잊으면 찾을 수 없어요.</p>
@@ -1666,7 +1703,12 @@ function viewMy() {
   const tab = MYTAB;
   const agState = a => a.year !== CUR_YEAR ? '<span class="pill">지난 학년도</span>'
     : participatedOf(a) ? '<span class="pill">참여 있음 · 덧붙이기만</span>' : '<span class="pill ok">수정·삭제 가능</span>';
+  const news = myNews(), newsKind = Object.fromEntries(news.map(x => [x.a.id, x.kind]));
+  const npill = a => newsKind[a.id] === 'result' ? '<span class="pill newp">결과 도착</span>' : newsKind[a.id] === 'open' ? '<span class="pill newp">질문 열림</span>' : '';
   return `${pageHead('내 참여', '내가 남긴 기록', '로그인 없이 이 기기에 기록돼요. 다른 기기에서는 관리 코드나 비밀번호로 불러올 수 있어요.')}
+  ${news.length ? `<section class="card sec newsc"><div class="between"><b><span class="dot"></span>새 소식 ${news.length}</b><span class="small muted">눌러서 보면 사라져요</span></div>
+    ${news.map(x => `<button class="newsit" data-act="open" data-id="${x.a.id}"><span class="pill newp">${x.kind === 'result' ? '결과 도착' : '질문 열림'}</span><span class="tt">${esc(x.a.title)}</span><span class="small muted">${x.kind === 'result' ? `${MIN_SCHOOLS}개교 이상이 답해 옆 학교 판단이 공개됐어요` : '다른 학교들이 궁금해해서 투표가 열렸어요. 우리 학교 판단부터 남겨 보세요'}</span></button>`).join('')}
+  </section>` : ''}
   <section class="card sec">
     <div class="f" style="margin-top:0"><span class="lbl">이 기기의 학교 <span class="opt">${CUR_YEAR}학년도</span></span>
       ${ms ? `<div class="picked"><span><b>${esc(ms.sc.name)}</b> <span class="small muted">${esc(ms.sc.region)}${ms.sc.addr ? ' ' + esc(ms.sc.addr) : ''}</span></span>
@@ -1690,10 +1732,10 @@ function viewMy() {
   <section class="card" style="margin-top:10px">
     ${tab === 'ag' ? `<div class="mylist">${myAgs.length ? myAgs.map(a => `<div class="myit" style="display:block">
       <div class="tt">${esc(a.title)}</div>
-      <div class="row" style="margin-top:6px">${a.status === 'pending' ? `<span class="pill warn">대기 ${a.curious.length}/3</span>` : '<span class="pill ok">공개</span>'}${agState(a)}${a.code ? `<span class="code" style="background:#F1F3F8">${esc(a.code)}</span>` : ''}</div>
+      <div class="row" style="margin-top:6px">${npill(a)}${a.status === 'pending' ? `<span class="pill warn">대기 ${a.curious.length}/3</span>` : '<span class="pill ok">공개</span>'}${agState(a)}${a.code ? `<span class="code" style="background:#F1F3F8">${esc(a.code)}</span>` : ''}</div>
       <div class="row" style="margin-top:8px"><button class="btn sm" data-act="open" data-id="${a.id}">보기</button><button class="btn sm" data-act="myAgenda" data-id="${a.id}">내 글 관리</button></div>
     </div>`).join('') : '<div class="empty small">아직 올린 질문이 없어요.</div>'}</div>` : tab === 'vote' ? `<div class="mylist">${mine.length ? mine.map(e => { const a = getAg(e.agendaId); if (!a) return ''; return `<button class="myit" data-act="open" data-id="${a.id}">
-      <span><span class="tt">${esc(a.title)}</span><br><span class="small muted">${ROLE_LABEL[e.role] ? ROLE_LABEL[e.role] + ' · ' : ''}${esc(a.options[e.choice])}${e.edited ? ' · 수정됨' : ''}</span></span>
+      <span>${npill(a)}<span class="tt">${esc(a.title)}</span><br><span class="small muted">${ROLE_LABEL[e.role] ? ROLE_LABEL[e.role] + ' · ' : ''}${esc(a.options[e.choice])}${e.edited ? ' · 수정됨' : ''}</span></span>
       <span class="code" style="background:#F1F3F8">${esc(e.code)}</span></button>`; }).join('') : '<div class="empty small">아직 참여한 질문이 없어요.</div>'}</div>
     ${mine.length ? '<p class="small muted" style="margin:8px 0 0">질문을 눌러 들어가면 「선택·의견 바꾸기」와 「참여 취소」를 할 수 있어요.</p>' : ''}` : `<div class="mylist">${myCms.length ? myCms.map(c => { const a = getAg(c.agendaId); return `<div class="myit" style="display:block">
       <div class="small muted">${esc(a ? a.title : '')}</div>
@@ -2097,6 +2139,7 @@ function judgeCopyText(r) {
     `○ 주관: ${L.name} — ${r.byBook ? '우리 학교 업무분장표 기준' : '근거: ' + (r.why[r.lead] || []).join(', ')}\n` +
     (H ? `○ 협조: ${H.name} — ${H.give} 제공\n` : '') +
     (r.close ? '○ 두 영역의 판단 근거가 비슷해 담당자 간 협의를 권합니다.\n' : '') +
+    (() => { const c = crowdInfo(r); return c && c.ready && c.shown ? `○ 옆 학교 판단: ${c.sm.total}개교 중 ${c.pct}%가 「${c.a.options[c.top]}」 (옆 학교는? ${shareUrl(c.a)})\n` : ''; })() +
     `○ 근거 대조\n` + CRIT.filter(cr => (JDG.crit[cr.k].areas || []).length).map(cr => {
       const c = JDG.crit[cr.k], snip = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? '예산·정산 관련 표현' : ((c.snip || '').length > 44 ? c.snip.slice(0, 43) + '…' : (c.snip || ''));
       return `  - ${cr.label}(×${cr.w}): ${snip ? '「' + snip + '」 → ' : ''}${c.areas.map(id => AMAP[id].name).join(', ')}`;
@@ -2112,6 +2155,7 @@ function viewJudge() {
     <h1>이 공문, 누가 맡을까요?</h1>
     <p>공문 PDF·캡처를 올리면 발신 부서·조사 대상·다루는 사업·자료 보유자를 따져 주관과 협조 담당을 제안해요.</p>
     <ol class="hsteps"><li><i>1</i>공문 판별</li><li><i>2</i>옆 학교 기록 확인</li><li><i>3</i>애매하면 옆 학교에 묻기</li></ol>
+    ${(() => { const n = myNews(); return n.length ? `<button class="hnews" data-act="my"><span class="dot"></span>${n.some(x => x.kind === 'result') ? `내 질문 ${n.length}개에 새 소식이 있어요 · 결과 도착` : `내가 올린 질문 ${n.length}개가 열렸어요`} ›</button>` : ''; })()}
     <button class="hlink only-wide" data-act="criteria">어떤 기준으로 판별하나요? · 판별 기준 ${JUDGE_VER} ›</button>
   </section>
   <section class="card jcardtop">
@@ -2157,6 +2201,7 @@ function viewJudge() {
       <div class="lead"><small>주관</small><b>${esc(AMAP[r.lead].name)}</b><span>${r.byBook ? '업무분장표 기준' : '점수 ' + r.s1}</span></div>
       ${r.help ? `<div class="help"><small>협조</small><b>${esc(AMAP[r.help].name)}</b><span>${esc(AMAP[r.help].give)} 제공</span></div>` : '<div class="help none"><small>협조</small><b>없음</b><span>한 영역의 일로 보여요</span></div>'}
     </div>
+    ${crowdHtml(r)}
     ${r.close ? `<div class="jwarn">두 영역의 근거가 비슷해요 · 두 담당자의 협의를 권해요</div>
     <button class="jask" data-act="jAsk"><b>애매하다면 옆 학교에 묻기 ›</b><span>질문과 선택지를 판별 결과로 채워 드려요. 다른 학교는 누가 맡는지 학교별 1표로 모여요.</span></button>` : ''}
     <div class="jbars">${r.rank.slice(0, 4).map(([id, n]) => `<div class="jbar"><span>${esc(AMAP[id].name)}</span><i><b style="width:${Math.round(n / max * 100)}%;background:${id === r.lead ? COLORS[0] : id === r.help ? COLORS[1] : '#C9CEDA'}"></b></i><em>${n}</em></div>`).join('')}</div>
@@ -2190,15 +2235,86 @@ const J_STOP = new Set(['제출', '조사', '현황', '안내', '계획', '운�
 function jWords(t) {   // 공문에서 비교에 쓸 낱말
   return [...new Set(String(t || '').replace(/\[[^\]]*\]/g, ' ').split(/[^가-힣A-Za-z]+/).map(w => w.replace(/(학년도|학기)$/, '')).filter(w => w.length >= 2 && !J_STOP.has(w)))];
 }
-function similarAgendas(r) {   // 판별 결과와 비슷한 옆 학교 질문
-  const p = JDG.parsed, words = jWords([p.title, p.target, p.content].join(' '));
+function scoreAgendas(r, statuses) {   // 판별 결과와 질문이 얼마나 닮았나 (점수 높을수록 같은 공문)
+  const p = JDG.parsed, words = jWords([p.title, p.target, p.content].join(' ')), dt = docType(p.title || '');
   const want = [r.lead, r.help].filter(Boolean);
   const succeeded = new Set(S.agendas.filter(a => a.prevId).map(a => a.prevId));   // 이어서 연 질문은 최신 학년도만
-  return S.agendas.filter(a => a.status === 'open' && !succeeded.has(a.id)).map(a => {
+  return S.agendas.filter(a => statuses.includes(a.status) && !succeeded.has(a.id)).map(a => {
     const text = a.title + ' ' + (a.desc || '') + ' ' + a.options.join(' '), sq = squash(text), ar = topAreas(text, 3);
-    const sc = want.filter(id => ar.includes(id)).length * 2 + words.filter(w => sq.includes(squash(w))).length + sim(p.title || '', a.title) * 6;
+    const sc = want.filter(id => ar.includes(id)).length * 2 + words.filter(w => sq.includes(squash(w))).length + Math.max(sim(p.title || '', a.title), sim(dt, a.title)) * 6;
     return { a, sc };
-  }).filter(x => x.sc >= 3).sort((x, y) => y.sc - x.sc || computeRows(y.a).length - computeRows(x.a).length).slice(0, 3).map(x => x.a);
+  }).filter(x => x.sc >= 3).sort((x, y) => y.sc - x.sc || computeRows(y.a).length - computeRows(x.a).length);
+}
+const SAME_SCORE = 6;   // 이 점수 이상이면 「같은 공문을 물은 질문」으로 봄
+function similarAgendas(r) { return scoreAgendas(r, ['open']).slice(0, 3).map(x => x.a); }
+function sameAgendas(r) {   // 올리기 전에 확인할 같은 질문 (올해 대기·진행 + 지난 학년도)
+  return scoreAgendas(r, ['open', 'pending']).filter(x => x.sc >= SAME_SCORE).slice(0, 3).map(x => x.a);
+}
+function docType(title) {   // 공문 제목 → 연도·학기·날짜·[제출]·안내 등을 뺀 「공문 유형」
+  let t = String(title || '')
+    .replace(/\[[^\]]{1,10}\]/g, ' ').replace(/\([^)]{0,14}(재|공고|수정|정정|변경)[^)]{0,8}\)/g, ' ')
+    .replace(/\d{4}\s*(학년도|년도|년)/g, ' ').replace(/\d\s*학기/g, ' ').replace(/\d{1,2}\s*월(분)?/g, ' ').replace(/(제\s*)?\d+\s*차/g, ' ')
+    .replace(/(일반학교|각급\s*학교|관내|교내|초등학교)/g, ' ');
+  for (let i = 0; i < 3; i++) t = t.trim().replace(/\s*(제출\s*안내|제출\s*요청|협조\s*요청|운영\s*안내|안내|알림|제출|요청|협조|에\s*대한|관련)$/, '');
+  t = t.replace(/\s+/g, ' ').trim();
+  if (t.length > 46) { t = t.slice(0, 46); t = t.slice(0, Math.max(30, t.lastIndexOf(' '))).trim() + '…'; }
+  return t;
+}
+function optArea(t) {   // 선택지 글 → 담당 영역 (공동이면 'joint')
+  if (/공동|함께|같이|나누어|분담/.test(t)) return 'joint';
+  const s = squash(t);
+  for (const a of AREAS) { const nm = squash(a.name.replace(/\(.*?\)/g, '').replace(/담당|책임교사/g, '')); if (nm && s.includes(nm)) return a.id; }
+  return topAreas(t, 1)[0] || null;
+}
+const F0 = { region: null, level: '', confirmed: false };
+function crowdInfo(r) {   // 같은 공문을 물은 질문의 옆 학교 판단
+  const m = scoreAgendas(r, ['open']).filter(x => x.sc >= SAME_SCORE);
+  if (!m.length) return null;
+  const pick = m.map(x => x.a).sort((x, y) => (y.year === CUR_YEAR) - (x.year === CUR_YEAR) || computeRows(y).length - computeRows(x).length)[0];
+  const sm = summarize(pick, computeRows(pick), F0);
+  const top = sm.counts.indexOf(Math.max(...sm.counts));
+  const shown = !!(myEntry(pick) || REVEAL.has(pick.id));
+  const ta = sm.total ? optArea(pick.options[top]) : null;
+  const rel = !sm.total || !r.lead ? '' : ta === 'joint' ? 'joint' : ta === r.lead ? 'same' : ta ? 'diff' : '';
+  return { a: pick, sm, top, pct: sm.total ? pct(sm.counts[top], sm.total) : 0, shown, ready: sm.total >= MIN_SCHOOLS, rel };
+}
+function crowdHtml(r) {
+  const c = crowdInfo(r); if (!c) return '';
+  const { a, sm } = c;
+  if (!c.ready) return `<div class="crowd"><div><b>같은 공문을 물은 질문이 있어요</b><span>옆 학교 ${sm.total}/${MIN_SCHOOLS}개교 답함 · ${MIN_SCHOOLS}개교가 모이면 판단이 공개돼요</span></div><button class="btn sm pri" data-act="open" data-id="${a.id}">우리 학교 판단 남기기</button></div>`;
+  if (!c.shown) return `<div class="crowd"><div><b>옆 학교 ${sm.total}개교가 이 공문에 답했어요</b><span>판별기 의견과 옆 학교 실제 판단을 비교해 보세요</span></div><button class="btn sm pri" data-act="crowdReveal" data-id="${a.id}">옆 학교 판단 보기</button></div>`;
+  const L = AMAP[r.lead] ? AMAP[r.lead].name : '';
+  const opt = a.options[c.top];
+  const cmp = c.rel === 'same' ? `옆 학교 다수 판단이 <b>판별기 의견(${esc(L)} 주관)과 같아요.</b> 두 근거가 같은 쪽을 가리켜요.`
+    : c.rel === 'joint' ? `옆 학교 다수는 <b>공동 처리</b>를 택했어요. 판별기 의견(${esc(L)} 주관)과 함께 두 담당의 협의 근거로 쓰세요.`
+    : c.rel === 'diff' ? `옆 학교 다수 판단은 <b>판별기 의견(${esc(L)} 주관)과 달라요.</b> 결재할 때 두 근거를 함께 보세요.`
+    : '';
+  return `<div class="crowd on">
+    <div class="between"><b>옆 학교 판단 · ${sm.total}개교</b><button class="link" data-act="open" data-id="${a.id}">질문 보기 ›</button></div>
+    <div class="stack" style="margin:10px 0 8px">${sm.counts.map((n, i) => n ? `<i style="width:${n / sm.total * 100}%;background:${COLORS[i]}"></i>` : '').join('')}</div>
+    <div class="crowdl">${sm.counts.map((n, i) => ({ n, i })).filter(x => x.n > 0).sort((x, y) => y.n - x.n).slice(0, 3).map(({ n, i }) => `<span><i style="background:${COLORS[i]}"></i>${esc(a.options[i])} <b>${pct(n, sm.total)}%</b></span>`).join('')}</div>
+    ${cmp ? `<p class="cmp ${c.rel}">${cmp}</p>` : ''}
+  </div>`;
+}
+const INTENT_KEY = 'yhg_intent', SEEN_KEY = 'yhg_seen';
+const lsObj = k => { try { return JSON.parse(LS.get(k) || '{}') || {}; } catch (e) { return {}; } };
+function setIntent(id, i) { const o = lsObj(INTENT_KEY); o[id] = i; LS.set(INTENT_KEY, JSON.stringify(o)); }
+function markSeen(ag) {   // 질문 화면을 보면 그 소식은 읽은 것으로
+  if (!ag || ag.status !== 'open') return;
+  const o = lsObj(SEEN_KEY), done = summarize(ag, computeRows(ag), F0).total >= MIN_SCHOOLS ? 'r' : 'o';
+  if (o[ag.id] !== done && o[ag.id] !== 'r') { o[ag.id] = done; LS.set(SEEN_KEY, JSON.stringify(o)); }
+}
+function myNews() {   // 내가 올리거나 답한 질문의 새 소식 (질문 열림 · 결과 도착)
+  const seen = lsObj(SEEN_KEY), out = [];
+  S.agendas.forEach(a => {
+    if (a.status !== 'open' || a.ex) return;
+    const mineAg = a.authorDevice === DEV, voted = !!myEntry(a);
+    if (!mineAg && !voted) return;
+    const total = summarize(a, computeRows(a), F0).total;
+    if (total >= MIN_SCHOOLS) { if (seen[a.id] !== 'r') out.push({ a, kind: 'result' }); }
+    else if (mineAg && !seen[a.id]) out.push({ a, kind: 'open' });
+  });
+  return out;
 }
 function similarSection(r) {
   const list = similarAgendas(r);
@@ -2209,20 +2325,20 @@ function similarSection(r) {
 function judgeAskDraft() {   // 판별 결과로 「옆 학교에 묻기」 질문 초안 만들기 (공문 본문·문의처는 넣지 않음)
   const r = scoreJudge(), p = JDG.parsed;
   const L = r.lead ? AMAP[r.lead].name : '', Hn = r.help ? AMAP[r.help].name : '';
-  let t = (p.title || '').replace(/^\s*\[[^\]]{1,8}\]\s*/, '').replace(/\d{4}\s*학년도\s*/, '').replace(/\d\s*학기\s*/, '').replace(/\s+/g, ' ').trim();
-  if (t.length > 40) t = t.slice(0, 39) + '…';
+  const t = docType(p.title || '');
   const opts = [];
   if (L) opts.push(L + ' 주관');
   if (Hn) opts.push(Hn + ' 주관'); else if (r.rank[1]) opts.push(AMAP[r.rank[1][0]].name + ' 주관');
   opts.push(L && (Hn || r.rank[1]) ? '두 담당 공동 처리' : '다른 담당 주관');
+  if (L && (Hn || r.rank[1])) opts.push('그 밖의 담당');
   if (opts.length < 2) opts.unshift('담당 교사 주관');
   return {
-    title: t ? `「${t}」 공문, 어느 담당이 맡나요?` : '이 공문은 어느 담당이 맡나요?',
+    title: t ? `${t} 공문은 누가 맡나요?` : '이 공문은 어느 담당이 맡나요?',
     cat: '업무분장',
     options: opts.slice(0, 5),
     desc: [L ? `공문 판별기 참고 결과: 주관 ${L}${Hn ? ` · 협조 ${Hn}` : ''}${r.close ? ' (근거가 비슷해 협의 권장)' : ''}.` : '',
       p.sender ? `발신 부서: ${p.sender}.` : '', p.target ? `대상: ${p.target.slice(0, 80)}.` : '',
-      '다른 학교에서는 이 공문을 어느 담당이 맡는지 궁금합니다.'].filter(Boolean).join(' ').slice(0, 500)
+      '다른 학교에서는 이 공문을 어느 담당이 맡는지 궁금합니다. (연도·학기와 관계없이 같은 종류의 공문에 대한 판단을 모으는 질문입니다.)'].filter(Boolean).join(' ').slice(0, 500)
   };
 }
 /* ----- 판별 기준 페이지 (?criteria) : 코드의 CRIT·AREAS 값을 그대로 읽어 그림으로 보여 줌 ----- */
@@ -2750,7 +2866,24 @@ const ACT = {
   },
   jMode: t => { if (JDG.busy || JDG.mode === t.dataset.m) return; JDG.mode = t.dataset.m; JDG.parsed = null; JDG.crit = null; JDG.book = ''; render(); },
   jPick: () => { const f = $('#jFile'); if (f) f.click(); },
-  jAsk: () => { if (!JDG.crit) return; const d = judgeAskDraft(); resetNew(); Object.assign(NEWF, d, { fromJudge: true }); go('new'); },
+  jAsk: () => {
+    if (!JDG.crit) return;
+    const same = sameAgendas(scoreJudge());
+    if (!same.length) return ACT.jAskNew();
+    openSheet(`<h2>같은 공문을 물은 질문이 있어요</h2>
+      <p class="small sub" style="margin:0">새로 올리면 표가 나뉘어요. 이미 있는 질문에 우리 학교 판단을 남겨 주세요.</p>
+      <div class="samel">${same.map(a => { const sm = summarize(a, computeRows(a), F0); const past = a.year !== CUR_YEAR;
+        return `<div class="sameit"><div><b>${esc(a.title)}</b><span>${a.status === 'pending' ? `공개 대기 · 우리도 궁금해요 ${a.curious.length}/3` : past ? `${a.year}학년도 · ${sm.total}개교 답함 · 올해로 이어서 열 수 있어요` : `${a.year}학년도 · ${sm.total}개교 답함`}</span></div>
+          <button class="btn sm pri" data-act="open" data-id="${a.id}">${a.status === 'pending' ? '우리도 궁금해요' : past ? '보러 가기' : myEntry(a) ? '결과 보기' : '판단 남기기'}</button></div>`; }).join('')}</div>
+      <div class="foot"><button class="btn" data-act="closeSheet">닫기</button><button class="btn" data-act="jAskNew">그래도 새로 묻기</button></div>`);
+  },
+  jAskNew: () => { if (!JDG.crit) return; closeSheet(); const d = judgeAskDraft(); resetNew(); Object.assign(NEWF, d, { fromJudge: true, intent: -1 }); go('new'); },
+  crowdReveal: t => { REVEAL.add(t.dataset.id); render(); },
+  voteIntent: t => {
+    const ag = getAg(ST.id), i = lsObj(INTENT_KEY)[ag.id];
+    ACT.vote();
+    setTimeout(() => { const el = document.querySelector(`input[name="vChoice"][value="${i}"]`); if (el) { el.checked = true; showErr('eChoice', false); } }, 30);
+  },
   jShot: () => { const f = $('#jCam'); if (f) f.click(); },
   jDel: t => { const c = JDG.crit[t.dataset.k]; c.areas = c.areas.filter(x => x !== t.dataset.a); render(); },
   jCopy: () => copyText(judgeCopyText(scoreJudge()), '배정 사유 문구를 복사했어요. 결재 의견이나 메신저에 붙여 넣으세요'),
@@ -2991,7 +3124,9 @@ const ACT = {
       return;
     }
     run(t && t.isConnected ? t : document.querySelector('[data-act="submitNew"]'), async () => {
+      const intentText = NEWF.fromJudge && NEWF.intent >= 0 ? (NEWF.options[NEWF.intent] || '').trim() : '';
       const id = await API.createAgenda({ title, desc: NEWF.desc.trim(), cat: NEWF.cat, options: opts, prevId: NEWF.prevId, pw }, school);
+      if (intentText && opts.indexOf(intentText) >= 0) setIntent(id, opts.indexOf(intentText));
       delete PICK.new; resetNew();
       go('agenda', id); shareSheet(getAg(id), true);
     });
@@ -3075,6 +3210,7 @@ document.addEventListener('input', e => {
   else if (t.dataset.new === 'desc') NEWF.desc = t.value;
   else if (t.dataset.newOpt !== undefined) { NEWF.options[+t.dataset.newOpt] = t.value; showErr('eOpt', false); }
   if (t.name === 'vChoice') showErr('eChoice', false);
+  if (t.name === 'nIntent') NEWF.intent = +t.value;
   liveCheck();
 });
 function liveCheck() {   // 입력하는 동안 욕설·학교 이름을 바로 안내
