@@ -304,6 +304,13 @@ body.demo{--bg:#F7F5EE}
 .jres small{display:block;font-size:12px;font-weight:700;opacity:.8}
 .jres b{display:block;font-size:17px;font-weight:800;margin:2px 0;line-height:1.35}
 .jres span{display:block;font-size:12px;opacity:.85;line-height:1.45}
+.jdecide{border:1.5px solid #C5D0FF;background:#F7F9FF;border-radius:14px;padding:12px 14px;margin-top:10px}
+.jdecide b{font-size:14.5px}
+.jdecide p{margin:4px 0 10px;font-size:13px;color:var(--sub);line-height:1.55}
+.jdecide.done{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px;padding:10px 14px}
+.jdecide.done em{font-style:normal;font-weight:800;color:var(--pri-ink)}
+.jmem{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:#F6F7FA;border-radius:12px;padding:10px 14px;margin-top:10px;font-size:13.5px;line-height:1.55}
+.jmem.on{background:var(--ok-soft);color:#085041}
 .jwarn{background:var(--warn-soft);color:#B35C00;border-radius:10px;padding:8px 12px;margin-top:10px;font-size:13px;font-weight:600}
 .jbars{display:grid;gap:7px;margin-top:14px}
 .jbar{display:grid;grid-template-columns:132px 1fr 28px;gap:8px;align-items:center;font-size:12.5px}
@@ -1776,22 +1783,28 @@ const AMAP = Object.fromEntries(AREAS.map(a => [a.id, a]));
 const CRIT = [   // 판별 기준: 이름, 가중치, 설명
   { k: 'sender', label: '발신 부서', w: 3, hint: '정책을 주관하는 과',
     why: '공문을 보낸 과가 그 정책을 만들고 결과를 받는 곳이에요. 학교에서도 그 정책을 맡은 담당이 받는 것이 자연스러워요.',
-    how: '「문의」 줄의 부서 이름(○○과·○○센터 등)을 먼저 보고, 없으면 본문에서 찾아요.', ex: '중등특수교육과 → 특수교육 담당' },
+    how: '「문의」 줄의 부서 이름(○○과·○○센터 등)을 먼저 보고, 없으면 본문에서 찾아요. 대상과 같은 담당을 가리키면 같은 뿌리 단서라 절반만 더해요(1.1).', ex: '중등특수교육과 → 특수교육 담당' },
   { k: 'target', label: '조사·사업 대상', w: 3, hint: '누구에 관한 일인가',
     why: '누구에 관한 일인지가 담당을 가장 직접 가리켜요. 대상 학생·교원을 관리하는 담당이 사정을 가장 잘 알아요.',
     how: '「대상」 줄을 보고, 없으면 제목을 봐요.', ex: '특수교육대상자 배치 학교 → 특수교육 담당' },
   { k: 'content', label: '다루는 사업·내용', w: 3, hint: '무슨 사업에 관한 일인가',
     why: '어떤 사업의 자료인지가 곧 그 사업 담당의 일이에요.',
     how: '「내용」과 「붙임」 줄을 보고, 없으면 제목을 봐요.', ex: '늘봄학교 참여 현황 → 늘봄 담당' },
-  { k: 'basis', label: '근거 공문', w: 2, hint: '관련 공문의 발신 부서·제목',
+  { k: 'use', label: '결과가 쓰이는 곳', w: 3, hint: '받은 인력·예산이 어느 사업 안에 들어가나',
+    why: '조사로 받게 될 보조강사·예산·물품이 학교 안의 어느 사업 운영에 들어가는지를 봐요. 대상(누구)이 특수교육대상학생이어도, 그 지원이 늘봄 프로그램 안에서 쓰이면 늘봄 운영을 맡은 담당이 실제로 일을 굴려요.',
+    how: '「○○에 참여할 수 있도록」, 「○○ 운영시간에」, 「○○ 프로그램 보조강사」 같은 문장을 찾고, 여러 영역이 함께 나오면 뒤쪽 낱말(머리어)이 가리키는 사업으로 봐요. 인력·예산이 따르지 않는 단순 현황 조사에서는 비워 둬요.', ex: '특수교육대상학생이 늘봄 프로그램에 참여할 수 있도록 보조강사 지원 → 늘봄 담당' },
+  { k: 'follow', label: '후속 실무', w: 3, hint: '제출한 뒤 이 일을 실제로 굴리는 사람',
+    why: '공문 겉글만으로는 갈리지 않을 때, 제출 뒤에 일정을 짜고 출근·집행을 확인하는 사람이 누구인지가 가장 확실한 단서예요. 판별기가 짐작하지 않고 선생님께 직접 물어요.',
+    how: '「협의 권장」이 뜨면 결정 질문 하나에 답해 주세요. 답한 담당에 무게가 더해져요. 답하지 않으면 계산에 넣지 않아요.', ex: '보조강사 시간표·출근 확인은 늘봄 담당 → 늘봄 담당' },
+  { k: 'basis', label: '근거 공문', w: 2, hint: '관련 공문의 제목(없으면 부서)',
     why: '위 단계 공문이 어느 부서의 일인지가 이 공문의 뿌리를 보여 줘요. 다만 교육부와 교육청 부서 이름이 달라 보조 근거로 둬요.',
-    how: '「관련」 줄의 부서 이름과 제목을 봐요.', ex: '교육부 특수교육정책과 → 특수교육 담당' },
+    how: '「관련」 줄에서 「부서-번호(날짜)」를 떼고 제목을 먼저 봐요. 제목에 단서가 없을 때만 부서 이름을 봐요(1.1).', ex: '유초등교육과-1148 「늘봄학교 운영 계획 안내」 → 늘봄 담당' },
   { k: 'holder', label: '자료를 가진 사람', w: 2, hint: '답을 쓰려면 누구의 명단·장부가 필요한가',
     why: '실제로 답을 쓰려면 누구의 명단·장부가 있어야 하는지를 따져요. 주관이 아니어도 협조 담당을 정하는 데 중요해요.',
     how: '대상과 내용에서 찾은 담당을 합쳐 추정해요. 판별 화면에서 직접 고칠 수 있어요.', ex: '늘봄 참여 학생 명단 → 늘봄 담당' },
   { k: 'purpose', label: '정책 목적', w: 1, hint: '결과를 어디에 쓰나',
     why: '결과를 어디에 쓰는지는 참고가 되지만, 목적 문장은 여러 사업을 함께 적는 경우가 많아 낮게 둬요.',
-    how: '「~을 위해」, 「~을 위하여」 앞 문장을 봐요.', ex: '특수교육대상자 현황 조사를 위해 → 특수교육 담당' },
+    how: '「~을 위해」, 「~을 위하여」 앞 문장을 보고, 없으면 「~할 수 있도록」, 「~하고자」 앞 문장을 봐요(1.1).', ex: '특수교육대상자 현황 조사를 위해 → 특수교육 담당' },
   { k: 'route', label: '제출 경로·권한', w: 1, hint: '어느 시스템으로 내나',
     why: '제출 시스템의 권한이 누구에게 있는지가 실무를 좌우할 때가 있어요.',
     how: '「제출 방법」 줄에서 에듀파인(행정실)·나이스(학적) 같은 시스템을 찾아요.', ex: '에듀파인 제출 → 행정실' },
@@ -1802,11 +1815,26 @@ const CRIT = [   // 판별 기준: 이름, 가중치, 설명
     why: '해마다 이어지는 사업이면 그 사업 담당에게 조금 더 무게를 둬요.',
     how: '제목·내용에 운영·추진·계획·사업이 있고 조사·현황이 아니면 지속 사업으로 봐요.', ex: '늘봄학교 운영 계획 → 늘봄 담당' }
 ];
-const JUDGE_VER = '1.0', JUDGE_VER_AT = '2026년 11월';
+const JUDGE_VER = '1.1', JUDGE_VER_AT = '2026년 11월';
 const CLOSE_GAP = 3, CLOSE_RATIO = 0.7;   // 1·2위 점수 차이가 이 값 이하이거나, 2위가 1위의 이 비율 이상이면 「협의 권장」
 const JUDGE_LOG = [   // 판별 기준 바뀐 기록 (새것이 위)
+  { v: '1.1', at: '2026. 11.', what: '실제 배정과 다르게 나온 공문(특수교육과 발신 「특수 늘봄 프로그램 보조강사 수요 조사」 → 실제 늘봄 배정)을 반영. 핵심 기준 「결과가 쓰이는 곳」 추가, 발신 부서와 대상이 같은 담당을 가리키면 발신 부서는 절반만 계산(같은 뿌리 단서), 근거 공문은 부서 이름보다 제목 우선, 목적 문장에 「~할 수 있도록·~하고자」 추가, 긴 낱말에 걸린 자리를 짧은 낱말이 다시 세지 않도록 수정, 협의 권장일 때 「후속 실무」 결정 질문, 이 기기의 배정 기억.' },
   { v: '1.0', at: '2026. 11.', what: '처음 공개. 기준 9가지·가중치, 업무 영역 21개, 협의 권장 규칙(점수 차 3점 이하 또는 2위가 1위의 70% 이상).' }
 ];
+const RESOURCE_RE = /보조\s*강사|강사|보조\s*인력|지원\s*인력|인력|예산|운영비|교부|물품|기자재|보조금|지원금/;   // 「결과가 쓰이는 곳」을 따질 만한 공문(인력·예산이 따름)
+const CROSS_EX = [   // 교차 공문 예: 대상 영역 × 사업 영역 → 사업 쪽 주관, 대상 쪽 협조 (판별 기준 페이지 설명용)
+  ['special', 'neulbom', '특수교육대상학생 늘봄 프로그램 보조강사'],
+  ['multi', 'after', '다문화 학생 방과후학교 자유수강권'],
+  ['basic', 'neulbom', '기초학력 지원 대상 늘봄 맞춤형 프로그램 강사'],
+  ['special', 'pe', '특수교육대상학생 학교스포츠클럽 보조인력']
+];
+const fmtN = n => Number.isInteger(n) ? String(n) : n.toFixed(1);
+function critW(crit, k, id) {   // 기준이 그 담당에 주는 실제 점수 (같은 뿌리 단서 감산 포함)
+  const cr = CRIT.find(c => c.k === k); if (!cr) return 0;
+  if (k === 'sender' && ((crit.target || {}).areas || []).includes(id)) return cr.w / 2;
+  return cr.w;
+}
+const halfNote = (crit, k, id) => k === 'sender' && critW(crit, k, id) < 3 ? '같은 뿌리 ½' : '';
 const JDG = { text: '', parsed: null, book: '', crit: null, mode: 'doc', simple: { title: '', dept: '', target: '', content: '' }, src: null, busy: false };
 const JDEPTS = ['특수교육과', '중등특수교육과', '늘봄지원과', '늘봄교육과', '초등교육과', '유초등교육과', '교육과정과', '기초학력지원과', '학생생활교육과', '민주시민교육과', '인성교육과', '체육건강과', '보건급식과', '학교안전과', '안전총괄과', '디지털교육과', '미래교육과', '진로교육과', '과학교육과', '다문화교육지원센터', '교원인사과', '행정과', '재정과', '시설과'];
 
@@ -2028,10 +2056,71 @@ const JUDGE_EXAMPLE = `수신 수신자 참조
 
 붙임 2026학년도 1학기 일반학교 교내 초등돌봄교육(늘봄학교) 특수교육대상학생 참여 현황(서식) 1부. 끝.`;
 
+/* 판별 기준 회귀 사례: 기준을 고칠 때마다 「테스트 도구 → 판별 기준 점검」으로 확인 (실제 학교 배정과 맞춰 둔 공문) */
+const JUDGE_CASES = [
+  { name: '특수 늘봄 프로그램 보조강사 수요 조사 (실제 배정: 늘봄)', since: '1.1', lead: 'neulbom', help: 'special', close: false, text: `제목 [조사/제출] 초등학교 1학기 특수 늘봄 프로그램 보조강사 수요 조사
+1. 관련: 유초등교육과-1148(2026. 1. 23.) 2026학년도 광주 늘봄학교 운영 계획 안내
+2. 초등학교 특수교육대상학생들이 1학기 늘봄학교 프로그램에 안정적으로 참여할 수
+있도록 보조강사 수요를 조사하오니, 보조강사 필요 학교에서는 기한내 자료를 제출하여
+주시기 바랍니다.
+가. 대상: 광주광역시 특수교육대상자 배치 초등학교 중 보조강사 지원이 필요한 초등학교
+나. 제출기한 및 방법: 2026. 3. 20.(금) 17:00까지 교육행정데이터통합관리로 제 출
+※ 특수교육대상자 늘봄 미참여 및 프로그램 보조강사가 필요 없는 경우에는 제출 생략
+다. 유의사항: 특수교육 지원인력 또는 기타 지원인력이 없거나 다른 학생을 지원하여
+늘봄학교(맞춤형 및 방과후, 돌봄 프로그램) 운영시간에 특수교육 지원인력이 단기간 필요한
+경우 작성하기 바람
+라. 문의: 시교육청 중등특수교육과 ○○○ 주무관(☎ 380-○○○○)
+붙임 1. 2026학년도 초등학교 1학기 늘봄학교 보조강사 지원계획 1부.
+2. 2026학년도 초등학교 특수교육대상학생 늘봄학교 참여 보조강사 수요조사 1부. 끝.` },
+  { name: '특수교육대상자 초등돌봄·교육 현황 조사 (예시 공문: 협의 권장)', since: '1.0', pair: ['neulbom', 'special'], close: true, text: JUDGE_EXAMPLE }
+];
+function runJudgeCases() {
+  return JUDGE_CASES.map(c => {
+    const r = scoreWith(buildCriteria(parseDoc(c.text)), '');
+    const got = `${r.lead ? AMAP[r.lead].name : '없음'} ${fmtN(r.s1)} : ${r.help ? AMAP[r.help].name : '없음'} ${fmtN(r.s2)}${r.close ? ' · 협의 권장' : ''}`;
+    let ok = r.close === c.close;
+    if (c.lead) ok = ok && r.lead === c.lead && r.help === c.help;
+    if (c.pair) ok = ok && [r.lead, r.help].sort().join() === [...c.pair].sort().join();
+    const want = c.lead ? `${AMAP[c.lead].name} 주관 · ${AMAP[c.help].name} 협조${c.close ? ' · 협의 권장' : ''}` : `${c.pair.map(id => AMAP[id].name).join('·')} 두 담당${c.close ? ' · 협의 권장' : ''}`;
+    return { name: c.name, ok, got, want };
+  });
+}
 const squash = t => String(t || '').toLowerCase().replace(/[\s·ㆍ・.,'"‘’“”()\[\]]/g, '');
+const KW_ALL = AREAS.flatMap(a => a.kw.map(k => ({ id: a.id, k: squash(k) }))).filter(x => x.k).sort((a, b) => b.k.length - a.k.length);
+function kwMatches(text) {   // 단서 낱말 찾기: 긴 낱말이 잡힌 자리는 짧은 낱말이 다시 세지 않음 (1.1)
+  const t = squash(text), used = new Uint8Array(t.length), out = [];
+  KW_ALL.forEach(({ id, k }) => {
+    let i = t.indexOf(k);
+    while (i >= 0) {
+      let free = true; for (let j = i; j < i + k.length; j++) if (used[j]) { free = false; break; }
+      if (free) { used.fill(1, i, i + k.length); out.push({ id, at: i }); }
+      i = t.indexOf(k, i + 1);
+    }
+  });
+  return out.sort((a, b) => a.at - b.at);
+}
 function areaHits(text) {   // 영역별 단서 낱말이 몇 번 나오는지
-  const t = squash(text), out = {};
-  AREAS.forEach(a => { let n = 0; a.kw.forEach(k => { const kk = squash(k); let i = t.indexOf(kk); while (i >= 0) { n++; i = t.indexOf(kk, i + kk.length); } }); if (n) out[a.id] = n; });
+  const out = {};
+  kwMatches(text).forEach(m => out[m.id] = (out[m.id] || 0) + 1);
+  return out;
+}
+function headArea(text) {   // 한 구절에 여러 영역이 나오면 뒤쪽 낱말(머리어)이 가리키는 영역
+  const m = kwMatches(text);
+  return m.length ? m[m.length - 1].id : null;
+}
+function useClues(t, title) {   // 「결과가 쓰이는 곳」 단서 문장
+  const s = String(t || '').replace(/\s+/g, ' ');
+  const out = [];
+  const push = x => { x = String(x || '').replace(/^[\s,·:]+|[\s,]+$/g, ''); if (x && kwMatches(x).length && !out.includes(x)) out.push(x); };
+  let m;
+  const re1 = /([^.。]{0,60}?)에\s*(?:안정적으로\s*|원활히\s*|원활하게\s*)?(?:참여|참가|활용|투입|배치)(?:할|하는|될|되는)?\s*수\s*있도록/g;
+  while ((m = re1.exec(s))) push(m[1]);
+  const re2 = /([^.。,※]{0,40}?)\s*운영\s*시간/g, s2 = s.replace(/\([^)]{0,40}\)/g, '');   // 괄호 속 풀이는 빼고
+  while ((m = re2.exec(s2))) push(m[1].split(/(?:하여|거나|하고|이나|또는|및)\s/).pop());
+  const re3 = /((?:[가-힣A-Za-z0-9·]+\s+){0,3}[가-힣A-Za-z0-9·]*프로그램)\s*(?:보조\s*강사|강사|보조\s*인력|지원\s*인력)/g;
+  const t3 = String(title || '').replace(/\[[^\]]*\]/g, ' ');
+  while ((m = re3.exec(t3))) push(m[1]);
+  if (!out.length && RESOURCE_RE.test(title || '') && new Set(kwMatches(title).map(x => x.id)).size >= 2) push(title);   // 제목에 두 영역 + 인력·예산
   return out;
 }
 function topAreas(text, cap = 2) {   // 가장 많이 나온 영역(최댓값의 60% 이상, 최대 2개)
@@ -2051,18 +2140,28 @@ function parseDoc(raw) {   // 공문 본문에서 항목 뽑기
   const deptRe = /([가-힣]{2,14}(?:과|담당관|센터|지원단|교육지원청))(?=[\s\-·,)(]|$)/;
   let sender = firstMatch(inquiry, deptRe);
   if (!sender) sender = firstMatch(t.replace(/관\s*련\s*[:：][^\n]*/g, ''), deptRe);
-  const pm = t.replace(/\s+/g, ' ').match(/([^.。]*?)(?:를|을)?\s*위(?:해|하여)/);
-  const purpose = pm ? pm[1].trim().slice(-80) : '';
+  const flat = t.replace(/\s+/g, ' ');
+  const pm = flat.match(/([^.。]*?)(?:를|을)?\s*위(?:해|하여|한)(?=[\s,])/) || flat.match(/([^.。]*?)\s*(?:수\s*있도록|하고자)/);   // 1.1: 「~할 수 있도록」·「~하고자」도 목적으로
+  const purpose = pm ? pm[1].replace(/^\s*\d+\s*\.\s*/, '').trim().slice(-80) : '';
+  const basisTitle = basis.replace(/[가-힣A-Za-z]{2,20}-\d+\s*\([^)]*\)\s*/g, ' ').replace(/\s+/g, ' ').trim();   // 1.1: 부서-번호(날짜) 떼고 제목만
+  const useSnips = useClues(t, title);
+  const resource = RESOURCE_RE.test(title + ' ' + content) || useSnips.length > 0;
   const span = /운영|추진|계획\s*수립|사업|지원\s*사업|공모/.test(title + content) && !/조사|현황|제출|실적/.test(title) ? '지속 사업' : (/조사|현황|제출|실적|명단/.test(title + content) ? '일회성 조사·제출' : '');
   const budget = /예산|교부|집행|정산|지출|에듀파인|수익자\s*부담|비용\s*지원/.test(t);
-  return { title, basis, target, content, route, sender, purpose, span, budget, empty: !t.trim() };
+  return { title, basis, basisTitle, target, content, route, sender, purpose, span, budget, useSnips, resource, empty: !t.trim() };
 }
 function buildCriteria(p) {   // 기준별로 가리키는 영역 (사용자가 칩으로 고칠 수 있음)
   const c = {};
   c.sender = { snip: p.sender, areas: topAreas(p.sender, 1) };
   c.target = { snip: p.target || p.title, areas: topAreas(p.target || p.title) };
   c.content = { snip: p.content || p.title, areas: topAreas(p.content || p.title) };
-  c.basis = { snip: p.basis, areas: topAreas(p.basis) };
+  { const bt = topAreas(p.basisTitle || '');   // 1.1: 근거 공문은 제목 우선, 제목에 단서가 없을 때만 부서 이름
+    c.basis = { snip: p.basis, areas: bt.length ? bt : topAreas(p.basis) }; }
+  { const v = {};   // 1.1: 결과가 쓰이는 곳 = 단서 문장마다 머리어 영역에 1표
+    (p.useSnips || []).forEach(s => { const h = headArea(s); if (h) v[h] = (v[h] || 0) + 1; });
+    const best = Object.entries(v).sort((a, b) => b[1] - a[1]);
+    c.use = { snip: (p.useSnips || []).join(' / '), areas: best.length ? [best[0][0]] : [] }; }
+  c.follow = { snip: '', areas: [] };
   c.holder = { snip: '대상과 내용에서 추정 — 고쳐 주세요', areas: [...new Set([...c.target.areas, ...c.content.areas])].slice(0, 3) };
   c.purpose = { snip: p.purpose, areas: topAreas(p.purpose) };
   c.route = { snip: p.route, areas: /에듀파인/.test(p.route) ? ['admin'] : /나이스|neis/i.test(p.route) ? ['records'] : [] };
@@ -2073,8 +2172,8 @@ function buildCriteria(p) {   // 기준별로 가리키는 영역 (사용자가 
 function scoreJudge() { return scoreWith(JDG.crit, JDG.book); }
 function scoreWith(crit, book) {
   const sc = {}, why = {};
-  CRIT.forEach(cr => (crit[cr.k].areas || []).forEach(id => {
-    sc[id] = (sc[id] || 0) + cr.w; (why[id] = why[id] || []).push(cr.label);
+  CRIT.forEach(cr => ((crit[cr.k] || {}).areas || []).forEach(id => {
+    sc[id] = (sc[id] || 0) + critW(crit, cr.k, id); (why[id] = why[id] || []).push(cr.label);
   }));
   const rank = Object.entries(sc).sort((a, b) => b[1] - a[1]);
   let lead = rank[0] ? rank[0][0] : null, help = rank[1] ? rank[1][0] : null, byBook = false;
@@ -2102,20 +2201,20 @@ function evidenceSection(r) {
   // 판단 요지
   const gist = r.byBook
     ? `이 공문은 <b>우리 학교 업무분장표</b>에 따라 <b>${esc(L)}</b>${josa(L, '이', '가')} 주관합니다.${Hn ? ` 판별 기준상 점수가 가장 높은 <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} 자료 제공 등으로 협조합니다.` : ''}`
-    : `이 공문은 ${leadC.length}개 기준(가중 합계 <b>${r.s1}점</b>)이 <b>${esc(L)}</b>${josa(L, '을', '를')} 가리켜 이를 주관으로 판단합니다.${heavy.length === CRIT.filter(c => c.w === 3).length ? ` 특히 무게가 가장 큰(×3) 세 기준이 모두 ${esc(L)}${josa(L, '을', '를')} 가리킵니다.` : heavy.length ? ` 특히 무게가 가장 큰(×3) 기준 중 「${heavy.join('」·「')}」${josa(heavy[heavy.length - 1], '이', '가')} ${esc(L)}${josa(L, '을', '를')} 가리킵니다.` : ''}` +
-      (Hn ? ` <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} ${helpC.length}개 기준(<b>${r.s2}점</b>)에서 관련성이 확인되어 「${esc(AMAP[r.help].give)}」 제공 등 협조가 필요합니다.` : ' 다른 담당을 가리키는 기준이 없어 한 담당의 업무로 봅니다.');
+    : `이 공문은 ${leadC.length}개 기준(가중 합계 <b>${fmtN(r.s1)}점</b>)이 <b>${esc(L)}</b>${josa(L, '을', '를')} 가리켜 이를 주관으로 판단합니다.${heavy.length >= 3 ? ` 특히 무게가 가장 큰(×3) 기준 ${heavy.length}가지(「${heavy.join('」·「')}」)가 모두 ${esc(L)}${josa(L, '을', '를')} 가리킵니다.` : heavy.length ? ` 특히 무게가 가장 큰(×3) 기준 중 「${heavy.join('」·「')}」${josa(heavy[heavy.length - 1], '이', '가')} ${esc(L)}${josa(L, '을', '를')} 가리킵니다.` : ''}` +
+      (Hn ? ` <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} ${helpC.length}개 기준(<b>${fmtN(r.s2)}점</b>)에서 관련성이 확인되어 「${esc(AMAP[r.help].give)}」 제공 등 협조가 필요합니다.` : ' 다른 담당을 가리키는 기준이 없어 한 담당의 업무로 봅니다.');
   const verdict = r.byBook ? `업무분장표 우선 원칙에 따라 <b>${esc(L)} 주관</b>${Hn ? ` · <b>${esc(Hn)} 협조</b>` : ''}`
     : !Hn ? `<b>${esc(L)} 단독 주관</b> (협조 담당 없음)`
-    : r.close ? `<b>${esc(L)} 주관 · ${esc(Hn)} 협조</b> — 점수 차이 ${gap}점이 ${gap <= CLOSE_GAP ? `기준(${CLOSE_GAP}점 이하)` : `기준(2위가 1위의 ${Math.round(CLOSE_RATIO * 100)}% 이상)`}에 해당하여 <b>담당자 간 협의 권장</b>`
-    : `<b>${esc(L)} 주관 · ${esc(Hn)} 협조</b> — 점수 차이 ${gap}점으로 주관이 분명함`;
+    : r.close ? `<b>${esc(L)} 주관 · ${esc(Hn)} 협조</b> — 점수 차이 ${fmtN(gap)}점이 ${gap <= CLOSE_GAP ? `기준(${CLOSE_GAP}점 이하)` : `기준(2위가 1위의 ${Math.round(CLOSE_RATIO * 100)}% 이상)`}에 해당하여 <b>담당자 간 협의 권장</b>`
+    : `<b>${esc(L)} 주관 · ${esc(Hn)} 협조</b> — 점수 차이 ${fmtN(gap)}점으로 주관이 분명함`;
   const rows = CRIT.map(cr => {
     const c = JDG.crit[cr.k], a = c.areas || [];
-    const auto = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? (p.budget ? '예산·정산 관련 표현 있음' : '') : (c.snip || '');
+    const auto = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? (p.budget ? '예산·정산 관련 표현 있음' : '') : cr.k === 'follow' ? (a.length ? '결정 질문에 답한 내용' : '') : (c.snip || '');
     const role = a.includes(r.lead) ? 'lead' : a.includes(r.help) ? 'help' : a.length ? 'etc' : 'none';
     return `<div class="evrow ${role}">
       <div class="evk"><b>${cr.label}</b><span class="jw">×${cr.w}</span></div>
-      <div class="evq">${auto ? `<q>${markKw(auto.length > 110 ? auto.slice(0, 108) + '…' : auto, a)}</q>` : '<span class="muted">공문에서 단서를 찾지 못함</span>'}</div>
-      <div class="eva">${a.length ? a.map(id => `<span class="evtag ${id === r.lead ? 'l' : id === r.help ? 'h' : ''}">${esc(AMAP[id].name)} <em>+${cr.w}</em></span>`).join('') : '<span class="muted small">—</span>'}</div>
+      <div class="evq">${auto ? `<q>${markKw(auto.length > 110 ? auto.slice(0, 108) + '…' : auto, a)}</q>` : `<span class="muted">${cr.k === 'follow' ? '협의 권장일 때 결정 질문으로 정해요' : cr.k === 'use' && !p.resource ? '인력·예산이 따르지 않는 공문이라 보지 않음' : '공문에서 단서를 찾지 못함'}</span>`}</div>
+      <div class="eva">${a.length ? a.map(id => `<span class="evtag ${id === r.lead ? 'l' : id === r.help ? 'h' : ''}">${esc(AMAP[id].name)} <em>+${fmtN(critW(JDG.crit, cr.k, id))}</em>${halfNote(JDG.crit, cr.k, id) ? `<small class="muted" style="font-weight:600">${halfNote(JDG.crit, cr.k, id)}</small>` : ''}</span>`).join('') : '<span class="muted small">—</span>'}</div>
     </div>`;
   }).join('');
   return `<div class="sech"><h2>판별 근거</h2><span class="small muted">판별 기준 ${JUDGE_VER} · 공문에서 찾은 단서를 그대로 인용했어요</span></div>
@@ -2127,7 +2226,7 @@ function evidenceSection(r) {
     <div class="evtable">${rows}</div>
     <div class="evh"><span>3</span>판정</div>
     <div class="evsum">
-      <div class="evscore"><span class="l">${esc(L)} <b>${r.s1}</b></span>${Hn ? `<span class="vs">:</span><span class="h">${esc(Hn)} <b>${r.s2}</b></span>` : ''}</div>
+      <div class="evscore"><span class="l">${esc(L)} <b>${fmtN(r.s1)}</b></span>${Hn ? `<span class="vs">:</span><span class="h">${esc(Hn)} <b>${fmtN(r.s2)}</b></span>` : ''}</div>
       <p>${verdict}</p>
     </div>
     <p class="evfoot">이 판정은 공문 겉에 드러난 단서를 공개된 기준에 따라 계산한 참고 의견이며, 법령 해석이 아닙니다. <button class="link" style="font-size:12px" data-act="criteria" data-mine="1">판별 기준 ${JUDGE_VER} 전문 보기</button></p>
@@ -2141,10 +2240,39 @@ function judgeCopyText(r) {
     (r.close ? '○ 두 영역의 판단 근거가 비슷해 담당자 간 협의를 권합니다.\n' : '') +
     (() => { const c = crowdInfo(r); return c && c.ready && c.shown ? `○ 옆 학교 판단: ${c.sm.total}개교 중 ${c.pct}%가 「${c.a.options[c.top]}」 (옆 학교는? ${shareUrl(c.a)})\n` : ''; })() +
     `○ 근거 대조\n` + CRIT.filter(cr => (JDG.crit[cr.k].areas || []).length).map(cr => {
-      const c = JDG.crit[cr.k], snip = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? '예산·정산 관련 표현' : ((c.snip || '').length > 44 ? c.snip.slice(0, 43) + '…' : (c.snip || ''));
-      return `  - ${cr.label}(×${cr.w}): ${snip ? '「' + snip + '」 → ' : ''}${c.areas.map(id => AMAP[id].name).join(', ')}`;
+      const c = JDG.crit[cr.k], snip = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? '예산·정산 관련 표현' : cr.k === 'follow' ? '결정 질문 답' : ((c.snip || '').length > 44 ? c.snip.slice(0, 43) + '…' : (c.snip || ''));
+      return `  - ${cr.label}(×${cr.w}): ${snip ? '「' + snip + '」 → ' : ''}${c.areas.map(id => AMAP[id].name + (critW(JDG.crit, cr.k, id) !== cr.w ? `(+${fmtN(critW(JDG.crit, cr.k, id))}, 대상과 같은 뿌리)` : '')).join(', ')}`;
     }).join('\n') + '\n' +
     `※ 발신 부서·조사 대상·다루는 사업·자료 보유자 등을 따진 참고 의견(판별 기준 ${JUDGE_VER})이며, 최종 배정은 학교 업무분장과 협의에 따릅니다.`;
+}
+/* ----- 1.1: 결정 질문(후속 실무) · 이 기기의 배정 기억 ----- */
+function followHtml(r) {   // 협의 권장이면 「제출한 뒤 누가 굴리나」를 한 번 묻기
+  if (!JDG.crit || r.byBook) return '';
+  const fa = (JDG.crit.follow.areas || [])[0];
+  if (fa) return `<div class="jdecide done"><span>결정 질문 답 · 제출 뒤 실무는 <b>${esc(AMAP[fa].name)}</b> <em>+${CRIT.find(c => c.k === 'follow').w}</em></span><button class="link" data-act="jFollow" data-a="">다시 고르기</button></div>`;
+  if (!r.close) return '';
+  const r0 = scoreWith({ ...JDG.crit, follow: { areas: [] } }, '');
+  const ids = [r0.lead, r0.help].filter(Boolean);
+  return `<div class="jdecide">
+    <b>결정 질문 하나만 답해 주세요</b>
+    <p>제출한 뒤 이 일을 실제로 굴리는 사람은 누구인가요? 지원 인력의 일정을 짜고 출근을 확인하거나, 예산을 집행하는 사람을 골라 주세요.</p>
+    <div class="row">${ids.map(id => `<button class="btn sm" data-act="jFollow" data-a="${id}">${esc(AMAP[id].name)}</button>`).join('')}<button class="btn sm" data-act="jFollowSkip" style="color:var(--mute)">잘 모르겠어요</button></div>
+  </div>`;
+}
+const ASSIGN_KEY = 'yhg_assign';
+function assignKey() { const p = JDG.parsed; return p && p.title ? docType(p.title) : ''; }
+function rememberAssign(area) {   // 업무분장표로 고른 배정을 공문 유형별로 이 기기에 기억 (서버로 보내지 않음)
+  const k = assignKey(); if (!k) return;
+  const o = lsObj(ASSIGN_KEY);
+  if (area) o[k] = { a: area, at: Date.now() }; else delete o[k];
+  LS.set(ASSIGN_KEY, JSON.stringify(o));
+}
+function assignMemHtml() {
+  const k = assignKey(), m = k && lsObj(ASSIGN_KEY)[k];
+  if (!m || !AMAP[m.a]) return '';
+  const d = new Date(m.at), when = `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}.`;
+  if (JDG.book === m.a) return `<div class="jmem on">우리 학교 배정 기억대로 <b>${esc(AMAP[m.a].name)}</b> 주관으로 정했어요 <button class="link" data-act="jMemForget">기억 지우기</button></div>`;
+  return `<div class="jmem">이 기기에서 같은 유형 공문을 <b>${when}</b>에 <b>${esc(AMAP[m.a].name)}</b>로 배정했어요 <span class="row" style="gap:10px"><button class="btn sm pri" data-act="jMemApply" data-a="${m.a}">이대로 적용</button><button class="link" data-act="jMemForget">기억 지우기</button></span></div>`;
 }
 function chipHtml(k, id) { const a = AMAP[id]; return `<span class="jchip">${esc(a.name)}<button data-act="jDel" data-k="${k}" data-a="${id}" aria-label="${esc(a.name)} 빼기">×</button></span>`; }
 function viewJudge() {
@@ -2198,20 +2326,22 @@ function viewJudge() {
     <div class="between" style="margin:0 0 4px"><p class="small muted" style="margin:0">판별 결과</p><button class="cbadge" data-act="criteria" data-mine="1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></svg>판별 기준 ${JUDGE_VER} · 계산 내역</button></div>
     <p style="font-weight:700;margin:0 0 12px;line-height:1.5">${esc(JDG.parsed.title || '(제목을 찾지 못했어요)')}</p>
     <div class="jres">
-      <div class="lead"><small>주관</small><b>${esc(AMAP[r.lead].name)}</b><span>${r.byBook ? '업무분장표 기준' : '점수 ' + r.s1}</span></div>
+      <div class="lead"><small>주관</small><b>${esc(AMAP[r.lead].name)}</b><span>${r.byBook ? '업무분장표 기준' : '점수 ' + fmtN(r.s1)}</span></div>
       ${r.help ? `<div class="help"><small>협조</small><b>${esc(AMAP[r.help].name)}</b><span>${esc(AMAP[r.help].give)} 제공</span></div>` : '<div class="help none"><small>협조</small><b>없음</b><span>한 영역의 일로 보여요</span></div>'}
     </div>
     ${crowdHtml(r)}
-    ${r.close ? `<div class="jwarn">두 영역의 근거가 비슷해요 · 두 담당자의 협의를 권해요</div>
-    <button class="jask" data-act="jAsk"><b>애매하다면 옆 학교에 묻기 ›</b><span>질문과 선택지를 판별 결과로 채워 드려요. 다른 학교는 누가 맡는지 학교별 1표로 모여요.</span></button>` : ''}
-    <div class="jbars">${r.rank.slice(0, 4).map(([id, n]) => `<div class="jbar"><span>${esc(AMAP[id].name)}</span><i><b style="width:${Math.round(n / max * 100)}%;background:${id === r.lead ? COLORS[0] : id === r.help ? COLORS[1] : '#C9CEDA'}"></b></i><em>${n}</em></div>`).join('')}</div>
+    ${assignMemHtml()}
+    ${r.close ? `<div class="jwarn">두 영역의 근거가 비슷해요 · 두 담당자의 협의를 권해요</div>` : ''}
+    ${followHtml(r)}
+    ${r.close ? `<button class="jask" data-act="jAsk"><b>애매하다면 옆 학교에 묻기 ›</b><span>질문과 선택지를 판별 결과로 채워 드려요. 다른 학교는 누가 맡는지 학교별 1표로 모여요.</span></button>` : ''}
+    <div class="jbars">${r.rank.slice(0, 4).map(([id, n]) => `<div class="jbar"><span>${esc(AMAP[id].name)}</span><i><b style="width:${Math.round(n / max * 100)}%;background:${id === r.lead ? COLORS[0] : id === r.help ? COLORS[1] : '#C9CEDA'}"></b></i><em>${fmtN(n)}</em></div>`).join('')}</div>
     <div class="row" style="margin-top:12px"><button class="btn sm" data-act="jCopy">배정 사유 문구 복사</button>${r.close ? '' : '<button class="btn sm" data-act="jAsk">결과가 다르다면 옆 학교에 묻기</button>'}</div>
     <p class="disc">규칙에 따라 계산한 <b>참고 의견</b>(판별 기준 ${JUDGE_VER})이에요. 정답이 아니며, 최종 배정은 학교 업무분장과 협의에 따라 정해 주세요. <button class="link" style="font-size:12px" data-act="criteria" data-mine="1">이 점수는 어떻게 나왔나요?</button></p>
   </section>`;
   h += evidenceSection(r);
   h += similarSection(r);
   h += `<details class="card sec jdetail" ${JDG.open ? 'open' : ''}><summary><b>판단 근거 고치기</b><span class="small muted">우리 학교 업무분장표를 반영하거나, 기준마다 담당을 빼거나 더하면 위 근거와 결과가 함께 다시 계산돼요</span></summary>
-    <div class="jrow book"><div class="jl"><b>우리 학교 업무분장표</b><span class="small muted">분장표에 이 업무가 적혀 있으면 그대로 따라요 (최우선)</span></div>
+    <div class="jrow book"><div class="jl"><b>우리 학교 업무분장표</b><span class="small muted">분장표에 이 업무가 적혀 있으면 그대로 따라요 (최우선). 고르면 이 기기에 공문 유형별로 기억해 두었다가, 다음에 같은 유형이 오면 알려 드려요.</span></div>
       <select class="sel" id="jBook" style="height:40px;max-width:100%"><option value="">분장표 확인 안 함</option>${AREAS.map(a => `<option value="${a.id}" ${JDG.book === a.id ? 'selected' : ''}>${esc(a.name)}</option>`).join('')}</select></div>
     ${CRIT.map(cr => { const c = JDG.crit[cr.k]; return `<div class="jrow">
       <div class="jl"><b>${cr.label} <span class="jw">×${cr.w}</span> <button class="jinfo" data-act="criteria" data-mine="1" data-k="${cr.k}" aria-label="${cr.label} 기준 설명">?</button></b><span class="small muted">${esc(c.snip ? c.snip.slice(0, 90) : cr.hint)}</span></div>
@@ -2343,7 +2473,7 @@ function judgeAskDraft() {   // 판별 결과로 「옆 학교에 묻기」 질�
 }
 /* ----- 판별 기준 페이지 (?criteria) : 코드의 CRIT·AREAS 값을 그대로 읽어 그림으로 보여 줌 ----- */
 const CRIT_VIEW = { mine: false, area: '' };
-const CRIT_SHORT = { sender: '발신', target: '대상', content: '사업', basis: '근거', holder: '자료', purpose: '목적', route: '경로', budget: '예산', span: '지속' };
+const CRIT_SHORT = { sender: '발신', target: '대상', content: '사업', basis: '근거', holder: '자료', purpose: '목적', route: '경로', budget: '예산', span: '지속', use: '쓰임', follow: '실무' };
 const TIER = { 3: { name: '핵심', cls: 't3', desc: '공문의 주인을 직접 가리켜요' }, 2: { name: '보조', cls: 't2', desc: '주인을 확인하고 협조 담당을 찾아요' }, 1: { name: '참고', cls: 't1', desc: '동점을 가르는 작은 단서예요' } };
 const CIC = {   // 기준 아이콘 (선 아이콘)
   sender: '<path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/>',
@@ -2354,7 +2484,9 @@ const CIC = {   // 기준 아이콘 (선 아이콘)
   purpose: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>',
   route: '<path d="M4 12h12"/><path d="M12 7l5 5-5 5"/><path d="M20 5v14"/>',
   budget: '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/>',
-  span: '<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>'
+  span: '<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>',
+  use: '<path d="M12 3v10"/><path d="M8 9l4 4 4-4"/><rect x="3" y="15" width="18" height="6" rx="2"/>',
+  follow: '<circle cx="12" cy="7" r="3"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/><path d="M16 11l2 2 4-4"/>'
 };
 const cicon = (k, sz = 22) => `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CIC[k] || ''}</svg>`;
 function stackBlock(crit, book) {   // 담당별 쌓인 막대: 점수가 어느 기준에서 왔는지
@@ -2362,20 +2494,20 @@ function stackBlock(crit, book) {   // 담당별 쌓인 막대: 점수가 어느
   if (!r.rank.length) return '<p class="small muted">어느 기준에서도 담당을 찾지 못했어요.</p>';
   const ids = r.rank.slice(0, 3).map(x => x[0]), max = Math.max(1, ...r.rank.map(x => x[1]));
   return `<div class="sbars">${ids.map(id => {
-    const parts = CRIT.filter(cr => (crit[cr.k].areas || []).includes(id)), tot = parts.reduce((a, c) => a + c.w, 0);
+    const parts = CRIT.filter(cr => (crit[cr.k].areas || []).includes(id)), tot = parts.reduce((a, c) => a + critW(crit, c.k, id), 0);
     const col = id === r.lead ? COLORS[0] : id === r.help ? COLORS[1] : '#9AA2B2';
     return `<div class="sbar"><div class="sbl"><b>${esc(AMAP[id].name)}</b>${id === r.lead ? '<span class="l">주관</span>' : id === r.help ? '<span class="h">협조</span>' : ''}</div>
-      <div class="sbt"><div class="sbf" style="width:${tot / max * 100}%">${parts.map(cr => `<i style="flex:${cr.w};background:${col};opacity:${cr.w === 3 ? 1 : cr.w === 2 ? .78 : .56}" title="${cr.label} +${cr.w}">${CRIT_SHORT[cr.k]}<small>+${cr.w}</small></i>`).join('')}</div></div>
-      <em>${tot}</em></div>`;
+      <div class="sbt"><div class="sbf" style="width:${tot / max * 100}%">${parts.map(cr => { const w = critW(crit, cr.k, id); return `<i style="flex:${w};background:${col};opacity:${cr.w === 3 ? 1 : cr.w === 2 ? .78 : .56}" title="${cr.label} +${fmtN(w)}">${CRIT_SHORT[cr.k]}<small>+${fmtN(w)}</small></i>`; }).join('')}</div></div>
+      <em>${fmtN(tot)}</em></div>`;
   }).join('')}</div>`;
 }
 function gaugeBlock(r) {   // 협의 권장 눈금: 2위 점수가 1위의 몇 %인가
   if (!r.lead || !r.help || r.byBook) return '';
   const ratio = Math.round(r.s2 / r.s1 * 100), gap = r.s1 - r.s2, z = Math.round(CLOSE_RATIO * 100);
-  return `<div class="gauge"><div class="gt"><span>2위 점수 ÷ 1위 점수</span><b>${r.s2} ÷ ${r.s1} = ${ratio}%</b></div>
+  return `<div class="gauge"><div class="gt"><span>2위 점수 ÷ 1위 점수</span><b>${fmtN(r.s2)} ÷ ${fmtN(r.s1)} = ${ratio}%</b></div>
     <div class="gbar"><span class="gz" style="left:${z}%"><em>협의 권장 ${z}%~</em></span><i style="left:${Math.min(100, ratio)}%"></i></div>
     <div class="gscale"><span>0%</span><span>50%</span><span>100%</span></div>
-    <p class="gnote">점수 차이 <b>${gap}점</b> ${gap <= CLOSE_GAP ? `≤ ${CLOSE_GAP}점` : `> ${CLOSE_GAP}점`} · 비율 <b>${ratio}%</b> ${ratio >= z ? `≥ ${z}%` : `< ${z}%`} → ${r.close ? '<b class="warn">협의 권장</b>' : '<b>주관이 분명함</b>'}</p></div>`;
+    <p class="gnote">점수 차이 <b>${fmtN(gap)}점</b> ${gap <= CLOSE_GAP ? `≤ ${CLOSE_GAP}점` : `> ${CLOSE_GAP}점`} · 비율 <b>${ratio}%</b> ${ratio >= z ? `≥ ${z}%` : `< ${z}%`} → ${r.close ? '<b class="warn">협의 권장</b>' : '<b>주관이 분명함</b>'}</p></div>`;
 }
 function calcBlock(crit, book) {   // 한 공문의 계산 내역 (쌓인 막대 + 눈금 + 대조표 + 결론)
   const r = scoreWith(crit, book);
@@ -2383,10 +2515,10 @@ function calcBlock(crit, book) {   // 한 공문의 계산 내역 (쌓인 막대
   let verdict;
   if (!r.lead) verdict = '어느 기준에서도 담당을 찾지 못해 판단할 수 없어요.';
   else if (r.byBook) verdict = `우리 학교 업무분장표에서 <b>${esc(L)}</b>${josa(L, '을', '를')} 골라 그대로 주관으로 정했어요${Hn ? `. 점수 1위였던 <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} 협조로 내려가요` : ''}.`;
-  else verdict = `1위 <b>${esc(L)} ${r.s1}점</b>이 주관${Hn ? `, 2위 <b>${esc(Hn)} ${r.s2}점</b>이 협조예요.${r.close ? ' 두 점수가 가까워 <b>「협의 권장」</b>이에요.' : ' 차이가 커서 주관이 분명해요.'}` : '이에요. 다른 담당을 가리킨 기준이 없어 협조는 없어요.'}`;
+  else verdict = `1위 <b>${esc(L)} ${fmtN(r.s1)}점</b>이 주관${Hn ? `, 2위 <b>${esc(Hn)} ${fmtN(r.s2)}점</b>이 협조예요.${r.close ? ' 두 점수가 가까워 <b>「협의 권장」</b>이에요.' : ' 차이가 커서 주관이 분명해요.'}` : '이에요. 다른 담당을 가리킨 기준이 없어 협조는 없어요.'}`;
   return `${stackBlock(crit, book)}${gaugeBlock(r)}
     <details class="ddict" style="margin-top:14px"><summary>기준별 점수표 보기</summary>
-    <table class="ctable"><tbody>${CRIT.map(cr => { const a = (crit[cr.k].areas || []); return `<tr><th>${cr.label} <span class="jw">×${cr.w}</span></th><td>${a.length ? a.map(id => `<span class="jchip">${esc(AMAP[id].name)}</span>`).join('') : '<span class="small muted">해당 없음</span>'}</td><td class="n">${a.length ? `각 +${cr.w}` : ''}</td></tr>`; }).join('')}</tbody></table></details>
+    <table class="ctable"><tbody>${CRIT.map(cr => { const a = (crit[cr.k].areas || []); return `<tr><th>${cr.label} <span class="jw">×${cr.w}</span></th><td>${a.length ? a.map(id => `<span class="jchip">${esc(AMAP[id].name)}</span>`).join('') : '<span class="small muted">해당 없음</span>'}</td><td class="n">${a.length ? a.map(id => '+' + fmtN(critW(crit, cr.k, id))).join(' · ') : ''}</td></tr>`; }).join('')}</tbody></table></details>
     <div class="verdict">${verdict}</div>`;
 }
 function critSeg(on) {   // 휴대폰: 판별하기 ↔ 판별 기준 전환
@@ -2404,12 +2536,13 @@ function viewCriteria() {
   ${mine ? `<div class="sech"><h2>이 공문의 계산 내역</h2><span class="small muted">${esc((JDG.parsed.title || '').slice(0, 34))}</span></div>
   <section class="card">${calcBlock(JDG.crit, JDG.book)}</section>` : ''}
 
-  <div class="sech"><h2><span class="sn">1</span>세 가지 질문</h2><span class="small muted">판별의 핵심 원칙</span></div>
+  <div class="sech"><h2><span class="sn">1</span>네 가지 질문</h2><span class="small muted">판별의 핵심 원칙</span></div>
   <section class="card">
     <div class="q3">
-      ${[['sender', '누가 시작했나?', '발신 부서'], ['target', '누구에 관한 일인가?', '조사·사업 대상'], ['holder', '누구의 자료가 필요한가?', '자료를 가진 사람']].map(([k, q, l], i) => `${i ? '<span class="q3a" aria-hidden="true">›</span>' : ''}<div class="q3c"><span class="q3i">${cicon(k, 26)}</span><b>${q}</b><small>${l}</small></div>`).join('')}
+      ${[['sender', '누가 시작했나?', '발신 부서'], ['target', '누구에 관한 일인가?', '조사·사업 대상'], ['use', '결과가 어디에 쓰이나?', '결과가 쓰이는 곳'], ['holder', '누구의 자료가 필요한가?', '자료를 가진 사람']].map(([k, q, l], i) => `${i ? '<span class="q3a" aria-hidden="true">›</span>' : ''}<div class="q3c"><span class="q3i">${cicon(k, 26)}</span><b>${q}</b><small>${l}</small></div>`).join('')}
     </div>
-    <div class="q3r">세 질문이 <b>가장 많이 가리키는 담당 = 주관</b> · 그다음 = 협조</div>
+    <div class="q3r">네 질문이 <b>가장 많이 가리키는 담당 = 주관</b> · 그다음 = 협조</div>
+    <p class="small muted" style="margin:10px 0 0">1.1부터 「결과가 어디에 쓰이나」를 따로 봐요. 대상이 특수교육대상학생이어도 보조강사가 늘봄 프로그램 안에서 쓰이면, 늘봄 운영을 맡은 담당이 실제로 일을 굴리기 때문이에요.</p>
   </section>
 
   <div class="sech"><h2><span class="sn">2</span>기준 ${CRIT.length}가지와 무게</h2><span class="small muted">카드를 누르면 자세한 설명</span></div>
@@ -2433,7 +2566,12 @@ function viewCriteria() {
     <div class="rulebox">
       <div><b>협의 권장</b>이 붙는 경우 (둘 중 하나)</div>
       <div class="rr"><span class="rc">점수 차이 ≤ ${CLOSE_GAP}점</span><span class="ro">또는</span><span class="rc">2위 ÷ 1위 ≥ ${z}%</span></div>
+      <p style="margin:8px 0 0;font-size:13px">협의 권장이 뜨면 <b>결정 질문</b> 하나(제출한 뒤 이 일을 실제로 굴리는 사람은?)를 물어요. 답하면 「후속 실무」 ×3으로 계산에 더해져요.</p>
     </div>
+    <div class="fshort" style="margin-top:10px"><b>같은 뿌리</b> 발신 부서와 대상이 <b>같은 담당</b>을 가리키면 발신 부서 점수는 <b>절반(×1.5)</b>만 더해요. 교육청 부서는 대상·예산으로 나뉘어서, 특수교육과가 보냈다는 사실과 대상이 특수교육대상학생이라는 사실은 사실상 같은 단서이기 때문이에요.</div>
+    <div class="evh" style="margin-top:18px"><span>+</span>교차 공문 · 대상 영역과 사업 영역이 다를 때</div>
+    <table class="ctable"><tbody><tr><th>예</th><th>주관</th><th>협조</th></tr>${CROSS_EX.map(([t, b, ex]) => `<tr><td>${esc(ex)}</td><td><span class="jchip">${esc(AMAP[b].name)}</span></td><td><span class="jchip" style="background:var(--ok-soft);color:#087F5B">${esc(AMAP[t].name)}</span></td></tr>`).join('')}</tbody></table>
+    <p class="small muted" style="margin:6px 0 0">인력·예산이 사업 안에서 쓰이면 사업 쪽이 주관, 대상 학생을 맡은 쪽이 명단·지원 현황으로 협조해요. 표는 예시이고, 실제 판정은 위 기준의 점수로 정해요.</p>
   </section>
 
   ${mine ? '' : `<div class="sech"><h2><span class="sn">4</span>예시 풀이</h2><span class="small muted">특수교육대상자 초등돌봄 현황 조사 공문</span></div>
@@ -2443,7 +2581,7 @@ function viewCriteria() {
   <section class="card">
     <div class="atiles">${AREAS.map(a => `<button class="atile ${CRIT_VIEW.area === a.id ? 'on' : ''}" data-act="critArea" data-id="${a.id}"><b>${esc(a.name)}</b><small>낱말 ${a.kw.length}개</small></button>`).join('')}</div>
     ${selA ? `<div class="apanel"><div class="between"><b>${esc(selA.name)}</b><small class="muted">협조할 때 넘겨줄 것: ${esc(selA.give)}</small></div><div class="kw">${selA.kw.map(k => `<span>${esc(k)}</span>`).join('')}</div></div>`
-      : `<p class="small muted" style="margin:12px 0 0">띄어쓰기를 무시하고 단서 낱말이 몇 번 나오는지 세어, 가장 많이 나온 영역(1위의 60% 이상, 최대 2개)을 그 기준의 담당으로 봐요.</p>`}
+      : `<p class="small muted" style="margin:12px 0 0">띄어쓰기를 무시하고 단서 낱말이 몇 번 나오는지 세어, 가장 많이 나온 영역(1위의 60% 이상, 최대 2개)을 그 기준의 담당으로 봐요. 긴 낱말이 잡힌 자리는 짧은 낱말이 다시 세지 않아요(예: 「특수교육대상」은 「특수교육」으로 한 번 더 세지 않음). 「결과가 쓰이는 곳」은 단서 문장에서 맨 뒤 낱말(머리어)의 영역을 봐요.</p>`}
   </section>
 
   <div class="sech"><h2><span class="sn">${mine ? 5 : 6}</span>기준에 의견 내기 · 판번 기록</h2></div>
@@ -2879,6 +3017,10 @@ const ACT = {
   },
   jAskNew: () => { if (!JDG.crit) return; closeSheet(); const d = judgeAskDraft(); resetNew(); Object.assign(NEWF, d, { fromJudge: true, intent: -1 }); go('new'); },
   crowdReveal: t => { REVEAL.add(t.dataset.id); render(); },
+  jFollow: t => { if (!JDG.crit) return; JDG.crit.follow.areas = t.dataset.a ? [t.dataset.a] : []; const y = scrollY; render(); window.scrollTo(0, y); if (t.dataset.a) toast('「후속 실무」에 반영해 다시 계산했어요'); },
+  jFollowSkip: () => toast('괜찮아요. 두 담당자가 협의해 정해 주세요'),
+  jMemApply: t => { JDG.book = t.dataset.a; const y = scrollY; render(); window.scrollTo(0, y); toast('우리 학교 배정 기억을 적용했어요'); },
+  jMemForget: () => { rememberAssign(''); JDG.book = ''; const y = scrollY; render(); window.scrollTo(0, y); toast('이 유형의 배정 기억을 지웠어요'); },
   voteIntent: t => {
     const ag = getAg(ST.id), i = lsObj(INTENT_KEY)[ag.id];
     ACT.vote();
@@ -3138,6 +3280,7 @@ const ACT = {
     <div class="f" style="display:grid;gap:8px">
       <button class="btn dark block" data-act="newDevice">새 기기로 전환 (다른 선생님)</button>
       ${LIVE ? '' : '<button class="btn block" data-act="resetData">샘플 데이터로 초기화</button>'}
+      <button class="btn block" data-act="judgeCases">판별 기준 ${JUDGE_VER} 점검 (회귀 사례 ${JUDGE_CASES.length}건)</button>
     </div>
     ${LIVE ? '<p class="small" style="margin:12px 0 0;color:#B42424">실서비스 모드예요. 여기서 남긴 표는 실제 데이터로 저장돼요.</p>' : ''}
     <p class="small muted" style="margin:14px 0 0">같은 학교 흐름 시험: ① 투표 → ② 새 기기로 전환 → ③ 같은 학교로 투표하거나 질문 화면에서 확인·이의신청</p>
@@ -3147,6 +3290,14 @@ const ACT = {
     else { DEV = 'dev-' + uid(); LS.set('yhg_dev', DEV); }
     REVEAL.clear(); closeSheet(); render(); toast('새 기기로 바꿨어요. 이제 다른 선생님이에요');
   }),
+  judgeCases: () => {
+    const res = runJudgeCases(), bad = res.filter(x => !x.ok).length;
+    openSheet(`<h2>판별 기준 ${JUDGE_VER} 점검</h2>
+      <p class="small sub" style="margin:0">실제 배정과 맞춰 둔 공문으로 계산이 그대로인지 확인해요. ${bad ? `<b style="color:#B42424">${bad}건이 기대와 달라요.</b>` : '<b style="color:#087F5B">모두 기대대로예요.</b>'}</p>
+      <div class="mylist">${res.map(x => `<div class="myit" style="display:block"><div class="row"><span class="pill ${x.ok ? 'ok' : 'bad'}">${x.ok ? '통과' : '다름'}</span><b class="small">${esc(x.name)}</b></div>
+        <div class="small" style="margin-top:6px">기대: ${esc(x.want)}<br>계산: ${esc(x.got)}</div></div>`).join('')}</div>
+      <div class="foot" style="grid-template-columns:1fr"><button class="btn" data-act="closeSheet">닫기</button></div>`);
+  },
   resetData: () => { LS.del(KEY); load(); REVEAL.clear(); closeSheet(); go('judge'); toast('샘플 데이터로 초기화했어요'); },
   license: () => openSheet(`<h2>오픈소스 라이선스</h2>
     <p class="small sub" style="margin:0 0 12px">이 사이트에 쓰인 외부 자원과 라이선스예요. 아이콘은 직접 그린 SVG예요.</p>
@@ -3224,7 +3375,7 @@ function liveCheck() {   // 입력하는 동안 욕설·학교 이름을 바로 
 document.addEventListener('change', e => {
   const t = e.target;
   if (t.classList && t.classList.contains('jadd') && t.value) { const c = JDG.crit[t.dataset.k]; c.areas = [...(c.areas || []), t.value]; render(); return; }
-  if (t.id === 'jBook') { JDG.book = t.value; render(); return; }
+  if (t.id === 'jBook') { JDG.book = t.value; if (t.value) rememberAssign(t.value); render(); return; }
   if (t.id === 'jFile' || t.id === 'jCam') { if (t.files && t.files.length) readJudgeFiles(t.files); return; }
   if (t.id === 'yearSel') { H.year = t.value; renderHomeList(); }
   else if (t.id === 'sortSel') { H.sort = t.value; renderHomeList(); }
