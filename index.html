@@ -1851,9 +1851,10 @@ const CRIT = [   // 판별 기준: 이름, 가중치, 설명
     why: '해마다 이어지는 사업이면 그 사업 담당에게 조금 더 무게를 둬요.',
     how: '제목·내용에 운영·추진·계획·사업이 있고 조사·현황이 아니면 지속 사업으로 봐요.', ex: '늘봄학교 운영 계획 → 늘봄 담당' }
 ];
-const JUDGE_VER = '1.5', JUDGE_VER_AT = '2026년 11월';
+const JUDGE_VER = '1.6', JUDGE_VER_AT = '2026년 11월';
 const CLOSE_GAP = 3, CLOSE_RATIO = 0.7;   // 1·2위 점수 차이가 이 값 이하이거나, 2위가 1위의 이 비율 이상이면 「협의 권장」
 const JUDGE_LOG = [   // 판별 기준 바뀐 기록 (새것이 위)
+  { v: '1.6', at: '2026. 11.', what: '입법예고 알림은 주제와 관계없이 모두 교감 공문이라는 학교 판단을 반영. 공문 유형 「입법예고」 추가: 제목(없으면 본문 요청 문장)에 입법예고가 있으면 판별 규칙으로 교감(인사·복무)이 주관, 협조 없음. 우선순위는 업무분장표 → 우리 학교 사업 사전 → 판별 규칙 → 점수 계산. 「의견이 있는 기관·개인은 제출」처럼 선택 제출인 공문은 할 일을 「안내 · 의견이 있으면 제출(선택)」로 보여 주고, 「기간: ○ ~ ○」의 끝 날짜를 기한으로 읽음. 회귀 사례 짝 E 추가(장애인교원채용심의위원회 규칙 → 교감, 학교급식 조례 → 급식이 아니라 교감).' },
   { v: '1.5', at: '2026. 11.', what: '판별하지 못하던 인사 공문(「2027.3.1.자 광주 동·서부 교육장 임용 시행 계획 공고」 → 실제 교감)을 반영. 교감(인사·복무) 영역에 임용·교육장·교육전문직·장학관·장학사·교장공모 등 추가. 공문 유형 「인사·선발 공고」 추가: 제목에 공고·임용·선발·채용 등이 있고 본문에 지원자격·원서 접수·면접 등이 있으면 「누구를 뽑나」 직위 사전으로 주관을 정함(교원·전문직 → 교감, 지방공무원 → 행정실, 교육공무직 → 교감 + 직종별 분담 메모, 늘봄·방과후 강사 → 늘봄). 「~바랍니다」 앞 문장으로 학교가 할 일을 읽어 「안내·전달」(제출 없음, 협조 없음)과 「자료 제출」(기한 표시)로 나눠 보여 줌. 관련 공문 부서가 가리킨 담당이 본문 어디에도 다시 나오지 않으면 이상치로 보고 뺌. 판단 보류 화면에도 공문 유형과 할 일을 보여 줌. 회귀 사례 짝 D와 직위 점검 추가.' },
   { v: '1.4', at: '2026. 11.', what: '교권 업무가 명백한 공문(「교육활동 보호 관련 매뉴얼 개정 수요조사」)이 도서관·독서 담당으로 나오던 문제를 바로잡음. 원인은 「수요조사 서식」의 띄어쓰기를 지우고 비교해 「조사서식」 속 「사서」가 잡힌 것. 두 글자 단서 낱말은 띄어쓰기·기호를 넘어 붙이지 않고, 한 낱말 안의 오인은 제외 문맥표(조사서·과학적 등)로 거름. 업무 영역 「교육활동 보호(교권)」 신설(22개 영역). 제목에 의견·개정·매뉴얼·지침이 있고 인력·예산이 없으면 「의견 조회」 유형(수요조사라는 말이 있어도 지원·수요로 보지 않음). 근거 강도 추가: 제목에 주관 단서가 없으면 「근거 약함」, 제목·대상 모두 주관을 가리키지 않거나 제목 밖에서 단서가 한 번뿐이면 「판단 보류」. 회귀 사례 짝 C와 낱말 단위 점검 추가.' },
   { v: '1.3', at: '2026. 11.', what: '지원금 교부 공문(기초학력전담강사 운영학교 추가 지원금 교부 → 실제 기초학력, 학교체육시설 개방 유지관리 지원금 교부 → 실제 행정실)을 반영. 교부·집행·정산·예산·지출·에듀파인 같은 절차 낱말은 담당 단서로 세지 않고 「예산 수반」과 협조에만 씀. 공문 유형 「예산 교부·정산」 추가: 주관은 사업명이 가리키는 담당, 행정실은 집행·정산으로 늘 협조. 「사업명:」 줄·제목·관련 공문 「」 제목에서 사업명을 뽑아 다루는 사업의 우선 단서로 씀. 사업 사전(표준값 + 우리 학교) 추가: 우리 학교에서 정한 「사업 → 담당」은 같은 사업의 모든 공문에 먼저 적용. 발신 부서는 「시행 ○○과-번호」 줄을 먼저 보고 「다음과」 같은 말을 부서로 잡지 않음. 「1. 관련」 다음 줄에 가.·나.로 나열한 관련 공문도 읽음.' },
@@ -1871,6 +1872,7 @@ const CROSS_EX = [   // 교차 공문 예: 대상 영역 × 사업 영역 → �
 const fmtN = n => Number.isInteger(n) ? String(n) : n.toFixed(1);
 /* 1.2: 공문 유형 — 조사는 「누구를 세나」, 지원은 「어디에 쓰나」 */
 const DOC_TYPES = {
+  legis: { name: '입법예고', q: '', desc: '조례·규칙·훈령의 입법예고 알림', tw: {}, fixLead: 'personnel', rule: '입법예고 알림은 주제와 관계없이 교감' },
   hire: { name: '인사·선발 공고', q: '누구를 뽑는가', desc: '임용·채용·선발 계획을 알리는 공고', tw: { use: 0 } },
   opinion: { name: '의견 조회', q: '무엇에 대한 의견인가', desc: '제도·지침·매뉴얼에 대한 의견을 모으는 공문', tw: { use: 0 } },
   grant: { name: '예산 교부·정산', q: '무슨 사업의 돈인가', desc: '사업비를 내려보내고 집행·정산을 받는 공문', tw: { use: 0 }, fixHelp: 'admin', give: '예산 집행·정산' },
@@ -1906,18 +1908,21 @@ const NOTICE_RE = /안내하여|안내해|안내\s*바|게시|홍보|전달|알�
 function todoOf(t) {
   const flat = String(t || '').replace(/\s+/g, ' ');
   const req = (flat.match(/[^。]{0,120}?(?:주시기\s*바랍니다|바랍니다|바람)/g) || []).join(' ');
-  const kind = SUBMIT_RE.test(req) ? 'submit' : NOTICE_RE.test(req) ? 'notice' : '';
+  const kind = /의견이\s*있는|희망하는|필요한\s*경우|해당\s*(?:학교|기관)만/.test(req) && SUBMIT_RE.test(req) ? 'optional' : SUBMIT_RE.test(req) ? 'submit' : NOTICE_RE.test(req) ? 'notice' : '';   // 1.6: 선택 제출
   const wm = req.match(/((?:교직원|학부모|학생|직원|교원|지역\s*주민)(?:\s*(?:및|과|와|,)\s*(?:교직원|학부모|학생|직원|교원|지역\s*주민))*)(?:들)?에게/);   // 「○○에게」 앞말
   const who = wm ? wm[1].replace(/\s+/g, ' ') : '';
   const dm = flat.match(/(?:기한|기간|까지)[^。]{0,40}?(\d{4}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*\([월화수목금토일]\)(?:\s*\d{1,2}:\d{2})?)/) || flat.match(/(\d{4}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*\([월화수목금토일]\)(?:\s*\d{1,2}:\d{2})?)\s*까지/) || flat.match(/제\s*출\s*(?:방\s*법|일)?\s*[:：]?\s*(\d{4}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*\([월화수목금토일]\)(?:\s*\d{1,2}:\d{2})?)/);
-  return { kind, who, due: kind === 'submit' && dm ? dm[1].replace(/\s+/g, ' ') : '' };
+  const dr = flat.match(/기\s*간\s*[:：]?\s*\d{4}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*(?:\([월화수목금토일]\))?\s*~\s*(\d{4}\.\s*\d{1,2}\.\s*\d{1,2}\.?(?:\s*\([월화수목금토일]\))?)/);   // 1.6: 「기간: ○ ~ ○」 끝 날짜
+  return { kind, who, due: (kind === 'submit' || kind === 'optional') && (dm || dr) ? (dm || dr)[1].replace(/\s+/g, ' ') : '' };
 }
+const LEGIS_RE = /입법\s*예고/;
 const OPINION_RE = /의견|개정|매뉴얼|지침|안\s*검토|설문|제도\s*개선/;
 const OPINION_NOT = /강사|인력|예산|물품|기기|기자재|교부|지원금|운영비/;
 const GRANT_RE = /교부|정산\s*서|정산\s*보고|집행\s*결과|예산\s*집행/;
 const RUN_RE = /운영|추진|계획\s*수립|공모|사업\s*안내/;
 function detectType(p) {   // 유형 판정: 지원·수요 단서가 있으면 그것이 우선 (받는 것이 있으면 신청 공문)
   const head = [p.title, p.content].join(' ');   // 대상 줄의 「학생 배치」 같은 말에 걸리지 않도록 제목·내용만
+  if (LEGIS_RE.test(p.title || '') || LEGIS_RE.test(((p.raw || '').match(/[^\n]*바랍니다/) || [''])[0])) return { type: 'legis', sure: true };   // 1.6: 입법예고 → 교감 규칙
   if (GRANT_RE.test(head)) return { type: 'grant', sure: true };   // 1.3: 돈이 이미 사업으로 내려온 공문
   if (HIRE_TITLE.test(p.title || '') && HIRE_BODY.test(p.raw || head) && p.pos) return { type: 'hire', sure: true };   // 1.5: 누구를 뽑는 공고
   if (OPINION_RE.test(p.title || '') && !OPINION_NOT.test(head)) return { type: 'opinion', sure: true };   // 1.4: 「수요조사」라도 받는 것이 없으면 의견 조회
@@ -2250,7 +2255,24 @@ const JUDGE_CASES = [
 가. 선발 예정 인원: 교육행정 5명
 나. 응시자격: 공고일 기준 관련 경력 2년 이상인 사람
 다. 원서 접수: 2026. 12. 1.(화) ~ 12. 3.(목)
-라. 서류 심사 및 면접시험: 2026. 12. 15.(화)` }
+라. 서류 심사 및 면접시험: 2026. 12. 15.(화)` },
+  { name: '[짝 E-1] 장애인교원채용심의위원회 규칙 입법예고 → 입법예고 (실제 배정: 교감)', since: '1.6', type: 'legis', lead: 'personnel', conf: 'ok', text: `제목 [입법예고] 전남광주통합특별시교육청 장애인교원채용심의위원회 입법예고 알림
+1. 관련
+가. 「행정절차법」 제41조(행정상 입법예고)
+나. 「전남광주통합특별시 교육자치법규 입법에 관한 조례」제4조(입법예고)
+2. 전남광주통합특별시교육청 장애인교원채용심의위원회 규칙을 다음과 같이 입법예고하니, 의견이 있는 기관·단체 또는 개인은 입법예고 기간 내에 의견을 제출하여 주시기 바랍니다.
+가. 입법예고 기간: 2026. 11. 12. ~ 2026. 12. 2.[20일간]
+나. 입법예고 방법: 전남광주통합특별시교육청 누리집(교육정보모두/법무행정서비스/입법예고)
+다. 의견제출 방법: 우편 등(붙임 참조)
+붙임 1. 전남광주통합특별시교육청 장애인교원채용심의위원회 규칙(안) 입법예고문 1부.
+2. 입법예고에 따른 의견서 1부. 끝.` },
+  { name: '[짝 E-2] 학교급식 지원 조례 일부개정 입법예고 (가상 공문: 주제가 급식이어도 교감)', since: '1.6', type: 'legis', lead: 'personnel', conf: 'ok', text: `제목 [입법예고] 전남광주통합특별시 학교급식 지원에 관한 조례 일부개정조례안 입법예고
+1. 관련: 「전남광주통합특별시 교육자치법규 입법에 관한 조례」제4조(입법예고)
+2. 학교급식 지원에 관한 조례 일부개정조례안을 다음과 같이 입법예고하니, 의견이 있는 기관·단체 또는 개인은 기간 내에 의견을 제출하여 주시기 바랍니다.
+가. 입법예고 기간: 2026. 11. 20. ~ 2026. 12. 10.
+나. 주요 내용: 친환경 급식 식재료 지원 대상 확대, 학교급식위원회 구성 변경
+다. 의견제출 방법: 우편 또는 전자우편(붙임 참조)
+붙임 학교급식 지원에 관한 조례 일부개정조례안 입법예고문 1부. 끝.` }
 ];
 /* 1.4: 낱말 단위 점검 — 이 글에서 이 영역이 잡혀야(true) / 잡히면 안 되는지(false) */
 const KW_TESTS = [
@@ -2263,7 +2285,7 @@ const runKwTests = () => KW_TESTS.map(([t, id, want]) => ({ t, id, want, ok: kwM
 function runJudgeCases() {
   return JUDGE_CASES.map(c => {
     const r = scoreWith(buildCriteria(parseDoc(c.text)), '');
-    const got = `[${DOC_TYPES[buildCriteria(parseDoc(c.text)).type].name}] ${r.lead ? AMAP[r.lead].name : '없음'} ${fmtN(r.s1)} ${r.help ? `: ${AMAP[r.help].name} ${fmtN(r.s2)}` : '· 협조 없음'}${r.close ? ' · 협의 권장' : ''}`;
+    const got = `[${DOC_TYPES[buildCriteria(parseDoc(c.text)).type].name}] ${r.lead ? AMAP[r.lead].name : '없음'} ${r.bookSrc === 'rule' ? '(판별 규칙)' : fmtN(r.s1)} ${r.help ? `: ${AMAP[r.help].name} ${fmtN(r.s2)}` : '· 협조 없음'}${r.close ? ' · 협의 권장' : ''}`;
     const cr = buildCriteria(parseDoc(c.text));
     let ok = (c.close === undefined || r.close === c.close) && (!c.type || cr.type === c.type);
     if (c.not) ok = ok && r.lead !== c.not && !r.rank.some(([id]) => id === c.not);
@@ -2411,7 +2433,7 @@ function buildCriteria(p) {   // 기준별로 가리키는 영역 (사용자가 
     c.pos = { a: p.pos.a, inTitle: p.pos.src === '제목', note: p.pos.note || '' };
     if (c.biz) c.biz.hit = null;   // 인사 공고는 사업 사전 표준값 대신 직위 사전을 따름
   }
-  c.noHelp = p.todo && p.todo.kind === 'notice' && c.type !== 'grant';   // 1.5: 안내·전달만 하는 공문은 협조 없음
+  c.noHelp = (p.todo && p.todo.kind === 'notice' && c.type !== 'grant') || c.type === 'legis';   // 안내만 하는 공문·입법예고는 협조 없음(선택 제출은 협조 유지)   // 1.5: 안내·전달만 하는 공문은 협조 없음
   c.holder = { snip: '대상과 내용에서 추정 — 고쳐 주세요', areas: [...new Set([...c.target.areas, ...c.content.areas])].slice(0, 3) };
   c.purpose = { snip: p.purpose, areas: topAreas(p.purpose) };
   c.route = { snip: p.route, areas: /에듀파인/.test(p.route) ? ['admin'] : /나이스|neis/i.test(p.route) ? ['records'] : [] };
@@ -2437,6 +2459,7 @@ function todoHtml() {   // 1.5: 학교가 할 일 + 직위 메모
   const td = p.todo || {};
   let h = '';
   if (td.kind === 'notice') h = `<div class="jtodo"><span class="tk">할 일</span><span><b>${esc(td.who || '교직원')}에게 안내</b> (메신저·누리집·게시) · 제출할 것 없음</span></div>`;
+  else if (td.kind === 'optional') h = `<div class="jtodo"><span class="tk">할 일</span><span><b>${esc(td.who || '교직원')}에게 안내</b> · 의견이 있으면 기한 내 제출(선택)${td.due ? ` · 기한 <b>${esc(td.due)}</b>` : ''}</span></div>`;
   else if (td.kind === 'submit') h = `<div class="jtodo"><span class="tk">할 일</span><span><b>자료 제출</b>${td.due ? ` · 기한 <b>${esc(td.due)}</b>` : ''}</span></div>`;
   if (c.pos && c.pos.note) h += `<div class="jmem vary" style="margin:-4px 0 12px"><span>${esc(c.pos.note)}</span></div>`;
   return h;
@@ -2466,6 +2489,8 @@ function scoreWith(crit, book, bookSrc) {
   }));
   const rank = Object.entries(sc).sort((a, b) => b[1] - a[1]);
   let lead = rank[0] ? rank[0][0] : null, help = rank[1] ? rank[1][0] : null, byBook = false;
+  const fl = (DOC_TYPES[crit.type] || {}).fixLead;   // 1.6: 판별 규칙(분장표·사업 사전이 없을 때만)
+  if (!book && fl && AMAP[fl]) { book = fl; bookSrc = 'rule'; }
   if (book && AMAP[book]) { byBook = true; if (lead !== book) help = lead; lead = book; if (help === lead) help = rank[1] ? rank[1][0] : null; }
   // 1.3: 예산 교부·정산 공문은 행정실이 집행·정산으로 늘 협조. 협의 권장은 행정실을 뺀 2위와 비교
   const fix = (DOC_TYPES[crit.type] || {}).fixHelp;
@@ -2474,7 +2499,7 @@ function scoreWith(crit, book, bookSrc) {
     alt = rank.find(([id]) => id !== lead && id !== fix) || null;
     if (!byBook || help === fix || !help) { help = fix; helpFixed = true; }
   }
-  if (crit.noHelp && !helpFixed && !byBook) help = null;
+  if (crit.noHelp && !helpFixed && (!byBook || bookSrc === 'rule')) help = null;
   const s1 = lead ? (sc[lead] || 0) : 0, s2 = help ? (sc[help] || 0) : 0;
   const a2 = helpFixed ? (alt ? alt[1] : 0) : s2;
   const close = !byBook && !!(helpFixed ? alt : help) && a2 > 0 && (s1 - a2 <= CLOSE_GAP || a2 >= s1 * CLOSE_RATIO);
@@ -2505,7 +2530,7 @@ function evidenceSection(r) {
       (Hn ? (r.helpFixed ? ` 예산 교부·정산 공문이라 <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} 「${esc(helpGive(r))}」으로 늘 협조합니다.` : ` <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} ${helpC.length}개 기준(<b>${fmtN(r.s2)}점</b>)에서 관련성이 확인되어 「${esc(helpGive(r))}」 제공 등 협조가 필요합니다.`) : ' 다른 담당을 가리키는 기준이 없어 한 담당의 업무로 봅니다.'));
   const gist = r.byBook || !typeLead ? gist0 : typeLead + gist0.replace(/^이 공문은 /, '그 결과 ');
   const altN = r.alt ? AMAP[r.alt].name : '', agap = r.s1 - (r.a2 || 0);
-  const verdict = r.byBook ? `${r.bookSrc === 'biz' ? '우리 학교 사업 사전' : '업무분장표'} 우선 원칙에 따라 <b>${esc(L)} 주관</b>${Hn ? ` · <b>${esc(Hn)} 협조</b>` : ''}`
+  const verdict = r.byBook ? `${r.bookSrc === 'biz' ? '우리 학교 사업 사전' : r.bookSrc === 'rule' ? '판별 규칙' : '업무분장표'} 우선 원칙에 따라 <b>${esc(L)} 주관</b>${Hn ? ` · <b>${esc(Hn)} 협조</b>` : ''}`
     : r.helpFixed ? `<b>${esc(L)} 주관 · ${esc(Hn)} 협조(집행·정산)</b> — 예산 교부·정산 공문이라 행정실 협조는 고정${altN ? `. 다음 후보 ${esc(altN)}와 점수 차이 ${fmtN(agap)}점${r.close ? '이라 <b>담당자 간 협의 권장</b>' : '으로 주관이 분명함'}` : ''}`
     : !Hn ? `<b>${esc(L)} 단독 주관</b> (협조 담당 없음)`
     : r.close ? `<b>${esc(L)} 주관 · ${esc(Hn)} 협조</b> — 점수 차이 ${fmtN(gap)}점이 ${gap <= CLOSE_GAP ? `기준(${CLOSE_GAP}점 이하)` : `기준(2위가 1위의 ${Math.round(CLOSE_RATIO * 100)}% 이상)`}에 해당하여 <b>담당자 간 협의 권장</b>`
@@ -2540,18 +2565,18 @@ function judgeCopyText(r) {
   const p = JDG.parsed, L = AMAP[r.lead], H = r.help ? AMAP[r.help] : null;
   const T = DOC_TYPES[JDG.crit.type] || DOC_TYPES.etc;
   return `[공문 배정 참고] ${p.title || '(제목 없음)'}\n` +
-    (T.q ? `○ 공문 유형: ${T.name} — 「${T.q}」를 중심으로 판단\n` : '') +
-    (p.todo && p.todo.kind ? `○ 할 일: ${p.todo.kind === 'notice' ? `${p.todo.who || '교직원'}에게 안내(제출 없음)` : `자료 제출${p.todo.due ? ' · 기한 ' + p.todo.due : ''}`}\n` : '') +
+    (T.q ? `○ 공문 유형: ${T.name} — 「${T.q}」를 중심으로 판단\n` : T.rule ? `○ 공문 유형: ${T.name} — 판별 규칙 적용\n` : '') +
+    (p.todo && p.todo.kind ? `○ 할 일: ${p.todo.kind === 'notice' ? `${p.todo.who || '교직원'}에게 안내(제출 없음)` : p.todo.kind === 'optional' ? `${p.todo.who || '교직원'}에게 안내, 의견이 있으면 제출(선택)${p.todo.due ? ' · 기한 ' + p.todo.due : ''}` : `자료 제출${p.todo.due ? ' · 기한 ' + p.todo.due : ''}`}\n` : '') +
     (JDG.crit.pos && JDG.crit.pos.note ? `○ 참고: ${JDG.crit.pos.note}\n` : '') +
     (CONF_TXT[confOf(r, JDG.crit, p)] ? `※ ${CONF_TXT[confOf(r, JDG.crit, p)]}\n` : '') +
     `○ 주관: ${L.name} — ${r.byBook ? bookLabel(r).replace(/<[^>]+>/g, '') + ' 기준' : '근거: ' + (r.why[r.lead] || []).join(', ')}\n` +
     (H ? `○ 협조: ${H.name} — ${helpGive(r)}${r.helpFixed ? '(예산 교부 공문 고정 협조)' : ' 제공'}\n` : '') +
     (r.close ? '○ 두 영역의 판단 근거가 비슷해 담당자 간 협의를 권합니다.\n' : '') +
     (() => { const c = crowdInfo(r); return c && c.ready && c.shown ? `○ 옆 학교 판단: ${c.sm.total}개교 중 ${c.pct}%가 「${c.a.options[c.top]}」 (옆 학교는? ${shareUrl(c.a)})\n` : ''; })() +
-    `○ 근거 대조\n` + CRIT.filter(cr => (JDG.crit[cr.k].areas || []).length && critBase(JDG.crit, cr.k)).map(cr => {
+    (CRIT.some(cr => (JDG.crit[cr.k].areas || []).length && critBase(JDG.crit, cr.k)) ? `○ 근거 대조\n` : '') + CRIT.filter(cr => (JDG.crit[cr.k].areas || []).length && critBase(JDG.crit, cr.k)).map(cr => {
       const c = JDG.crit[cr.k], snip = cr.k === 'holder' ? '대상·내용에서 추정' : cr.k === 'budget' ? '예산·정산 관련 표현' : cr.k === 'follow' ? '결정 질문 답' : ((c.snip || '').length > 44 ? c.snip.slice(0, 43) + '…' : (c.snip || ''));
       return `  - ${cr.label}(×${fmtN(critBase(JDG.crit, cr.k))}): ${snip ? '「' + snip + '」 → ' : ''}${c.areas.map(id => AMAP[id].name + (critW(JDG.crit, cr.k, id) !== critBase(JDG.crit, cr.k) ? `(+${fmtN(critW(JDG.crit, cr.k, id))}, 대상과 같은 뿌리)` : '')).join(', ')}`;
-    }).join('\n') + '\n' +
+    }).map(x => x + '\n').join('') +
     `※ 발신 부서·조사 대상·다루는 사업·자료 보유자 등을 따진 참고 의견(판별 기준 ${JUDGE_VER})이며, 최종 배정은 학교 업무분장과 협의에 따릅니다.`;
 }
 /* ----- 1.2: 공문 유형 표시 · 유형 질문 ----- */
@@ -2562,10 +2587,10 @@ function typeHtml() {
   if (ask) return `<div class="jdecide" style="margin:0 0 12px">
     <b>${JDG.typeOpen ? '공문 유형 바꾸기' : '이 공문은 어떤 공문인가요?'}</b>
     <p>${JDG.typeOpen ? '고르면 그 유형의 무게로 다시 계산해요.' : '유형을 공문에서 분명히 찾지 못했어요. 고르면 유형에 맞는 무게로 다시 계산해요. 조사는 「누구를 세나」, 지원은 「어디에 쓰나」로 판단해요.'}</p>
-    <div class="jtypes">${['grant', 'hire', 'opinion', 'stat', 'supply', 'run'].map(k => `<button class="btn sm ${c.type === k ? 'pri' : ''}" data-act="jType" data-t="${k}"><b>${DOC_TYPES[k].name}</b><span>${DOC_TYPES[k].desc}</span></button>`).join('')}</div>
+    <div class="jtypes">${['legis', 'grant', 'hire', 'opinion', 'stat', 'supply', 'run'].map(k => `<button class="btn sm ${c.type === k ? 'pri' : ''}" data-act="jType" data-t="${k}"><b>${DOC_TYPES[k].name}</b><span>${DOC_TYPES[k].desc}</span></button>`).join('')}</div>
     ${JDG.typeOpen ? '<div style="margin-top:8px"><button class="link" data-act="jTypeOpen">닫기</button></div>' : ''}
   </div>`;
-  return `<div class="jtype"><span>공문 유형 <b>${t.name}</b>${t.q ? ` · 「${t.q}」로 판단` : ''}${JDG.typeSel ? ' <span class="muted">(직접 고름)</span>' : ''}</span><button class="link" data-act="jTypeOpen">유형 바꾸기</button></div>`;
+  return `<div class="jtype"><span>공문 유형 <b>${t.name}</b>${t.q ? ` · 「${t.q}」로 판단` : t.rule ? ` · 판별 규칙 「${esc(t.rule)}」` : ''}${JDG.typeSel ? ' <span class="muted">(직접 고름)</span>' : ''}</span><button class="link" data-act="jTypeOpen">유형 바꾸기</button></div>`;
 }
 /* ----- 1.1: 결정 질문(후속 실무) · 이 기기의 배정 기억 ----- */
 function followHtml(r) {   // 협의 권장이면 「제출한 뒤 누가 굴리나」를 한 번 묻기
@@ -2607,10 +2632,11 @@ const bizKeyNow = () => { const c = JDG.crit; return (c && c.biz && c.biz.name) 
 const helpGive = r => r.helpFixed ? (DOC_TYPES[JDG.crit.type] || {}).give || AMAP[r.help].give : AMAP[r.help].give;
 function bookLabel(r) {   // 분장 우선 근거 이름
   if (r.bookSrc === 'biz') { const m = bizMineFor(JDG.crit, JDG.parsed); return `우리 학교 사업 사전(「${esc(m ? m.k : bizKeyNow())}」)`; }
+  if (r.bookSrc === 'rule') return `판별 규칙(「${esc((DOC_TYPES[JDG.crit.type] || {}).rule || '')}」)`;
   return '우리 학교 업무분장표';
 }
 function bizHtml(r) {
-  const c = JDG.crit; if (!c) return '';
+  const c = JDG.crit; if (!c || r.bookSrc === 'rule') return '';   // 1.6: 판별 규칙 공문은 사업 사전을 묻지 않음
   const m = bizMineFor(c, JDG.parsed), name = bizKeyNow(), hit = c.biz && c.biz.hit;
   if (m && r.bookSrc === 'biz') return `<div class="jmem on"><span>우리 학교 사업 사전 「${esc(m.k)} → <b>${esc(AMAP[m.a].name)}</b>」대로 정했어요</span><span class="row" style="gap:10px"><button class="link" data-act="jBizSkip">이번만 계산대로 보기</button><button class="link" data-act="bizSheet">사전 관리</button></span></div>`;
   if (m && JDG.bizSkip) return `<div class="jmem"><span>사업 사전 「${esc(m.k)} → ${esc(AMAP[m.a].name)}」을 이번만 끄고 계산했어요</span><button class="link" data-act="jBizSkip">사전대로 보기</button></div>`;
@@ -2691,8 +2717,8 @@ function viewJudge() {
     ${typeHtml()}
     ${todoHtml()}
     <div class="jres">
-      <div class="lead"><small>주관${cf === 'weak' || cf === 'hold' ? ` <em class="cflag">${cf === 'hold' ? '판단 보류' : '근거 약함'}</em>` : ''}</small><b>${esc(AMAP[r.lead].name)}</b><span>${r.byBook ? (r.bookSrc === 'biz' ? '우리 학교 사업 사전' : '업무분장표 기준') : '점수 ' + fmtN(r.s1)}</span></div>
-      ${r.help ? `<div class="help"><small>협조</small><b>${esc(AMAP[r.help].name)}</b><span>${esc(helpGive(r))}${r.helpFixed ? ' · 교부 공문 고정 협조' : ' 제공'}</span></div>` : `<div class="help none"><small>협조</small><b>없음</b><span>${JDG.crit.noHelp ? '안내·전달만 하는 공문이에요' : '한 영역의 일로 보여요'}</span></div>`}
+      <div class="lead"><small>주관${cf === 'weak' || cf === 'hold' ? ` <em class="cflag">${cf === 'hold' ? '판단 보류' : '근거 약함'}</em>` : ''}</small><b>${esc(AMAP[r.lead].name)}</b><span>${r.byBook ? (r.bookSrc === 'biz' ? '우리 학교 사업 사전' : r.bookSrc === 'rule' ? '판별 규칙 · ' + esc(DOC_TYPES[JDG.crit.type].name) : '업무분장표 기준') : '점수 ' + fmtN(r.s1)}</span></div>
+      ${r.help ? `<div class="help"><small>협조</small><b>${esc(AMAP[r.help].name)}</b><span>${esc(helpGive(r))}${r.helpFixed ? ' · 교부 공문 고정 협조' : ' 제공'}</span></div>` : `<div class="help none"><small>협조</small><b>없음</b><span>${JDG.crit.type === 'legis' ? '입법예고 알림이에요' : JDG.crit.noHelp ? '안내·전달만 하는 공문이에요' : '한 영역의 일로 보여요'}</span></div>`}
     </div>
     ${CONF_TXT[cf] ? `<div class="jwarn">${CONF_TXT[cf]}. 아래 판별 근거에서 걸린 단서를 한 번 확인해 주세요.</div>` : ''}
     ${crowdHtml(r)}
@@ -2881,6 +2907,7 @@ function calcBlock(crit, book) {   // 한 공문의 계산 내역 (쌓인 막대
   let verdict;
   if (!r.lead) verdict = '어느 기준에서도 담당을 찾지 못해 판단할 수 없어요.';
   else if (r.helpFixed && !r.byBook) verdict = `1위 <b>${esc(L)} ${fmtN(r.s1)}점</b>이 주관이에요. 예산 교부·정산 공문이라 <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} 점수와 관계없이 집행·정산으로 협조해요.${r.alt ? ` 다음 후보는 ${esc(AMAP[r.alt].name)} ${fmtN(r.a2)}점이에요${r.close ? ' · 가까워서 「협의 권장」' : ''}.` : ''}`;
+  else if (r.byBook && r.bookSrc === 'rule') verdict = `판별 규칙 「${esc((DOC_TYPES[crit.type] || {}).rule || '')}」에 따라 <b>${esc(L)}</b>${josa(L, '이', '가')} 주관이에요. 점수 계산보다 규칙이 먼저예요.`;
   else if (r.byBook) verdict = `우리 학교 업무분장표에서 <b>${esc(L)}</b>${josa(L, '을', '를')} 골라 그대로 주관으로 정했어요${Hn ? `. 점수 1위였던 <b>${esc(Hn)}</b>${josa(Hn, '은', '는')} 협조로 내려가요` : ''}.`;
   else verdict = `1위 <b>${esc(L)} ${fmtN(r.s1)}점</b>이 주관${Hn ? `, 2위 <b>${esc(Hn)} ${fmtN(r.s2)}점</b>이 협조예요.${r.close ? ' 두 점수가 가까워 <b>「협의 권장」</b>이에요.' : ' 차이가 커서 주관이 분명해요.'}` : '이에요. 다른 담당을 가리킨 기준이 없어 협조는 없어요.'}`;
   return `${stackBlock(crit, book)}${gaugeBlock(r)}
@@ -2932,6 +2959,7 @@ function viewCriteria() {
     <div class="evh" style="margin-top:18px"><span>+</span>공문 유형별 무게 <small>유형을 먼저 정하고 무게를 바꿔요</small></div>
     <table class="ctable"><tbody><tr><th>유형</th><th>알아보는 단서</th><th>판단 중심 · 바뀌는 무게</th></tr>
       <tr><td><b>${DOC_TYPES.grant.name}</b></td><td>교부·정산서·집행 결과 (<b>가장 먼저 봐요</b>)</td><td>「무슨 사업의 돈인가」 · 사업명이 가리키는 담당이 주관, <b>행정실은 집행·정산으로 늘 협조</b>, 결과가 쓰이는 곳 안 봄</td></tr>
+      <tr><td><b>${DOC_TYPES.legis.name}</b></td><td>제목(없으면 요청 문장)에 입법예고 (<b>가장 먼저 봐요</b>)</td><td><b>판별 규칙</b> · 주제와 관계없이 ${esc(AMAP[DOC_TYPES.legis.fixLead].name)} 주관, 협조 없음 (업무분장표·우리 학교 사업 사전이 있으면 그쪽이 먼저)</td></tr>
       <tr><td><b>${DOC_TYPES.hire.name}</b></td><td>제목에 공고·임용·선발·공모·채용·모집 + 본문에 지원자격·원서 접수·서류 심사·면접</td><td>「누구를 뽑는가」 · 아래 직위 사전으로 주관을 정함, 결과가 쓰이는 곳 안 봄</td></tr>
       <tr><td><b>${DOC_TYPES.opinion.name}</b></td><td>제목에 의견·개정·매뉴얼·지침, 인력·예산 단서 없음 (「수요조사」라는 말이 있어도)</td><td>「무엇에 대한 의견인가」 · 그 제도·매뉴얼 담당이 주관, 결과가 쓰이는 곳 안 봄</td></tr>
       <tr><td><b>${DOC_TYPES.stat.name}</b></td><td>제목에 현황·실태·통계·명단·인원·실적, 인력·예산 단서 없음</td><td>「누구를 세나」 · 다루는 사업 ×2, 결과가 쓰이는 곳 안 봄</td></tr>
@@ -2943,7 +2971,7 @@ function viewCriteria() {
     <div class="fshort" style="margin-top:10px"><b>할 일</b> 「~바랍니다」 앞 문장의 동사를 봐요. 제출·작성·회신이 있으면 <b>자료 제출</b>(기한 표시), 안내·게시·홍보·전달만 있으면 <b>안내·전달</b>이에요. 안내·전달만 하는 공문은 협조 담당을 두지 않아요.</div>
     <div class="fshort" style="margin-top:10px"><b>관련 공문 이상치</b> 관련 공문의 부서·제목이 가리킨 담당이 본문 어디에도 다시 나오지 않으면 그 점수는 빼요(예: 교육장 임용 공고의 관련 「중등특수교육과」).</div>
     <p class="small muted" style="margin:6px 0 12px">판정 화면의 「유형 바꾸기」로 유형을 직접 고르면 그 무게로 다시 계산해요.</p>
-    <div class="fshort"><b>지름길</b> 「우리 학교 업무분장표」에 적힌 업무라면 계산보다 <b>분장표가 먼저</b>예요. 그다음은 <b>우리 학교 사업 사전</b>이에요. 고른 담당이 주관, 원래 1위는 협조가 돼요.</div>
+    <div class="fshort"><b>지름길</b> 「우리 학교 업무분장표」에 적힌 업무라면 계산보다 <b>분장표가 먼저</b>예요. 그다음은 <b>우리 학교 사업 사전</b>, 그다음은 <b>판별 규칙</b>(입법예고 → 교감)이에요. 고른 담당이 주관, 원래 1위는 협조가 돼요.</div>
     <div class="rulebox">
       <div><b>협의 권장</b>이 붙는 경우 (둘 중 하나)</div>
       <div class="rr"><span class="rc">점수 차이 ≤ ${CLOSE_GAP}점</span><span class="ro">또는</span><span class="rc">2위 ÷ 1위 ≥ ${z}%</span></div>
