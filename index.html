@@ -1793,7 +1793,7 @@ const AREAS = [   // 업무 영역 사전: 이름, 단서 낱말(띄어쓰기 �
   { id: 'science', name: '과학·발명·영재 담당', give: '과학·영재교육 자료', kw: ['과학', '발명', '영재', '과학실', '탐구'] },
   { id: 'arts', name: '예술·문화 담당', give: '예술교육 자료', kw: ['예술', '음악', '미술', '문화예술', '합창', '오케스트라'] },
   { id: 'parents', name: '학부모·운영위원회 담당', give: '학부모·운영위원회 자료', kw: ['학부모', '학교운영위원회', '운영위원회', '학부모회'] },
-  { id: 'personnel', name: '교감(인사·복무)', give: '교원 인사·복무 자료', kw: ['임용', '교육장', '교육전문직', '장학관', '장학사', '교장공모', '공모교장', '교감공모', '복무', '교원인사', '인사관리', '인사발령', '근무성적', '다면평가', '성과상여', '초과근무', '교원능력개발', '기간제교원'] },
+  { id: 'personnel', name: '교감(인사·복무)', give: '교원 인사·복무 자료', kw: ['교육공무원', '전보', '전직', '중임', '원로교사', '인사자료', '공직기강', '복무기강', '근무기강', '행동강령', '근무철저', '보결전담', '순회교사', '겸임교사', '교직원포상', '포상', '표창', '유공', '훈포장', '교육청상', '교육감표창', '임용', '교육장', '교육전문직', '장학관', '장학사', '교장공모', '공모교장', '교감공모', '복무', '교원인사', '인사관리', '인사발령', '근무성적', '다면평가', '성과상여', '초과근무', '교원능력개발', '기간제교원'] },
   { id: 'admin', name: '행정실', give: '예산·회계·시설 자료', kw: ['학교회계', '회계', '계약', '세입', '물품', '시설관리', '시설', '공사', '수익자부담', '재산관리', '행정과'] }   // 1.3: 교부·집행·정산 같은 절차 낱말은 뺌(PROC_KW)
 ];
 const AMAP = Object.fromEntries(AREAS.map(a => [a.id, a]));
@@ -1851,9 +1851,10 @@ const CRIT = [   // 판별 기준: 이름, 가중치, 설명
     why: '해마다 이어지는 사업이면 그 사업 담당에게 조금 더 무게를 둬요.',
     how: '제목·내용에 운영·추진·계획·사업이 있고 조사·현황이 아니면 지속 사업으로 봐요.', ex: '늘봄학교 운영 계획 → 늘봄 담당' }
 ];
-const JUDGE_VER = '1.6', JUDGE_VER_AT = '2026년 11월';
+const JUDGE_VER = '1.7', JUDGE_VER_AT = '2026년 11월';
 const CLOSE_GAP = 3, CLOSE_RATIO = 0.7;   // 1·2위 점수 차이가 이 값 이하이거나, 2위가 1위의 이 비율 이상이면 「협의 권장」
 const JUDGE_LOG = [   // 판별 기준 바뀐 기록 (새것이 위)
+  { v: '1.7', at: '2026. 11.', what: '실제 교감 공문 목록 12건을 점검해 6건이던 교감 판정을 12건 모두로 바로잡음. 교감(인사·복무) 단서에 교육공무원·전보·전직·중임·원로교사·인사자료(인사), 공직기강·복무기강·근무기강·행동강령·근무 철저(복무), 보결전담·순회교사·겸임교사(교원 수급), 포상·표창·유공·훈포장·교육청상(교직원 포상)을 추가(업무분장 한눈에 표준 업무 m01·m02·m04·m05 근거). 학생 표창(g22)·보결수업 배당(g05)은 교무 업무라 「학생 표창」·「보결」 낱말만으로는 교감이 되지 않게 함. 판별 규칙 「입법예고」를 「법규 입법·공포」로 넓혀 법률안·조례안 의견조회와 자치법규 공포 알림도 교감. 점검 화면에 「교감 공문 목록」 12건 점검 추가.' },
   { v: '1.6', at: '2026. 11.', what: '입법예고 알림은 주제와 관계없이 모두 교감 공문이라는 학교 판단을 반영. 공문 유형 「입법예고」 추가: 제목(없으면 본문 요청 문장)에 입법예고가 있으면 판별 규칙으로 교감(인사·복무)이 주관, 협조 없음. 우선순위는 업무분장표 → 우리 학교 사업 사전 → 판별 규칙 → 점수 계산. 「의견이 있는 기관·개인은 제출」처럼 선택 제출인 공문은 할 일을 「안내 · 의견이 있으면 제출(선택)」로 보여 주고, 「기간: ○ ~ ○」의 끝 날짜를 기한으로 읽음. 회귀 사례 짝 E 추가(장애인교원채용심의위원회 규칙 → 교감, 학교급식 조례 → 급식이 아니라 교감).' },
   { v: '1.5', at: '2026. 11.', what: '판별하지 못하던 인사 공문(「2027.3.1.자 광주 동·서부 교육장 임용 시행 계획 공고」 → 실제 교감)을 반영. 교감(인사·복무) 영역에 임용·교육장·교육전문직·장학관·장학사·교장공모 등 추가. 공문 유형 「인사·선발 공고」 추가: 제목에 공고·임용·선발·채용 등이 있고 본문에 지원자격·원서 접수·면접 등이 있으면 「누구를 뽑나」 직위 사전으로 주관을 정함(교원·전문직 → 교감, 지방공무원 → 행정실, 교육공무직 → 교감 + 직종별 분담 메모, 늘봄·방과후 강사 → 늘봄). 「~바랍니다」 앞 문장으로 학교가 할 일을 읽어 「안내·전달」(제출 없음, 협조 없음)과 「자료 제출」(기한 표시)로 나눠 보여 줌. 관련 공문 부서가 가리킨 담당이 본문 어디에도 다시 나오지 않으면 이상치로 보고 뺌. 판단 보류 화면에도 공문 유형과 할 일을 보여 줌. 회귀 사례 짝 D와 직위 점검 추가.' },
   { v: '1.4', at: '2026. 11.', what: '교권 업무가 명백한 공문(「교육활동 보호 관련 매뉴얼 개정 수요조사」)이 도서관·독서 담당으로 나오던 문제를 바로잡음. 원인은 「수요조사 서식」의 띄어쓰기를 지우고 비교해 「조사서식」 속 「사서」가 잡힌 것. 두 글자 단서 낱말은 띄어쓰기·기호를 넘어 붙이지 않고, 한 낱말 안의 오인은 제외 문맥표(조사서·과학적 등)로 거름. 업무 영역 「교육활동 보호(교권)」 신설(22개 영역). 제목에 의견·개정·매뉴얼·지침이 있고 인력·예산이 없으면 「의견 조회」 유형(수요조사라는 말이 있어도 지원·수요로 보지 않음). 근거 강도 추가: 제목에 주관 단서가 없으면 「근거 약함」, 제목·대상 모두 주관을 가리키지 않거나 제목 밖에서 단서가 한 번뿐이면 「판단 보류」. 회귀 사례 짝 C와 낱말 단위 점검 추가.' },
@@ -1872,7 +1873,7 @@ const CROSS_EX = [   // 교차 공문 예: 대상 영역 × 사업 영역 → �
 const fmtN = n => Number.isInteger(n) ? String(n) : n.toFixed(1);
 /* 1.2: 공문 유형 — 조사는 「누구를 세나」, 지원은 「어디에 쓰나」 */
 const DOC_TYPES = {
-  legis: { name: '입법예고', q: '', desc: '조례·규칙·훈령의 입법예고 알림', tw: {}, fixLead: 'personnel', rule: '입법예고 알림은 주제와 관계없이 교감' },
+  legis: { name: '법규 입법·공포', q: '', desc: '법령·조례·규칙의 입법예고·의견조회·공포 알림', tw: {}, fixLead: 'personnel', rule: '법령·자치법규의 입법예고·의견조회·공포 알림은 주제와 관계없이 교감' },
   hire: { name: '인사·선발 공고', q: '누구를 뽑는가', desc: '임용·채용·선발 계획을 알리는 공고', tw: { use: 0 } },
   opinion: { name: '의견 조회', q: '무엇에 대한 의견인가', desc: '제도·지침·매뉴얼에 대한 의견을 모으는 공문', tw: { use: 0 } },
   grant: { name: '예산 교부·정산', q: '무슨 사업의 돈인가', desc: '사업비를 내려보내고 집행·정산을 받는 공문', tw: { use: 0 }, fixHelp: 'admin', give: '예산 집행·정산' },
@@ -1915,7 +1916,7 @@ function todoOf(t) {
   const dr = flat.match(/기\s*간\s*[:：]?\s*\d{4}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*(?:\([월화수목금토일]\))?\s*~\s*(\d{4}\.\s*\d{1,2}\.\s*\d{1,2}\.?(?:\s*\([월화수목금토일]\))?)/);   // 1.6: 「기간: ○ ~ ○」 끝 날짜
   return { kind, who, due: (kind === 'submit' || kind === 'optional') && (dm || dr) ? (dm || dr)[1].replace(/\s+/g, ' ') : '' };
 }
-const LEGIS_RE = /입법\s*예고/;
+const LEGIS_RE = /입법\s*예고|법률안|법령안|조례안|자치\s*법규|(?:법률|법령|조례|규칙|훈령)[^\n]{0,15}공포|공포\s*알림/;   // 1.7: 의견조회·공포까지
 const OPINION_RE = /의견|개정|매뉴얼|지침|안\s*검토|설문|제도\s*개선/;
 const OPINION_NOT = /강사|인력|예산|물품|기기|기자재|교부|지원금|운영비/;
 const GRANT_RE = /교부|정산\s*서|정산\s*보고|집행\s*결과|예산\s*집행/;
@@ -2277,8 +2278,11 @@ const JUDGE_CASES = [
 /* 1.4: 낱말 단위 점검 — 이 글에서 이 영역이 잡혀야(true) / 잡히면 안 되는지(false) */
 const KW_TESTS = [
   ['수요조사 서식', 'library', false], ['조사서 제출', 'library', false], ['과학적으로 검토', 'records', false], ['과학적으로 검토', 'science', false],
-  ['학교도서관 사서 배치', 'library', true], ['교육활동 보호', 'protect', true], ['학교 폭력 예방', 'violence', true], ['초등돌봄·교육', 'neulbom', true]
+  ['학교도서관 사서 배치', 'library', true], ['이전보다 늘어난', 'personnel', false], ['전직원 연수', 'personnel', false], ['학생 표창 대상자 추천', 'personnel', false], ['교직원 포상 추천', 'personnel', true], ['교육활동 보호', 'protect', true], ['학교 폭력 예방', 'violence', true], ['초등돌봄·교육', 'neulbom', true]
 ];
+/* 1.7: 실제 교감 공문 목록(제목만) — 모두 교감(인사·복무)이고 판단 보류가 아니어야 함 */
+const VP_TITLES = ["[공고/안내] 2027.3.1.자 광주 동·서부 교육장 임용 시행 계획 공고", "[제출] 2027. 3. 1.자 교장·원장 중임 및 원로교사 임용 인사자료 제출", "[안내] 대통령 해외순방 중 공무원 공직기강 확립 및 근무 철저", "[중요/제출] 2027. 3. 1.자 초등 교육공무원(교장, 교감) 인사(전직, 전보) 자료 제출 안내", "[중요/알림] 2027. 3. 1.자 교장 중임 및 원로 교사 임용 관련 서류 제출 안내", "[안내] 김희정 의원 대표발의 「교육공무원법」 일부개정법률안 의견조회", "[알림] 자치법규(조례 8건) 공포", "[알림/정정] 2026년 하반기 유초등 교육전문직원 임용후보자 선발 공개 전형 공고 일부 내용 정정 안내[유아교육분야]", "[안내/제출] 2027학년도 초등 보결전담 순회(겸임)교사 운영 계획 및 신청 안내", "[입법예고] 전남광주통합특별시교육청 장애인교원채용심의위원회 입법예고 알림", "[알림] 2026년 하반기 유초등 교육전문직원 임용후보자 선발 공개 전형 공고", "[협조/제출] 제1회 전남광주통합특별시교육청상 표창 계획 안내 및 추천 요청"];
+const runVpTests = () => VP_TITLES.map(t => { const p = parseDoc('제목 ' + t), cr = buildCriteria(p), r = scoreWith(cr, ''), cf = confOf(r, cr, p); return { t, ok: r.lead === 'personnel' && cf !== 'hold', got: r.lead ? AMAP[r.lead].name : '단서 없음', type: DOC_TYPES[cr.type].name }; });
 const POS_TESTS = [['돌봄전담사 채용 공고', 'personnel'], ['교육행정직 경력경쟁임용', 'admin'], ['방과후학교 강사 모집', 'neulbom'], ['공모교장 임용', 'personnel'], ['영재교육원 학생 선발', 'science']];
 const runPosTests = () => POS_TESTS.map(([t, a]) => { const p = posOf(t, ''); return { t, a, got: p ? p.a : '', ok: !!p && p.a === a }; });
 const runKwTests = () => KW_TESTS.map(([t, id, want]) => ({ t, id, want, ok: kwMatches(t).some(m => m.id === id) === want }));
@@ -2299,7 +2303,7 @@ function runJudgeCases() {
 const squash = t => String(t || '').toLowerCase().replace(/[\s·ㆍ・.,'"‘’“”()\[\]]/g, '');
 const KW_ALL = AREAS.flatMap(a => a.kw.map(k => ({ id: a.id, k: squash(k) }))).filter(x => x.k).sort((a, b) => b.k.length - a.k.length);
 /* 1.4: 한 낱말 안에서 생기는 오인을 막는 제외 문맥 (이 말 속의 단서 낱말은 세지 않음) */
-const KW_NEG = { '사서': ['조사서', '검사서', '감사서', '청구서'], '학적': ['과학적', '문학적', '철학적', '의학적', '공학적', '수학적'], '과학': ['과학적'], '교권': ['교권보다'] };
+const KW_NEG = { '전보': ['이전보다', '전보다'], '전직': ['전직원'], '표창': ['학생표창', '모범학생표창'], '사서': ['조사서', '검사서', '감사서', '청구서'], '학적': ['과학적', '문학적', '철학적', '의학적', '공학적', '수학적'], '과학': ['과학적'], '교권': ['교권보다'] };
 const SQ_DROP = /[\s·ㆍ・.,'"‘’“”()\[\]]/;
 function kwMatches(text) {   // 단서 낱말 찾기: 긴 낱말이 잡힌 자리는 짧은 낱말이 다시 세지 않음 (1.1)
   const raw = String(text || '').toLowerCase(), cut = [];   // 1.4: 지운 띄어쓰기·기호 자리를 기억
@@ -2959,7 +2963,7 @@ function viewCriteria() {
     <div class="evh" style="margin-top:18px"><span>+</span>공문 유형별 무게 <small>유형을 먼저 정하고 무게를 바꿔요</small></div>
     <table class="ctable"><tbody><tr><th>유형</th><th>알아보는 단서</th><th>판단 중심 · 바뀌는 무게</th></tr>
       <tr><td><b>${DOC_TYPES.grant.name}</b></td><td>교부·정산서·집행 결과 (<b>가장 먼저 봐요</b>)</td><td>「무슨 사업의 돈인가」 · 사업명이 가리키는 담당이 주관, <b>행정실은 집행·정산으로 늘 협조</b>, 결과가 쓰이는 곳 안 봄</td></tr>
-      <tr><td><b>${DOC_TYPES.legis.name}</b></td><td>제목(없으면 요청 문장)에 입법예고 (<b>가장 먼저 봐요</b>)</td><td><b>판별 규칙</b> · 주제와 관계없이 ${esc(AMAP[DOC_TYPES.legis.fixLead].name)} 주관, 협조 없음 (업무분장표·우리 학교 사업 사전이 있으면 그쪽이 먼저)</td></tr>
+      <tr><td><b>${DOC_TYPES.legis.name}</b></td><td>제목(없으면 요청 문장)에 입법예고·법률안·조례안·자치법규·공포 (<b>가장 먼저 봐요</b>)</td><td><b>판별 규칙</b> · 주제와 관계없이 ${esc(AMAP[DOC_TYPES.legis.fixLead].name)} 주관, 협조 없음 (업무분장표·우리 학교 사업 사전이 있으면 그쪽이 먼저)</td></tr>
       <tr><td><b>${DOC_TYPES.hire.name}</b></td><td>제목에 공고·임용·선발·공모·채용·모집 + 본문에 지원자격·원서 접수·서류 심사·면접</td><td>「누구를 뽑는가」 · 아래 직위 사전으로 주관을 정함, 결과가 쓰이는 곳 안 봄</td></tr>
       <tr><td><b>${DOC_TYPES.opinion.name}</b></td><td>제목에 의견·개정·매뉴얼·지침, 인력·예산 단서 없음 (「수요조사」라는 말이 있어도)</td><td>「무엇에 대한 의견인가」 · 그 제도·매뉴얼 담당이 주관, 결과가 쓰이는 곳 안 봄</td></tr>
       <tr><td><b>${DOC_TYPES.stat.name}</b></td><td>제목에 현황·실태·통계·명단·인원·실적, 인력·예산 단서 없음</td><td>「누구를 세나」 · 다루는 사업 ×2, 결과가 쓰이는 곳 안 봄</td></tr>
@@ -2971,7 +2975,7 @@ function viewCriteria() {
     <div class="fshort" style="margin-top:10px"><b>할 일</b> 「~바랍니다」 앞 문장의 동사를 봐요. 제출·작성·회신이 있으면 <b>자료 제출</b>(기한 표시), 안내·게시·홍보·전달만 있으면 <b>안내·전달</b>이에요. 안내·전달만 하는 공문은 협조 담당을 두지 않아요.</div>
     <div class="fshort" style="margin-top:10px"><b>관련 공문 이상치</b> 관련 공문의 부서·제목이 가리킨 담당이 본문 어디에도 다시 나오지 않으면 그 점수는 빼요(예: 교육장 임용 공고의 관련 「중등특수교육과」).</div>
     <p class="small muted" style="margin:6px 0 12px">판정 화면의 「유형 바꾸기」로 유형을 직접 고르면 그 무게로 다시 계산해요.</p>
-    <div class="fshort"><b>지름길</b> 「우리 학교 업무분장표」에 적힌 업무라면 계산보다 <b>분장표가 먼저</b>예요. 그다음은 <b>우리 학교 사업 사전</b>, 그다음은 <b>판별 규칙</b>(입법예고 → 교감)이에요. 고른 담당이 주관, 원래 1위는 협조가 돼요.</div>
+    <div class="fshort"><b>지름길</b> 「우리 학교 업무분장표」에 적힌 업무라면 계산보다 <b>분장표가 먼저</b>예요. 그다음은 <b>우리 학교 사업 사전</b>, 그다음은 <b>판별 규칙</b>(법규 입법·공포 → 교감)이에요. 고른 담당이 주관, 원래 1위는 협조가 돼요.</div>
     <div class="rulebox">
       <div><b>협의 권장</b>이 붙는 경우 (둘 중 하나)</div>
       <div class="rr"><span class="rc">점수 차이 ≤ ${CLOSE_GAP}점</span><span class="ro">또는</span><span class="rc">2위 ÷ 1위 ≥ ${z}%</span></div>
@@ -3745,13 +3749,15 @@ const ACT = {
     REVEAL.clear(); closeSheet(); render(); toast('새 기기로 바꿨어요. 이제 다른 선생님이에요');
   }),
   judgeCases: () => {
-    const res = runJudgeCases(), kt = runKwTests(), pt = runPosTests(), bad = res.filter(x => !x.ok).length + kt.filter(x => !x.ok).length + pt.filter(x => !x.ok).length;
+    const res = runJudgeCases(), kt = runKwTests(), pt = runPosTests(), vt = runVpTests(), bad = res.filter(x => !x.ok).length + kt.filter(x => !x.ok).length + pt.filter(x => !x.ok).length + vt.filter(x => !x.ok).length;
     openSheet(`<h2>판별 기준 ${JUDGE_VER} 점검</h2>
       <p class="small sub" style="margin:0">실제 배정과 맞춰 둔 공문으로 계산이 그대로인지 확인해요. ${bad ? `<b style="color:#B42424">${bad}건이 기대와 달라요.</b>` : '<b style="color:#087F5B">모두 기대대로예요.</b>'}</p>
       <div class="mylist">${res.map(x => `<div class="myit" style="display:block"><div class="row"><span class="pill ${x.ok ? 'ok' : 'bad'}">${x.ok ? '통과' : '다름'}</span><b class="small">${esc(x.name)}</b></div>
         <div class="small" style="margin-top:6px">기대: ${esc(x.want)}<br>계산: ${esc(x.got)}</div></div>`).join('')}</div>
       <div class="f"><span class="lbl">낱말 단위 점검 <span class="opt">${kt.filter(x => x.ok).length}/${kt.length} 통과</span></span>
         <div class="wchips">${kt.map(x => `<span class="pill ${x.ok ? 'ok' : 'bad'}">「${esc(x.t)}」 → ${esc(AMAP[x.id].name)} ${x.want ? '잡힘' : '안 잡힘'}${x.ok ? '' : ' ✗'}</span>`).join('')}</div></div>
+      <div class="f"><span class="lbl">교감 공문 목록 점검 <span class="opt">제목만 · ${vt.filter(x => x.ok).length}/${vt.length} 통과</span></span>
+        <div class="mylist">${vt.map(x => `<div class="small" style="display:flex;gap:6px;align-items:baseline"><span class="pill ${x.ok ? 'ok' : 'bad'}">${x.ok ? '교감' : esc(x.got)}</span><span>${esc(x.t)} <span class="muted">· ${esc(x.type)}</span></span></div>`).join('')}</div></div>
       <div class="f"><span class="lbl">직위 사전 점검 <span class="opt">${pt.filter(x => x.ok).length}/${pt.length} 통과</span></span>
         <div class="wchips">${pt.map(x => `<span class="pill ${x.ok ? 'ok' : 'bad'}">「${esc(x.t)}」 → ${esc(AMAP[x.a].name)}${x.ok ? '' : ' ✗'}</span>`).join('')}</div></div>
       <div class="foot" style="grid-template-columns:1fr"><button class="btn" data-act="closeSheet">닫기</button></div>`);
